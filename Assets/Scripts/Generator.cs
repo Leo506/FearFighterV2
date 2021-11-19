@@ -19,39 +19,6 @@ struct Cell
         this.x = (int)x;
         this.y = (int)y;
     }
-
-    public static bool operator ==(Cell cell_one, Cell cell_two)
-    {
-        if (cell_one.x == cell_two.x && cell_one.y == cell_two.y)
-            return true;
-
-        return false;
-    }
-
-    public static bool operator !=(Cell cell_one, Cell cell_two)
-    {
-        if (cell_one.x != cell_two.x || cell_one.y != cell_two.y)
-            return true;
-
-        return false;
-    }
-
-    public static Cell operator +(Cell cell_one, Cell cell_two)
-    {
-        return new Cell(cell_one.x + cell_two.x, cell_one.y + cell_two.y);
-    }
-
-
-    public static Cell operator /(Cell cell, int value)
-    {
-        return new Cell(cell.x / value, cell.y / value);
-    }
-
-
-    public override string ToString()
-    {
-        return $"Cell x = {x} and y = {y}";
-    }
 }
 
 public class Generator : MonoBehaviour
@@ -59,6 +26,7 @@ public class Generator : MonoBehaviour
     [SerializeField] GameObject _obstacle;                     // Префаб препятствия
     [SerializeField] Vector2 _fieldSize;                       // Размер поля
     [SerializeField] Vector2 _offset;
+    [SerializeField] PlayerLogic _playerPrefab;
 
 
     List<Cell> usedCells = new List<Cell>();
@@ -68,16 +36,18 @@ public class Generator : MonoBehaviour
     private void Start()
     {
         GenerateRoom();
-        /*var obj = Instantiate(_obstacle);
-        obj.transform.position = new Vector3(6 * _offset.x - 4.49f, obj.transform.position.y, 1 * _offset.y - 4.49f);*/
-       
+        SpawnPlayer();
     }
 
+
+    /// <summary>
+    /// Создаёт комнату, состоящую из 25 препятствий
+    /// </summary>
     public void GenerateRoom()
     {
         for (int i = 0; i < 25; i++)
         {
-            Cell newCell = new Cell(Random.Range(0, 10), Random.Range(0, 10));
+            Cell newCell = new Cell(Random.Range(0, 10), 0);
             while (usedCells.Contains(newCell))
                 newCell = new Cell(Random.Range(0, 10), Random.Range(0, 10));
             usedCells.Add(newCell);
@@ -87,5 +57,20 @@ public class Generator : MonoBehaviour
         {
             Instantiate(_obstacle).transform.position = new Vector3(item.x * _offset.x - 4.49f, _obstacle.transform.position.y, item.y * _offset.y - 4.49f);
         }
+    }
+
+
+    /// <summary>
+    /// Создаёт игрока на свободной клетке в первом ряду
+    /// </summary>
+    public void SpawnPlayer()
+    {
+        Cell newCell = new Cell(Random.Range(0, 10), Random.Range(0, 2));
+        while (usedCells.Contains(newCell))
+            newCell = new Cell(Random.Range(0, 10), Random.Range(0, 2));
+        usedCells.Add(newCell);
+        var player = Instantiate(_playerPrefab);
+        player.SetUpPlayer();
+        player.transform.position = new Vector3(newCell.x * _offset.x - 4.49f, _playerPrefab.transform.position.y, newCell.y * _offset.y - 4.49f);
     }
 }
