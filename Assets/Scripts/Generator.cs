@@ -19,6 +19,22 @@ struct Cell
         this.x = (int)x;
         this.y = (int)y;
     }
+
+    public static bool operator ==(Cell cell_one, Cell cell_two)
+    {
+        if (cell_one.x == cell_two.x && cell_one.y == cell_two.y)
+            return true;
+
+        return false;
+    }
+
+    public static bool operator !=(Cell cell_one, Cell cell_two)
+    {
+        if (cell_one.x != cell_two.x || cell_one.y != cell_two.y)
+            return true;
+
+        return false;
+    }
 }
 
 public class Generator : MonoBehaviour
@@ -27,6 +43,7 @@ public class Generator : MonoBehaviour
     [SerializeField] Vector2 _fieldSize;                       // Размер поля
     [SerializeField] Vector2 _offset;
     [SerializeField] PlayerLogic _playerPrefab;
+    [SerializeField] GameObject _enemyPrefab;
 
 
     List<Cell> usedCells = new List<Cell>();
@@ -37,6 +54,10 @@ public class Generator : MonoBehaviour
     {
         GenerateRoom();
         SpawnPlayer();
+        for (int i = 0; i < 5; i++)
+        {
+            SpawnEnemy();
+        }
     }
 
 
@@ -47,10 +68,7 @@ public class Generator : MonoBehaviour
     {
         for (int i = 0; i < 25; i++)
         {
-            Cell newCell = new Cell(Random.Range(0, 10), 0);
-            while (usedCells.Contains(newCell))
-                newCell = new Cell(Random.Range(0, 10), Random.Range(0, 10));
-            usedCells.Add(newCell);
+            GetFreeCell(0, 10, 0, 10);
         }
 
         foreach (var item in usedCells)
@@ -65,12 +83,34 @@ public class Generator : MonoBehaviour
     /// </summary>
     public void SpawnPlayer()
     {
-        Cell newCell = new Cell(Random.Range(0, 10), Random.Range(0, 2));
-        while (usedCells.Contains(newCell))
-            newCell = new Cell(Random.Range(0, 10), Random.Range(0, 2));
-        usedCells.Add(newCell);
+        Cell spawnCell = GetFreeCell(0, 10, 0, 2);
         var player = Instantiate(_playerPrefab);
         player.SetUpPlayer();
-        player.transform.position = new Vector3(newCell.x * _offset.x - 4.49f, _playerPrefab.transform.position.y, newCell.y * _offset.y - 4.49f);
+        player.transform.position = new Vector3(spawnCell.x * _offset.x - 4.49f, _playerPrefab.transform.position.y, spawnCell.y * _offset.y - 4.49f);
+    }
+
+
+    public void SpawnEnemy()
+    {
+        Cell spawnCell = GetFreeCell(0, 10, 0, 10);
+        Instantiate(_enemyPrefab).transform.position = new Vector3(spawnCell.x * _offset.x - 4.49f, _playerPrefab.transform.position.y, spawnCell.y * _offset.y - 4.49f);
+    }
+
+
+    Cell GetFreeCell(int minX, int maxX, int minY, int maxY)
+    {
+        Cell newCell = new Cell(-1, -1);
+
+        if (usedCells.Count < 100 && newCell == new Cell(-1, -1))
+        {
+            newCell = new Cell(Random.Range(minX, maxX), Random.Range(minY, maxY));
+            
+            while (usedCells.Contains(newCell))
+                newCell = new Cell(Random.Range(minX, maxX), Random.Range(minY, maxY));
+
+            usedCells.Add(newCell);
+        }
+
+        return newCell;
     }
 }

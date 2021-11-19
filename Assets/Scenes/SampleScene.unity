@@ -583,6 +583,7 @@ MonoBehaviour:
   _fieldSize: {x: 10, y: 10}
   _offset: {x: 1, y: 1}
   _playerPrefab: {fileID: 6827823677972935303, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
+  _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
 --- !u!4 &601400245
 Transform:
   m_ObjectHideFlags: 0
