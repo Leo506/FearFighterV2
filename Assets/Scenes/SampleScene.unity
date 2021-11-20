@@ -559,6 +559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 601400245}
+  - component: {fileID: 601400246}
   - component: {fileID: 601400244}
   m_Layer: 0
   m_Name: GameObject
@@ -576,14 +577,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 601400243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d1308bca8440a7499ce32b2f95958c9, type: 3}
+  m_Script: {fileID: 11500000, guid: a002059ea6fb286448b932de51540b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstacle: {fileID: 1129385397033107537, guid: b2b48da27ccaadd45aeda331dd236d88, type: 3}
-  _fieldSize: {x: 10, y: 10}
-  _offset: {x: 1, y: 1}
-  _playerPrefab: {fileID: 6827823677972935303, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
-  _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
+  roomRoot: {fileID: 1272713834}
+  filePath: Scene2.xml
 --- !u!4 &601400245
 Transform:
   m_ObjectHideFlags: 0
@@ -598,6 +596,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &601400246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601400243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1308bca8440a7499ce32b2f95958c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  types:
+  - Rock
+  - Test
+  objects:
+  - {fileID: 1129385397033107537, guid: b2b48da27ccaadd45aeda331dd236d88, type: 3}
+  - {fileID: 4381288776348281998, guid: 74b04b9e07cf4a44b8209ee773832e8b, type: 3}
+  roomRoot: {fileID: 1272713834}
+  _playerPrefab: {fileID: 6827823677972935303, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
+  _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
+  countOfScene: 3
 --- !u!1 &1272713834
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +631,7 @@ GameObject:
   - component: {fileID: 1272713836}
   - component: {fileID: 1272713835}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
