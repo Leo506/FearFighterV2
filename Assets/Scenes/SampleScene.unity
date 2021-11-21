@@ -611,13 +611,17 @@ MonoBehaviour:
   types:
   - Rock
   - Test
+  - Player
+  - Enemy
   objects:
   - {fileID: 1129385397033107537, guid: b2b48da27ccaadd45aeda331dd236d88, type: 3}
   - {fileID: 4381288776348281998, guid: 74b04b9e07cf4a44b8209ee773832e8b, type: 3}
+  - {fileID: 213978988609943417, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
+  - {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
   roomRoot: {fileID: 1272713834}
   _playerPrefab: {fileID: 6827823677972935303, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
   _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
-  countOfScene: 3
+  countOfScene: 1
 --- !u!1 &1272713834
 GameObject:
   m_ObjectHideFlags: 0

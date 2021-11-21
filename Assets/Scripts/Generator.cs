@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using Cinemachine;
 
 public class Generator : MonoBehaviour
 {
@@ -25,12 +25,8 @@ public class Generator : MonoBehaviour
         map = XMLParser.GetMap(Application.streamingAssetsPath + $"/Scene{sceneIndex}.xml");
 
         GenerateRoom();
-        SpawnPlayer();
-        for (int i = 0; i < 5; i++)
-        {
-            SpawnEnemy();
-        }
 
+        FindObjectOfType<CinemachineVirtualCamera>().Follow = FindObjectOfType<PlayerLogic>().transform;
         
     }
 
@@ -49,22 +45,5 @@ public class Generator : MonoBehaviour
             }
         }
     }
-
-
-    /// <summary>
-    /// Создаёт игрока на свободной клетке в первом ряду
-    /// </summary>
-    public void SpawnPlayer()
-    {
-       
-    }
-
-
-    public void SpawnEnemy()
-    {
-        
-    }
-
-
     
 }

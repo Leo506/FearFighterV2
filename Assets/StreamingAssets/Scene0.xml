@@ -7,14 +7,98 @@
       <Z>-4,49</Z>
     </Position>
     <Position>
-      <X>-0,21</X>
+      <X>-1,58</X>
       <Y>0,24</Y>
       <Z>-4,49</Z>
     </Position>
     <Position>
-      <X>3,45</X>
+      <X>-1,58</X>
       <Y>0,24</Y>
-      <Z>-4,49</Z>
+      <Z>-1,49</Z>
+    </Position>
+    <Position>
+      <X>-0,95</X>
+      <Y>0,24</Y>
+      <Z>-1,49</Z>
+    </Position>
+    <Position>
+      <X>-0,29</X>
+      <Y>0,24</Y>
+      <Z>-1,49</Z>
+    </Position>
+    <Position>
+      <X>-0,29</X>
+      <Y>0,24</Y>
+      <Z>1,18</Z>
+    </Position>
+    <Position>
+      <X>0,4</X>
+      <Y>0,24</Y>
+      <Z>1,18</Z>
+    </Position>
+    <Position>
+      <X>1,12</X>
+      <Y>0,24</Y>
+      <Z>1,18</Z>
+    </Position>
+    <Position>
+      <X>1,12</X>
+      <Y>0,24</Y>
+      <Z>2,77</Z>
+    </Position>
+    <Position>
+      <X>1,63</X>
+      <Y>0,24</Y>
+      <Z>2,77</Z>
+    </Position>
+    <Position>
+      <X>2,41</X>
+      <Y>0,24</Y>
+      <Z>2,77</Z>
+    </Position>
+    <Position>
+      <X>3,1</X>
+      <Y>0,24</Y>
+      <Z>2,77</Z>
+    </Position>
+  </Obstacle>
+  <Obstacle type="Player">
+    <Position>
+      <X>0</X>
+      <Y>0,17</Y>
+      <Z>0</Z>
+    </Position>
+  </Obstacle>
+  <Obstacle type="Enemy">
+    <Position>
+      <X>1,2</X>
+      <Y>0</Y>
+      <Z>0</Z>
+    </Position>
+    <Position>
+      <X>1,2</X>
+      <Y>0</Y>
+      <Z>2,04</Z>
+    </Position>
+    <Position>
+      <X>-2,19</X>
+      <Y>0</Y>
+      <Z>2,04</Z>
+    </Position>
+    <Position>
+      <X>-2,19</X>
+      <Y>0</Y>
+      <Z>3,45</Z>
+    </Position>
+    <Position>
+      <X>0,15</X>
+      <Y>0</Y>
+      <Z>3,45</Z>
+    </Position>
+    <Position>
+      <X>0,15</X>
+      <Y>0</Y>
+      <Z>-3,41</Z>
     </Position>
   </Obstacle>
 </Map>
