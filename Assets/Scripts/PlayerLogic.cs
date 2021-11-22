@@ -8,11 +8,12 @@ public class PlayerLogic : MonoBehaviour
     BoxCollider box;
     
     [SerializeField] Animator animator;
+    [SerializeField] float distanceCoeff = 1;
 
     /// <summary>
     /// Настройка игрока
     /// </summary>
-    public void SetUpPlayer()
+    public void SetUp()
     {
         FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
         movement = GetComponent<PlayerMovement>();
@@ -53,10 +54,13 @@ public class PlayerLogic : MonoBehaviour
                 break;
         }
 
-        if (Physics.Raycast(this.transform.position, rayDir, out hit, distance))
+        if (Physics.Raycast(this.transform.position, rayDir, out hit, distance * distanceCoeff))
         {
             Debug.Log("Attack the " + hit.collider.gameObject.name);
-            hit.collider.GetComponent<EnemyController>()?.GetDamage(10);
+            hit.collider.GetComponent<IGetDamaged>()?.GetDamage(10);
+        } else
+        {
+            Debug.Log("No objects");
         }
         Debug.DrawLine(transform.position, transform.position + rayDir * distance, Color.red);
         animator.SetTrigger("Attack");

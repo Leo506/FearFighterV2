@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 8933808265625053075}
   - component: {fileID: 8952071380563647042}
   - component: {fileID: -2301492982907438660}
+  - component: {fileID: -3018112792302125304}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -128,7 +129,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.18, z: 0}
 --- !u!54 &8952071380563647042
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -158,3 +159,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: Enemy
+--- !u!114 &-3018112792302125304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5088093951198742540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb1d1fcb3095dc4a8d9a8de45ee9a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 0}
+  hp: 100

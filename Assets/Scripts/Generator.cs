@@ -26,7 +26,7 @@ public class Generator : MonoBehaviour
 
         GenerateRoom();
 
-        FindObjectOfType<CinemachineVirtualCamera>().Follow = FindObjectOfType<PlayerLogic>().transform;
+        FindObjectOfType<PlayerLogic>().SetUp();
         
     }
 
@@ -41,7 +41,8 @@ public class Generator : MonoBehaviour
             var objToInstance = objects[types.IndexOf(type)];
             foreach (Vector3 pos in map.GetPositions(type))
             {
-                Instantiate(objToInstance, roomRoot.transform).transform.localPosition = pos;
+                var obj = Instantiate(objToInstance, roomRoot.transform);
+                obj.transform.localPosition = pos;
             }
         }
     }
