@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLogic : MonoBehaviour
+public class PlayerLogic : MonoBehaviour, ISetUpObj
 {
     PlayerMovement movement;
     BoxCollider box;

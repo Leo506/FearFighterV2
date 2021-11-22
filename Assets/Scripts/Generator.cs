@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using System.Linq;
-using Cinemachine;
 
 public class Generator : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class Generator : MonoBehaviour
 
     public int countOfScene;
 
+    NavMeshSurface surface;
 
     Map map;
     
@@ -26,7 +27,10 @@ public class Generator : MonoBehaviour
 
         GenerateRoom();
 
-        FindObjectOfType<PlayerLogic>().SetUp();
+        surface = GetComponent<NavMeshSurface>();
+        surface.BuildNavMesh();
+
+        StartCoroutine(WaitBeforeSetUp());
         
     }
 
@@ -44,6 +48,16 @@ public class Generator : MonoBehaviour
                 var obj = Instantiate(objToInstance, roomRoot.transform);
                 obj.transform.localPosition = pos;
             }
+        }
+    }
+
+
+    IEnumerator WaitBeforeSetUp()
+    {
+        yield return new WaitForSeconds(3);
+        foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<ISetUpObj>().ToArray())
+        {
+            item.SetUp();
         }
     }
     

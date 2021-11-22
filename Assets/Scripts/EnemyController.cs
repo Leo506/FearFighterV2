@@ -1,12 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour, IGetDamaged
+public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 {
     [SerializeField] CoinController coin;
     public float hp = 100;
-    
+
+    PlayerLogic player;
+    NavMeshAgent agent;
+
+
+    private void Update()
+    {
+        if (agent != null && player != null)
+            agent.SetDestination(player.transform.position);
+    }
+
+    public void SetUp()
+    {
+        player = FindObjectOfType<PlayerLogic>();
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+
+
     public void GetDamage(float value)
     {
         hp -= value;

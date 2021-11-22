@@ -108,7 +108,7 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 45
+    agentSlope: 40
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
@@ -561,6 +561,7 @@ GameObject:
   - component: {fileID: 601400245}
   - component: {fileID: 601400246}
   - component: {fileID: 601400244}
+  - component: {fileID: 601400247}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -622,6 +623,35 @@ MonoBehaviour:
   _playerPrefab: {fileID: 6827823677972935303, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
   _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
   countOfScene: 1
+--- !u!114 &601400247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601400243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 55
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.033333335
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &1272713834
 GameObject:
   m_ObjectHideFlags: 0
