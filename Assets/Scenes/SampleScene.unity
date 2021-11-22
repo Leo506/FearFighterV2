@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomRoot: {fileID: 1272713834}
-  filePath: Scene2.xml
+  filePath: Scene0.xml
 --- !u!4 &601400245
 Transform:
   m_ObjectHideFlags: 0

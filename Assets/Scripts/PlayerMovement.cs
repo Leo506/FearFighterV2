@@ -7,7 +7,8 @@ public enum viewDirection
     TOWARD,
     DOWN,
     RIGHT,
-    LEFT
+    LEFT,
+    NULL
 }
 public class PlayerMovement : MonoBehaviour
 {
