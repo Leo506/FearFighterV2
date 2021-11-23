@@ -5,15 +5,18 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 {
-    [SerializeField] CoinController coin;
-    public float hp = 100;
-    public float attackRadius = 1;
+    [SerializeField] DroppingObj coin;
+    [SerializeField] float hp = 100;
+    [SerializeField] float attackRadius = 1;
 
     PlayerLogic player;
     NavMeshAgent agent;
+    Subject subject;
     bool canAttack = true;
 
     viewDirection currentView = viewDirection.LEFT;
+
+    public static int enemyCount = 0;
 
     private void Update()
     {
@@ -103,6 +106,8 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     {
         player = FindObjectOfType<PlayerLogic>();
         agent = GetComponent<NavMeshAgent>();
+        subject = FindObjectOfType<Subject>();
+        enemyCount++;
     }
 
 
@@ -116,9 +121,12 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
             if (coin != null)
             {
                 var obj = Instantiate(coin);
-                obj.transform.position = this.transform.position;
+                obj.transform.position = new Vector3(this.transform.position.x, obj.transform.position.y, this.transform.position.z);
                 obj.Init();
             }
+
+            enemyCount--;
+            subject.Notify(this.gameObject, EventList.ENEMY_DIED);
             Destroy(this.gameObject);
         }
     }
