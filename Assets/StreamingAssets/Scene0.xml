@@ -9,24 +9,24 @@
     <Position>
       <X>0</X>
       <Y>0</Y>
-      <Z>2,65</Z>
+      <Z>2.65</Z>
     </Position>
     <Position>
-      <X>-3,35</X>
+      <X>-3.35</X>
       <Y>0</Y>
-      <Z>2,65</Z>
+      <Z>2.65</Z>
     </Position>
     <Position>
-      <X>3,71</X>
+      <X>3.71</X>
       <Y>0</Y>
-      <Z>2,65</Z>
+      <Z>2.65</Z>
     </Position>
   </Obstacle>
   <Obstacle type="Player">
     <Position>
       <X>0</X>
-      <Y>0,17</Y>
-      <Z>-1,19</Z>
+      <Y>0.17</Y>
+      <Z>-1.19</Z>
     </Position>
   </Obstacle>
 </Map>

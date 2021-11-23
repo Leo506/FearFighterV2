@@ -5,7 +5,8 @@ using UnityEngine;
 
 public enum EventList
 {
-    ENEMY_DIED
+    ENEMY_DIED,
+    MAP_READY
 }
 
 public class Subject : MonoBehaviour

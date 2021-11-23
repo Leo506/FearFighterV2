@@ -9,13 +9,19 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
     
     [SerializeField] Animator animator;
     [SerializeField] float distanceCoeff = 1;
+    [SerializeField] UnityEngine.UI.Text text;  // TODO не забыть удалить
+
+    private void Update()
+    {
+        text.text = transform.position.ToString();
+    }
 
     /// <summary>
     /// Настройка игрока
     /// </summary>
     public void SetUp()
     {
-        FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
+        //FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
         movement = GetComponent<PlayerMovement>();
         box = GetComponent<BoxCollider>();
     }

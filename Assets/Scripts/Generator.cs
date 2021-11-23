@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
 
-public class Generator : MonoBehaviour
+public class Generator : MonoBehaviour, IObserver
 {
     public List<string> types;              // Типы объектов
     public GameObject[] objects;            // Объекты
@@ -14,7 +14,10 @@ public class Generator : MonoBehaviour
 
     public int countOfScene;
 
+    [SerializeField] Subject subject;
+
     NavMeshSurface surface;
+    XMLParser parser;
 
     Map map;
     
@@ -22,16 +25,28 @@ public class Generator : MonoBehaviour
     // TODO не забыть удалить
     private void Start()
     {
+        subject.AddObserver(this);
         int sceneIndex = Random.Range(0, countOfScene);
-        map = XMLParser.GetMap(Application.streamingAssetsPath + $"/Scene{sceneIndex}.xml");
+        parser = GetComponent<XMLParser>();
 
-        GenerateRoom();
+#if UNITY_EDITOR
+        parser.GetMap("file://" + Application.streamingAssetsPath + $"/Scene{sceneIndex}.xml");
+#else
+        parser.GetMap("jar:file://" + Application.dataPath + $"!/assets/Scene{sceneIndex}.xml");
+#endif   
+    }
 
-        surface = GetComponent<NavMeshSurface>();
-        surface.BuildNavMesh();
+    public void OnNotify(GameObject obj, EventList eventValue)
+    {
+        if (eventValue == EventList.MAP_READY)
+        {
+            map = parser.map;
+            GenerateRoom();
+            surface = GetComponent<NavMeshSurface>();
+            surface.BuildNavMesh();
 
-        StartCoroutine(WaitBeforeSetUp());
-        
+            StartCoroutine(WaitBeforeSetUp());
+        }
     }
 
 

@@ -520,7 +520,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 1.78, z: -0.83}
+  m_LocalPosition: {x: 0, y: 3.92, z: -6.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -586,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530372779}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 1.78, z: -0.83}
+  m_LocalPosition: {x: 0, y: 3.92, z: -6.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 296960826}
@@ -605,6 +605,7 @@ GameObject:
   - component: {fileID: 601400246}
   - component: {fileID: 601400244}
   - component: {fileID: 601400247}
+  - component: {fileID: 601400248}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -666,6 +667,7 @@ MonoBehaviour:
   _playerPrefab: {fileID: 6827823677972935303, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
   _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
   countOfScene: 1
+  subject: {fileID: 119514645}
 --- !u!114 &601400247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,6 +697,19 @@ MonoBehaviour:
   m_VoxelSize: 0.033333335
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &601400248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601400243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ac17ef05778ff4f9f3c3016fd90874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subject: {fileID: 119514645}
 --- !u!1 &1272713834
 GameObject:
   m_ObjectHideFlags: 0

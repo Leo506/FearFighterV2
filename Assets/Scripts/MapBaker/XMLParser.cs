@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
+using UnityEngine.Networking;
+using System.Globalization;
 
 
 public struct Map
@@ -47,61 +49,17 @@ public struct Map
     }
 }
 
-public class XMLParser
+public class XMLParser: MonoBehaviour
 {
-    
+    [SerializeField] Subject subject;
 
-    public static Map GetMap(string path)
+    public Map map;
+
+    UnityWebRequest uwr;
+
+    public void GetMap(string path)
     {
-        XmlDocument sceneDoc;
-        sceneDoc = new XmlDocument();
-        sceneDoc.Load(path);
-
-        XmlElement map = sceneDoc.DocumentElement;                                                 // Доступ к корневому элементу
-        Dictionary<string, List<Vector3>> objects = new Dictionary<string, List<Vector3>>();
-        List<Vector3> positions;
-        string type;
-
-        if (map != null)
-        {
-            // Проходим по всем тегам Obstacle
-            foreach (XmlElement item in map)
-            {
-                positions = new List<Vector3>();
-
-                // Получаем тип препятствия
-                type = item.Attributes.GetNamedItem("type").Value;
-
-                // Получаем координаты каждого препятствия
-                foreach (XmlNode position in item.ChildNodes)
-                {
-                    float x = 0;
-                    float y = 0;
-                    float z = 0;
-
-                    foreach (XmlNode coordinates in position.ChildNodes)
-                    {
-                        Debug.Log(coordinates.InnerText);
-
-                        if (coordinates.Name == "X")
-                            x = float.Parse(coordinates.InnerText);
-
-                        if (coordinates.Name == "Y")
-                            y = float.Parse(coordinates.InnerText);
-
-                        if (coordinates.Name == "Z")
-                            z = float.Parse(coordinates.InnerText);
-                    }
-
-                    positions.Add(new Vector3(x, y, z));
-                }
-
-                objects.Add(type, positions);
-            }
-            
-        }
-
-        return new Map(objects);
+        StartCoroutine(GetMapFromFile(path));
     }
 
 
@@ -159,5 +117,79 @@ public class XMLParser
         }
 
         doc.Save(Application.streamingAssetsPath + "/" + filePath);
+    }
+
+    IEnumerator GetMapFromFile(string path)
+    {
+        using (uwr = UnityWebRequest.Get(path))
+        {
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError || uwr.isHttpError)
+            {
+                Debug.Log(uwr.error);
+            } else
+            {
+                XmlDocument sceneDoc;
+                sceneDoc = new XmlDocument();
+                var tmp = uwr.downloadHandler.text;
+                Debug.Log(tmp);
+                string _byteOrderMarkUtf8 = System.Text.Encoding.UTF8.GetString(System.Text.Encoding.UTF8.GetPreamble());
+                if (tmp.StartsWith(_byteOrderMarkUtf8))
+                {
+                    tmp = tmp.Remove(0, _byteOrderMarkUtf8.Length);
+                }
+                sceneDoc.LoadXml(tmp);
+
+                XmlElement map = sceneDoc.DocumentElement;                                                 // Доступ к корневому элементу
+                Dictionary<string, List<Vector3>> objects = new Dictionary<string, List<Vector3>>();
+                List<Vector3> positions;
+                string type;
+
+                if (map != null)
+                {
+                    CultureInfo ci = new CultureInfo("en-US");
+                    ci.NumberFormat.NumberDecimalSeparator = ".";
+
+                    // Проходим по всем тегам Obstacle
+                    foreach (XmlElement item in map)
+                    {
+                        positions = new List<Vector3>();
+
+                        // Получаем тип препятствия
+                        type = item.Attributes.GetNamedItem("type").Value;
+
+                        // Получаем координаты каждого препятствия
+                        foreach (XmlNode position in item.ChildNodes)
+                        {
+                            float x = 0;
+                            float y = 0;
+                            float z = 0;
+
+                            foreach (XmlNode coordinates in position.ChildNodes)
+                            {
+                                Debug.Log(coordinates.InnerText);
+
+                                if (coordinates.Name == "X")
+                                    float.TryParse(coordinates.InnerText, NumberStyles.Float, ci, out x);
+
+                                if (coordinates.Name == "Y")
+                                    float.TryParse(coordinates.InnerText, NumberStyles.Float, ci, out y);
+
+                                if (coordinates.Name == "Z")
+                                    float.TryParse(coordinates.InnerText, NumberStyles.Float, ci, out z);
+                            }
+
+                            positions.Add(new Vector3(x, y, z));
+                        }
+
+                        objects.Add(type, positions);
+                    }
+
+                }
+
+                this.map = new Map(objects);
+                subject.Notify(this.gameObject, EventList.MAP_READY);
+            }
+        }
     }
 }
