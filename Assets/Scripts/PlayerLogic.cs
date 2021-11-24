@@ -21,7 +21,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
     /// </summary>
     public void SetUp()
     {
-        //FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
+        FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
         movement = GetComponent<PlayerMovement>();
         box = GetComponent<BoxCollider>();
     }

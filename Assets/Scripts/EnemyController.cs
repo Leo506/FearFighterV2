@@ -108,6 +108,8 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         agent = GetComponent<NavMeshAgent>();
         subject = FindObjectOfType<Subject>();
         enemyCount++;
+
+        agent.stoppingDistance *= 3;
     }
 
 
@@ -131,5 +133,10 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         }
     }
 
+
+    public void MyQueue()
+    {
+        agent.stoppingDistance /= 3;
+    }
     
 }

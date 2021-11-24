@@ -74,6 +74,8 @@ public class Generator : MonoBehaviour, IObserver
         {
             item.SetUp();
         }
+
+        subject.Notify(this.gameObject, EventList.GAME_READY_TO_START);
     }
     
 }
