@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using Pathfinding;
 
 public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 {
@@ -10,29 +10,22 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     [SerializeField] float attackRadius = 1;
 
     PlayerLogic player;
-    NavMeshAgent agent;
     Subject subject;
     bool canAttack = true;
-
+    Pathfinding.AIPath path;
     viewDirection currentView = viewDirection.LEFT;
 
     public static int enemyCount = 0;
 
     private void Update()
     {
-        if (agent != null && player != null)
+        if (player != null)
         {
-            agent.SetDestination(player.transform.position);
-
-            if (Vector3.Distance(this.transform.position, player.transform.position) <= agent.stoppingDistance)
+            if (Vector3.Distance(this.transform.position, player.transform.position) <= path.endReachedDistance)
             {
                 if (canAttack)
-                {
                     Attack();
-                }
             }
-
-            currentView = DetermineView(agent.velocity);
         }
     }
 
@@ -86,7 +79,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         {
             if (dir.x > 0)
                 return viewDirection.RIGHT;
-            else if (agent.velocity.x < 0)
+            else if (dir.x < 0)
                 return viewDirection.LEFT;
             else
                 return viewDirection.NULL;
@@ -105,11 +98,13 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     public void SetUp()
     {
         player = FindObjectOfType<PlayerLogic>();
-        agent = GetComponent<NavMeshAgent>();
+        GetComponent<Pathfinding.AIDestinationSetter>().target = player.transform;
+        path = GetComponent<AIPath>();
+        path.endReachedDistance *= 5;
         subject = FindObjectOfType<Subject>();
         enemyCount++;
 
-        agent.stoppingDistance *= 3;
+
     }
 
 
@@ -136,7 +131,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
     public void MyQueue()
     {
-        agent.stoppingDistance /= 3;
+        path.endReachedDistance /= 5;
     }
     
 }

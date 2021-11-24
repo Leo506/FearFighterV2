@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using Pathfinding;
 using System.Linq;
 
 public class Generator : MonoBehaviour, IObserver
@@ -16,7 +16,6 @@ public class Generator : MonoBehaviour, IObserver
 
     [SerializeField] Subject subject;
 
-    NavMeshSurface surface;
     XMLParser parser;
 
     Map map;
@@ -42,8 +41,6 @@ public class Generator : MonoBehaviour, IObserver
         {
             map = parser.map;
             GenerateRoom();
-            surface = GetComponent<NavMeshSurface>();
-            surface.BuildNavMesh();
 
             StartCoroutine(WaitBeforeSetUp());
         }
@@ -76,6 +73,7 @@ public class Generator : MonoBehaviour, IObserver
         }
 
         subject.Notify(this.gameObject, EventList.GAME_READY_TO_START);
+        AstarPath.active.Scan();
     }
     
 }

@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1129385395564992259}
   - component: {fileID: 1129385395564992268}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: big-rock-v1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1129385395564992259
 Transform:
@@ -93,12 +93,12 @@ GameObject:
   - component: {fileID: 1129385397033107539}
   - component: {fileID: 1129385397033107538}
   - component: {fileID: 6103510088709410443}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1129385397033107539
 Transform:
