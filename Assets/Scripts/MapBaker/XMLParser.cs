@@ -99,9 +99,9 @@ public class XMLParser: MonoBehaviour
                 XmlElement y = doc.CreateElement("Y");
                 XmlElement z = doc.CreateElement("Z");
 
-                XmlText xText = doc.CreateTextNode(pos.x.ToString());
-                XmlText yText = doc.CreateTextNode(pos.y.ToString());
-                XmlText zText = doc.CreateTextNode(pos.z.ToString());
+                XmlText xText = doc.CreateTextNode(pos.x.ToString().Replace(",", "."));
+                XmlText yText = doc.CreateTextNode(pos.y.ToString().Replace(",", "."));
+                XmlText zText = doc.CreateTextNode(pos.z.ToString().Replace(",", "."));
 
                 x.AppendChild(xText);
                 y.AppendChild(yText);

@@ -3,36 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+
 public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 {
     [SerializeField] DroppingObj coin;
     [SerializeField] float hp = 100;
-    [SerializeField] float attackRadius = 1;
+    [SerializeField] float attackRadius = 0.5f;
 
     PlayerLogic player;
-    NavMeshAgent agent;
+    AIMovementComponent movement;
     Subject subject;
-    bool canAttack = true;
 
-    viewDirection currentView = viewDirection.LEFT;
+    bool canAttack = true;
 
     public static int enemyCount = 0;
 
     private void Update()
     {
-        if (agent != null && player != null)
+        if (movement != null)
         {
-            agent.SetDestination(player.transform.position);
+            movement.Move();
 
-            if (Vector3.Distance(this.transform.position, player.transform.position) <= agent.stoppingDistance)
+            if (movement.GetDistanceToTarget() <= attackRadius)
             {
                 if (canAttack)
-                {
                     Attack();
-                }
             }
-
-            currentView = DetermineView(agent.velocity);
         }
     }
 
@@ -44,7 +41,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         canAttack = false;
 
         Vector3 dirToPlayer = (player.transform.position - this.transform.position).normalized;
-        viewDirection dir = DetermineView(dirToPlayer);
+        viewDirection dir = movement.currentView;
 
         switch (dir)
         {
@@ -80,36 +77,12 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     }
 
 
-    viewDirection DetermineView(Vector3 dir)
-    {
-        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.z))
-        {
-            if (dir.x > 0)
-                return viewDirection.RIGHT;
-            else if (agent.velocity.x < 0)
-                return viewDirection.LEFT;
-            else
-                return viewDirection.NULL;
-        }
-        else
-        {
-            if (dir.z > 0)
-                return viewDirection.TOWARD;
-            else if (dir.z < 0)
-                return viewDirection.DOWN;
-            else
-                return viewDirection.NULL;
-        }
-    }
-
     public void SetUp()
     {
         player = FindObjectOfType<PlayerLogic>();
-        agent = GetComponent<NavMeshAgent>();
         subject = FindObjectOfType<Subject>();
         enemyCount++;
-
-        agent.stoppingDistance *= 3;
+        movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), player.transform);
     }
 
 
@@ -131,12 +104,14 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
             subject.Notify(this.gameObject, EventList.ENEMY_DIED);
             Destroy(this.gameObject);
         }
+
+        movement.PushFromTarget();
     }
 
 
     public void MyQueue()
     {
-        agent.stoppingDistance /= 3;
+        movement.GetAgent().stoppingDistance /= 3;
     }
     
 }

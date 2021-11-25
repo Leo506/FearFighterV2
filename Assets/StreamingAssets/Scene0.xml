@@ -1,5 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Map>
+  <Obstacle type="Rock">
+    <Position>
+      <X>-4.49</X>
+      <Y>0.24</Y>
+      <Z>-4.49</Z>
+    </Position>
+    <Position>
+      <X>-4.49</X>
+      <Y>0.24</Y>
+      <Z>-2.08</Z>
+    </Position>
+    <Position>
+      <X>-4.49</X>
+      <Y>0.24</Y>
+      <Z>0.63</Z>
+    </Position>
+    <Position>
+      <X>-4.49</X>
+      <Y>0.24</Y>
+      <Z>2.8</Z>
+    </Position>
+    <Position>
+      <X>-1.76</X>
+      <Y>0.24</Y>
+      <Z>2.8</Z>
+    </Position>
+    <Position>
+      <X>-1.76</X>
+      <Y>0.24</Y>
+      <Z>0.78</Z>
+    </Position>
+    <Position>
+      <X>-1.76</X>
+      <Y>0.24</Y>
+      <Z>-2.12</Z>
+    </Position>
+    <Position>
+      <X>-1.76</X>
+      <Y>0.24</Y>
+      <Z>-4.18</Z>
+    </Position>
+    <Position>
+      <X>0.71</X>
+      <Y>0.24</Y>
+      <Z>-4.18</Z>
+    </Position>
+    <Position>
+      <X>0.71</X>
+      <Y>0.24</Y>
+      <Z>-1.97</Z>
+    </Position>
+    <Position>
+      <X>0.71</X>
+      <Y>0.24</Y>
+      <Z>0.85</Z>
+    </Position>
+    <Position>
+      <X>0.71</X>
+      <Y>0.24</Y>
+      <Z>2.85</Z>
+    </Position>
+    <Position>
+      <X>3.35</X>
+      <Y>0.24</Y>
+      <Z>2.85</Z>
+    </Position>
+    <Position>
+      <X>3.35</X>
+      <Y>0.24</Y>
+      <Z>0.85</Z>
+    </Position>
+    <Position>
+      <X>3.35</X>
+      <Y>0.24</Y>
+      <Z>-2.01</Z>
+    </Position>
+    <Position>
+      <X>3.35</X>
+      <Y>0.24</Y>
+      <Z>-4.1</Z>
+    </Position>
+  </Obstacle>
   <Obstacle type="Enemy">
     <Position>
       <X>0</X>
@@ -9,24 +91,49 @@
     <Position>
       <X>0</X>
       <Y>0</Y>
-      <Z>2.65</Z>
+      <Z>1.73</Z>
     </Position>
     <Position>
-      <X>-3.35</X>
+      <X>0</X>
       <Y>0</Y>
-      <Z>2.65</Z>
+      <Z>3.61</Z>
     </Position>
     <Position>
-      <X>3.71</X>
+      <X>2.3</X>
       <Y>0</Y>
-      <Z>2.65</Z>
+      <Z>3.61</Z>
+    </Position>
+    <Position>
+      <X>2.3</X>
+      <Y>0</Y>
+      <Z>1.76</Z>
+    </Position>
+    <Position>
+      <X>2.3</X>
+      <Y>0</Y>
+      <Z>0.1</Z>
+    </Position>
+    <Position>
+      <X>-2.92</X>
+      <Y>0</Y>
+      <Z>0.1</Z>
+    </Position>
+    <Position>
+      <X>-2.92</X>
+      <Y>0</Y>
+      <Z>1.53</Z>
+    </Position>
+    <Position>
+      <X>-2.92</X>
+      <Y>0</Y>
+      <Z>3.87</Z>
     </Position>
   </Obstacle>
   <Obstacle type="Player">
     <Position>
       <X>0</X>
       <Y>0.17</Y>
-      <Z>-1.19</Z>
+      <Z>-4.75</Z>
     </Position>
   </Obstacle>
 </Map>
