@@ -405,6 +405,9 @@ MonoBehaviour:
   animator: {fileID: 213978989023742394}
   distanceCoeff: 1
   text: {fileID: 4172324227324390797}
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!212 &213978988609943412
 SpriteRenderer:
   m_ObjectHideFlags: 0

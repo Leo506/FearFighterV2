@@ -10,10 +10,14 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     [SerializeField] DroppingObj coin;
     [SerializeField] float hp = 100;
     [SerializeField] float attackRadius = 0.5f;
+    [SerializeField] LayerMask attackLayer;
 
     PlayerLogic player;
     AIMovementComponent movement;
+    AttackComponent attack;
     Subject subject;
+
+    BoxCollider box;
 
     bool canAttack = true;
 
@@ -35,38 +39,39 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
     void Attack()
     {
-        RaycastHit hit;
         Vector3 rayDir;
+        float distance;
 
         canAttack = false;
 
         Vector3 dirToPlayer = (player.transform.position - this.transform.position).normalized;
-        viewDirection dir = movement.currentView;
+        viewDirection dir = movement.DetermineView(dirToPlayer);
 
         switch (dir)
         {
             case viewDirection.TOWARD:
                 rayDir = Vector3.forward;
+                distance = box.size.z;
                 break;
             case viewDirection.DOWN:
                 rayDir = Vector3.back;
+                distance = box.size.z;
                 break;
             case viewDirection.RIGHT:
                 rayDir = Vector3.right;
+                distance = box.size.x;
                 break;
             case viewDirection.LEFT:
                 rayDir = Vector3.left;
+                distance = box.size.x;
                 break;
             default:
                 rayDir = Vector3.zero;
+                distance = box.size.x;
                 break;
         }
 
-        if (Physics.Raycast(this.transform.position, rayDir, out hit, attackRadius))
-        {
-            Debug.Log("Enemy attack: " + hit.collider.name);
-        }
-        Debug.DrawLine(this.transform.position, this.transform.position + rayDir * attackRadius, Color.red);
+        attack.Attack(rayDir, distance);
         Invoke("Reload", 3);
     }
 
@@ -83,6 +88,9 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         subject = FindObjectOfType<Subject>();
         enemyCount++;
         movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), player.transform);
+
+        box = GetComponent<BoxCollider>();
+        attack = new AttackComponent(box, transform, attackLayer);
     }
 
 
@@ -112,6 +120,13 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     public void MyQueue()
     {
         movement.GetAgent().stoppingDistance /= 3;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, transform.forward * box.size.z);
+        //Draw a cube at the maximum distance
+        Gizmos.DrawWireCube(transform.position + movement.DetermineView(movement.currentView) * box.size.z, box.size);
     }
     
 }

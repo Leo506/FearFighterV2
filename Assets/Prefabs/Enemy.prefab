@@ -158,6 +158,9 @@ MonoBehaviour:
   coin: {fileID: 7717239673306690485, guid: 18ad0e0e6bd2b3146b7ccc648d1ae09f, type: 3}
   hp: 100
   attackRadius: 1
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!195 &1454178506
 NavMeshAgent:
   m_ObjectHideFlags: 0

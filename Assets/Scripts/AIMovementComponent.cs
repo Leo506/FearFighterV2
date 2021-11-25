@@ -60,7 +60,7 @@ public class AIMovementComponent
     /// </summary>
     /// <param name="dir"></param>
     /// <returns></returns>
-    viewDirection DetermineView(Vector3 dir)
+    public viewDirection DetermineView(Vector3 dir)
     {
         if (Mathf.Abs(dir.x) > Mathf.Abs(dir.z))
         {
@@ -79,6 +79,25 @@ public class AIMovementComponent
                 return viewDirection.DOWN;
             else
                 return viewDirection.NULL;
+        }
+    }
+
+
+    public Vector3 DetermineView(viewDirection view)
+    {
+        switch (view)
+        {
+            case viewDirection.TOWARD:
+                return Vector3.forward;
+            case viewDirection.DOWN:
+                return Vector3.back;
+            case viewDirection.RIGHT:
+                return Vector3.right;
+            case viewDirection.LEFT:
+                return Vector3.left;
+            
+            default:
+                return Vector3.zero;
         }
     }
 
