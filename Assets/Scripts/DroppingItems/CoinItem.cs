@@ -12,7 +12,7 @@ public class CoinItem : DroppingObj
         {
             Moving();
             if (CheckDistance())
-                Destroy(this.gameObject);
+                OnGet();
         }
     }
 }

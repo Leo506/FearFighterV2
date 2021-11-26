@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClueItem : DroppingObj
+public class SwordItem : DroppingObj
 {
-
     // Update is called once per frame
     void Update()
     {
@@ -12,7 +11,12 @@ public class ClueItem : DroppingObj
         {
             Moving();
             if (CheckDistance())
-                Destroy(this.gameObject);
+                OnGet();
         }
+    }
+
+    protected override void OnGet()
+    {
+        base.OnGet();
     }
 }

@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour, IObserver
             {
                 foreach (var item in FindObjectsOfType<DroppingObj>())
                 {
+                    item.Init();
                     item.StartMove();
                 }
 

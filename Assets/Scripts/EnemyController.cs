@@ -105,12 +105,12 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
             {
                 var obj = Instantiate(droppingObjs[Random.Range(0, droppingObjs.Length)]);
                 obj.transform.position = new Vector3(this.transform.position.x, obj.transform.position.y, this.transform.position.z);
-                obj.Init();
             }
 
             enemyCount--;
             subject.Notify(this.gameObject, EventList.ENEMY_DIED);
             Destroy(this.gameObject);
+            return;
         }
 
         movement.PushFromTarget();

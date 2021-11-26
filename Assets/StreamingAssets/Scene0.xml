@@ -84,41 +84,6 @@
   </Obstacle>
   <Obstacle type="Enemy">
     <Position>
-      <X>0</X>
-      <Y>0</Y>
-      <Z>0</Z>
-    </Position>
-    <Position>
-      <X>0</X>
-      <Y>0</Y>
-      <Z>1.73</Z>
-    </Position>
-    <Position>
-      <X>0</X>
-      <Y>0</Y>
-      <Z>3.61</Z>
-    </Position>
-    <Position>
-      <X>2.3</X>
-      <Y>0</Y>
-      <Z>3.61</Z>
-    </Position>
-    <Position>
-      <X>2.3</X>
-      <Y>0</Y>
-      <Z>1.76</Z>
-    </Position>
-    <Position>
-      <X>2.3</X>
-      <Y>0</Y>
-      <Z>0.1</Z>
-    </Position>
-    <Position>
-      <X>-2.92</X>
-      <Y>0</Y>
-      <Z>0.1</Z>
-    </Position>
-    <Position>
       <X>-2.92</X>
       <Y>0</Y>
       <Z>1.53</Z>
