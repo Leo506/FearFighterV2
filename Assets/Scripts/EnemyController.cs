@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 {
-    [SerializeField] DroppingObj coin;
+    [SerializeField] DroppingObj[] droppingObjs;
     [SerializeField] float hp = 100;
     [SerializeField] float attackRadius = 0.5f;
     [SerializeField] LayerMask attackLayer;
@@ -71,7 +71,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
                 break;
         }
 
-        attack.Attack(rayDir, distance);
+        attack.Attack(rayDir, distance, 10);
         Invoke("Reload", 3);
     }
 
@@ -101,9 +101,9 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         Debug.Log("Get damage by " + value + " points");
         if (hp <= 0)
         {
-            if (coin != null)
+            if (droppingObjs.Length != 0)
             {
-                var obj = Instantiate(coin);
+                var obj = Instantiate(droppingObjs[Random.Range(0, droppingObjs.Length)]);
                 obj.transform.position = new Vector3(this.transform.position.x, obj.transform.position.y, this.transform.position.z);
                 obj.Init();
             }

@@ -13,11 +13,6 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
     [SerializeField] UnityEngine.UI.Text text;  // TODO не забыть удалить
     [SerializeField] LayerMask attackLayer;
 
-    // TODO Удалить
-    void Start()
-    {
-        SetUp();
-    }
 
     private void Update()
     {
@@ -32,7 +27,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
         movement = GetComponent<PlayerMovement>();
         box = GetComponent<BoxCollider>();
         attack = new AttackComponent(box, transform, attackLayer);
-        //FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
+        FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
     }
 
 
@@ -69,7 +64,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
                 break;
         }
 
-        attack.Attack(rayDir, distance);
+        attack.Attack(rayDir, distance, 10);
         animator.SetTrigger("Attack");
     }
 

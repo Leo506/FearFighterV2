@@ -30,7 +30,8 @@ public class AttackComponent
     /// </summary>
     /// <param name="dir">Направление атаки</param>
     /// <param name="distance">Максимальное расстояние</param>
-    public void Attack(Vector3 dir, float distance)
+    /// <param name="damageValue">Количество урона</param>
+    public void Attack(Vector3 dir, float distance, float damageValue)
     {
         Vector3 center = objTransform.position + dir * distance;
         Vector3 size = new Vector3(
@@ -39,9 +40,13 @@ public class AttackComponent
             box.size.z * objTransform.localScale.z
             );
 
-        if (Physics.OverlapBox(center, size / 2, objTransform.rotation, layerMask).Length != 0)
+        Collider[] colliders = Physics.OverlapBox(center, size / 2, objTransform.rotation, layerMask);
+        if (colliders.Length != 0)
         {
-            Debug.Log("Hit!!!");
+            foreach (var item in colliders)
+            {
+                item.GetComponent<IGetDamaged>()?.GetDamage(damageValue);
+            }
         }
     }
 }
