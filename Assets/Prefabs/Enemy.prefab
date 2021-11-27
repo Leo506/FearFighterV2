@@ -50,7 +50,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3758cc6c042c1bb498ba0154cc96ba4c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -165,6 +165,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   getDamageEffect: {fileID: 455331627107759679, guid: 5fd8d6901305c8d4890a23683d4a6472, type: 3}
+  spriteRenderer: {fileID: 8179089070652854737}
 --- !u!195 &1454178506
 NavMeshAgent:
   m_ObjectHideFlags: 0

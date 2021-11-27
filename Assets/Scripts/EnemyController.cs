@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     [SerializeField] float attackRadius = 0.5f;
     [SerializeField] LayerMask attackLayer;
     [SerializeField] ParticleSystem getDamageEffect;
+    [SerializeField] SpriteRenderer spriteRenderer;
+
 
     PlayerLogic player;
     AIMovementComponent movement;
@@ -102,15 +104,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         Debug.Log("Get damage by " + value + " points");
         if (hp <= 0)
         {
-            if (droppingObjs.Length != 0)
-            {
-                var obj = Instantiate(droppingObjs[Random.Range(0, droppingObjs.Length)]);
-                obj.transform.position = new Vector3(this.transform.position.x, obj.transform.position.y, this.transform.position.z);
-            }
-
-            enemyCount--;
-            subject.Notify(this.gameObject, EventList.ENEMY_DIED);
-            Destroy(this.gameObject);
+            StartCoroutine(Death());
             return;
         }
 
@@ -130,6 +124,31 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         Gizmos.DrawRay(transform.position, transform.forward * box.size.z);
         //Draw a cube at the maximum distance
         Gizmos.DrawWireCube(transform.position + movement.DetermineView(movement.currentView) * box.size.z, box.size);
+    }
+
+
+    IEnumerator Death()
+    {
+        float fadePerIter = 1.0f / 100.0f;
+        float fade = 1;
+        spriteRenderer.materials[0].SetFloat("_Fade", fade);
+
+        for (int i = 0; i < 100; i++)
+        {
+            fade -= fadePerIter;
+            spriteRenderer.materials[0].SetFloat("_Fade", fade);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        if (droppingObjs.Length != 0)
+        {
+            var obj = Instantiate(droppingObjs[Random.Range(0, droppingObjs.Length)]);
+            obj.transform.position = new Vector3(this.transform.position.x, obj.transform.position.y, this.transform.position.z);
+        }
+
+        enemyCount--;
+        subject.Notify(this.gameObject, EventList.ENEMY_DIED);
+        Destroy(this.gameObject);
     }
     
 }
