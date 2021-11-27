@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     [SerializeField] float hp = 100;
     [SerializeField] float attackRadius = 0.5f;
     [SerializeField] LayerMask attackLayer;
+    [SerializeField] ParticleSystem getDamageEffect;
 
     PlayerLogic player;
     AIMovementComponent movement;
@@ -112,6 +113,8 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
             Destroy(this.gameObject);
             return;
         }
+
+        Instantiate(getDamageEffect, this.transform);
 
         movement.PushFromTarget();
     }
