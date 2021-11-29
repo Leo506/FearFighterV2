@@ -16,7 +16,7 @@ public class Generator : MonoBehaviour, IObserver
 
     [SerializeField] Subject subject;
 
-    NavMeshSurface surface;
+    [SerializeField] NavMeshSurface surface;
     XMLParser parser;
 
     Map map;
@@ -41,19 +41,18 @@ public class Generator : MonoBehaviour, IObserver
         if (eventValue == EventList.MAP_READY)
         {
             map = parser.map;
-            GenerateRoom();
-            surface = GetComponent<NavMeshSurface>();
+            StartCoroutine(GenerateRoom());
             surface.BuildNavMesh();
 
-            StartCoroutine(WaitBeforeSetUp());
+            //subject.Notify(this.gameObject, EventList.GAME_READY_TO_START);
         }
     }
 
 
     /// <summary>
-    /// Создаёт комнату, состоящую из 25 препятствий
+    /// Создаёт комнату
     /// </summary>
-    public void GenerateRoom()
+    IEnumerator GenerateRoom()
     {
         foreach (string type in map.GetTypes())
         {
@@ -62,17 +61,8 @@ public class Generator : MonoBehaviour, IObserver
             {
                 var obj = Instantiate(objToInstance, roomRoot.transform);
                 obj.transform.localPosition = pos;
+                yield return null;
             }
-        }
-    }
-
-
-    IEnumerator WaitBeforeSetUp()
-    {
-        yield return new WaitForSeconds(3);
-        foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<ISetUpObj>().ToArray())
-        {
-            item.SetUp();
         }
 
         subject.Notify(this.gameObject, EventList.GAME_READY_TO_START);

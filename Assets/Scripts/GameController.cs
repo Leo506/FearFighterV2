@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameController : MonoBehaviour, IObserver
 {
@@ -10,6 +11,19 @@ public class GameController : MonoBehaviour, IObserver
     private void Start()
     {
         subject.AddObserver(this);
+
+        foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<ISetUpObj>().ToArray())
+        {
+            Debug.Log("Set up!!!");
+            item.SetUp();
+        }
+
+        foreach (var item in FindObjectsOfType<EnemyController>())
+        {
+            enemies.Enqueue(item);
+        }
+
+        enemies.Dequeue().MyQueue();
     }
 
 
@@ -19,16 +33,6 @@ public class GameController : MonoBehaviour, IObserver
         {
             if (enemies.Count != 0)
                 enemies.Dequeue().MyQueue();
-        }
-
-        if (eventValue == EventList.GAME_READY_TO_START)
-        {
-            foreach (var item in FindObjectsOfType<EnemyController>())
-            {
-                enemies.Enqueue(item);
-            }
-
-            enemies.Dequeue().MyQueue();
         }
     }
 }

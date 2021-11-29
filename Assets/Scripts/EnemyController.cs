@@ -90,6 +90,9 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
         box = GetComponent<BoxCollider>();
         attack = new AttackComponent(box, transform, attackLayer);
+
+        Debug.Log("movement component is null " + movement == null);
+        Debug.Log("attack component is null " + attack == null);
     }
 
 

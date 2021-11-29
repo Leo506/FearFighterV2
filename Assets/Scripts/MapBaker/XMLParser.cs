@@ -132,7 +132,6 @@ public class XMLParser: MonoBehaviour
                 XmlDocument sceneDoc;
                 sceneDoc = new XmlDocument();
                 var tmp = uwr.downloadHandler.text;
-                Debug.Log(tmp);
                 string _byteOrderMarkUtf8 = System.Text.Encoding.UTF8.GetString(System.Text.Encoding.UTF8.GetPreamble());
                 if (tmp.StartsWith(_byteOrderMarkUtf8))
                 {
