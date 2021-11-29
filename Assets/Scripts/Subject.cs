@@ -8,7 +8,8 @@ public enum EventList
     ENEMY_DIED,
     MAP_READY,
     GAME_READY_TO_START,
-    ITEM_GET
+    ITEM_GET,
+    NO_ENEMIES
 }
 
 public class Subject : MonoBehaviour

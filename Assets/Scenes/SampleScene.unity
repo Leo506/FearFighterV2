@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomRoot: {fileID: 1272713834}
-  filePath: Scene0.xml
+  filePath: Scene1.xml
 --- !u!4 &601400245
 Transform:
   m_ObjectHideFlags: 0
@@ -666,7 +666,7 @@ MonoBehaviour:
   roomRoot: {fileID: 1272713834}
   _playerPrefab: {fileID: 6827823677972935303, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
   _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
-  countOfScene: 1
+  countOfScene: 2
   subject: {fileID: 119514645}
 --- !u!114 &601400247
 MonoBehaviour:
@@ -1058,6 +1058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568811905}
   - component: {fileID: 1568811904}
+  - component: {fileID: 1568811906}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1092,6 +1093,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1568811906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568811903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1a0bf5bf80b190692a7fc4df80d010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drop:
+  - {fileID: 7717239673306690485, guid: 18ad0e0e6bd2b3146b7ccc648d1ae09f, type: 3}
+  - {fileID: 3049295001091489010, guid: bad3ce044b157b34d8cc61bbe96c097c, type: 3}
+  - {fileID: 926963303997766848, guid: 0c53b42ca2d577940892140a62cfdcdd, type: 3}
 --- !u!1 &1792093969
 GameObject:
   m_ObjectHideFlags: 0

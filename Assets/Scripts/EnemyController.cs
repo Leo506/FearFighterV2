@@ -7,7 +7,6 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 {
-    [SerializeField] DroppingObj[] droppingObjs;
     [SerializeField] float hp = 100;
     [SerializeField] float attackRadius = 0.5f;
     [SerializeField] LayerMask attackLayer;
@@ -101,11 +100,6 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         Debug.Log("Get damage by " + value + " points");
         if (hp <= 0)
         {
-            if (droppingObjs.Length != 0)
-            {
-                var obj = Instantiate(droppingObjs[Random.Range(0, droppingObjs.Length)]);
-                obj.transform.position = new Vector3(this.transform.position.x, obj.transform.position.y, this.transform.position.z);
-            }
 
             enemyCount--;
             subject.Notify(this.gameObject, EventList.ENEMY_DIED);

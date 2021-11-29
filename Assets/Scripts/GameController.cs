@@ -17,19 +17,8 @@ public class GameController : MonoBehaviour, IObserver
     {
         if (eventValue == EventList.ENEMY_DIED)
         {
-            if (EnemyController.enemyCount <= 0)
-            {
-                foreach (var item in FindObjectsOfType<DroppingObj>())
-                {
-                    item.Init();
-                    item.StartMove();
-                }
-
-                Debug.Log("Старт движения выпавших вещей");
-                return;
-            }
-
-            enemies.Dequeue().MyQueue();
+            if (enemies.Count != 0)
+                enemies.Dequeue().MyQueue();
         }
 
         if (eventValue == EventList.GAME_READY_TO_START)

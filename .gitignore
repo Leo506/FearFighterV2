@@ -72,3 +72,6 @@ crashlytics-build.properties
 
 *.sublime-workspace
 *.sublime-project
+
+*.sublime-workspace.*
+*.sublime-project.*
