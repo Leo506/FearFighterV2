@@ -10,13 +10,8 @@ public class UIController : MonoBehaviour
 
     int currentPhrase = 0;
 
-    void Update() {
-    	if (Input.GetMouseButtonDown(0)) {
-    		if (loader.isLoaded) {
-    			StopAllCoroutines();
-    			ShowPhrase();
-    		}
-    	}
+    void Start() {
+    	StartCoroutine(WaitUntilLoad());
     }
 
     public void ShowPhrase() {
@@ -24,8 +19,10 @@ public class UIController : MonoBehaviour
     		string text;
     		if (currentPhrase == 0)
     			text = loader.bossText["_StartDialog"];
-    		else
+    		else if (currentPhrase < loader.bossText.Count)
     			text = loader.bossText[$"_Clue{currentPhrase}"];
+    		else
+    			text = "...";
 
     		StartCoroutine(Show(text));
 
@@ -40,5 +37,11 @@ public class UIController : MonoBehaviour
     		bossText.text = tmp;
     		yield return new WaitForSeconds(0.1f);
     	}
+    }
+
+
+    IEnumerator WaitUntilLoad() {
+    	yield return new WaitUntil(() => loader.isLoaded);
+    	ShowPhrase();
     }
 }
