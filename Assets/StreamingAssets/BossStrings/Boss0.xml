@@ -4,4 +4,7 @@
 	<phrase id="_Clue1">clue1 clue1 clue1 clue1 clue1 clue1</phrase>
 	<phrase id="_Clue2">clue2 clue2 clue2 clue2 clue2 clue2</phrase>
 	<phrase id="_Clue3">clue3 clue3 clue3 clue3 clue3 clue3</phrase>
+	<phrase id="_UncorrectClue">Неверно...</phrase>
+	<prase id="_EndDialog">Я умер...</prase>
+	<phase id="_Victory">ХА-ХА, жалкий людишка. Я победил</phase>
 </Text>

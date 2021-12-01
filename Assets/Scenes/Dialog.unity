@@ -213,7 +213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1526517863}
   target: {fileID: 591128808}
-  uiController: {fileID: 1785108169}
+  boss: {fileID: 1785108170}
+  clueID: 0
 --- !u!1 &78122795
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,6 +806,7 @@ GameObject:
   - component: {fileID: 768114582}
   - component: {fileID: 768114584}
   - component: {fileID: 768114583}
+  - component: {fileID: 768114585}
   m_Layer: 5
   m_Name: ClueImg (2)
   m_TagString: Untagged
@@ -869,6 +871,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 768114581}
   m_CullTransparentMesh: 0
+--- !u!114 &768114585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768114581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba39d82a2b1cfc4cb5070f9c82ec90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 1526517863}
+  target: {fileID: 591128808}
+  boss: {fileID: 1785108170}
+  clueID: 2
 --- !u!1 &857957882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,6 +1588,7 @@ GameObject:
   - component: {fileID: 1748355799}
   - component: {fileID: 1748355801}
   - component: {fileID: 1748355800}
+  - component: {fileID: 1748355802}
   m_Layer: 5
   m_Name: ClueImg (1)
   m_TagString: Untagged
@@ -1634,6 +1653,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1748355798}
   m_CullTransparentMesh: 0
+--- !u!114 &1748355802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748355798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba39d82a2b1cfc4cb5070f9c82ec90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 1526517863}
+  target: {fileID: 591128808}
+  boss: {fileID: 1785108170}
+  clueID: 1
 --- !u!1 &1785108166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,6 +1680,8 @@ GameObject:
   - component: {fileID: 1785108168}
   - component: {fileID: 1785108167}
   - component: {fileID: 1785108169}
+  - component: {fileID: 1785108170}
+  - component: {fileID: 1785108171}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1692,6 +1729,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossText: {fileID: 1384282895}
   loader: {fileID: 1785108167}
+--- !u!114 &1785108170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785108166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9266c066cbfdd87b1dc5509b9a9a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiController: {fileID: 1785108169}
+  player: {fileID: 1785108171}
+--- !u!114 &1785108171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785108166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d361034fd89d19449b1e4265d7ecc3ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSlider: {fileID: 326270634}
 --- !u!1 &1792370630
 GameObject:
   m_ObjectHideFlags: 0
