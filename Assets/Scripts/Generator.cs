@@ -42,7 +42,6 @@ public class Generator : MonoBehaviour, IObserver
         {
             map = parser.map;
             StartCoroutine(GenerateRoom());
-            surface.BuildNavMesh();
 
             //subject.Notify(this.gameObject, EventList.GAME_READY_TO_START);
         }
@@ -65,6 +64,7 @@ public class Generator : MonoBehaviour, IObserver
             }
         }
 
+        surface.BuildNavMesh();
         subject.Notify(this.gameObject, EventList.GAME_READY_TO_START);
     }
     

@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour, IObserver
     [SerializeField] Subject subject;
     Queue<EnemyController> enemies = new Queue<EnemyController>();
 
+    static int lvlNumber = 0;
+
     private void Start()
     {
         subject.AddObserver(this);
@@ -37,6 +39,12 @@ public class GameController : MonoBehaviour, IObserver
         }
 
         if (eventValue == EventList.NEXT_LVL)
-            SceneManager.LoadScene("LoadingScene");
+        {
+            lvlNumber++;
+            if (lvlNumber == 4)
+                SceneManager.LoadScene("Dialog");
+            else
+                SceneManager.LoadScene("LoadingScene");
+        }
     }
 }
