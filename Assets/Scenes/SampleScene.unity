@@ -1108,8 +1108,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drop:
   - {fileID: 7717239673306690485, guid: 18ad0e0e6bd2b3146b7ccc648d1ae09f, type: 3}
-  - {fileID: 3049295001091489010, guid: bad3ce044b157b34d8cc61bbe96c097c, type: 3}
   - {fileID: 926963303997766848, guid: 0c53b42ca2d577940892140a62cfdcdd, type: 3}
+  clues:
+  - {fileID: 3049295001091489010, guid: bad3ce044b157b34d8cc61bbe96c097c, type: 3}
 --- !u!1 &1792093969
 GameObject:
   m_ObjectHideFlags: 0

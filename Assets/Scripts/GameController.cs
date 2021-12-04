@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour, IObserver
     [SerializeField] Subject subject;
     Queue<EnemyController> enemies = new Queue<EnemyController>();
 
-    static int lvlNumber = 0;
+    public static int lvlNumber = 0;
 
     private void Start()
     {

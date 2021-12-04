@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     bool canAttack = true;
 
     public static int enemyCount = 0;
+    public int id { get; private set; }
 
     private void Update()
     {
@@ -85,7 +86,10 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     {
         player = FindObjectOfType<PlayerLogic>();
         subject = FindObjectOfType<Subject>();
+
+        id = enemyCount;
         enemyCount++;
+
         movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), player.transform);
 
         box = GetComponent<BoxCollider>();
