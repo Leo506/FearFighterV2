@@ -94,6 +94,9 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
         box = GetComponent<BoxCollider>();
         attack = new AttackComponent(box, transform, attackLayer);
+
+        spriteRenderer.materials[0].SetFloat("_Fade", 1);
+        spriteRenderer.materials[0].SetFloat("_Scale", 55);
     }
 
 
