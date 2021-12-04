@@ -17,6 +17,7 @@ public class SwordItem : DroppingObj
 
     protected override void OnGet()
     {
+        PlayerLogic.attackValue *= 1.5f;
         base.OnGet();
     }
 }

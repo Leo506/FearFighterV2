@@ -13,6 +13,8 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
     [SerializeField] UnityEngine.UI.Text text;  // TODO не забыть удалить
     [SerializeField] LayerMask attackLayer;
 
+    public static float attackValue = 10;
+
 
     private void Update()
     {
@@ -64,7 +66,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
                 break;
         }
 
-        attack.Attack(rayDir, distance, 10);
+        attack.Attack(rayDir, distance, attackValue);
         animator.SetTrigger("Attack");
     }
 
