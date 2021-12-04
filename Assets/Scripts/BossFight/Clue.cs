@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Clue : MonoBehaviour, IPointerDownHandler, IEndDragHandler, IDragHandler
 {
@@ -30,21 +31,18 @@ public class Clue : MonoBehaviour, IPointerDownHandler, IEndDragHandler, IDragHa
 
     public void OnEndDrag(PointerEventData eventData) {
     	Debug.Log("End drag");
+        target.GetComponent<Image>().enabled = false;
 
-    	// Возвращаем прежний размер, тк игрок перестал передвигать улику
-    	transform.localScale = new Vector3(1, 1, 1);
+        // Возвращаем прежний размер, тк игрок перестал передвигать улику
+        transform.localScale = new Vector3(1, 1, 1);
 
-    	// Проверяем, попала ли улика на объект, на который нужно её перенести
-    	// Сначала проверяем координаты по Х,
-    	// потом по Y
-    	if (transform.position.x >= target.position.x - target.rect.width / 2 && transform.position.x <= target.position.x + target.rect.width / 2) {
-    		if (transform.position.y >= target.position.y - target.rect.height / 2 && transform.position.y <= target.position.y + target.rect.height / 2) {
-    			
-    			// Пытаемся атаковать босса
-    			if (boss.TryAttack(clueID))   
-    				Destroy(this.gameObject);
-    		}
-    	}
+    	
+    	if (CheckPos(transform.position))
+        {
+            // Пытаемся атаковать босса
+            if (boss.TryAttack(clueID))
+                Destroy(this.gameObject);
+        }
 
     	// Если не попали на цель, то возвращаем улику на своё место
     	transform.localPosition = startPos;
@@ -56,5 +54,25 @@ public class Clue : MonoBehaviour, IPointerDownHandler, IEndDragHandler, IDragHa
 
     	// Увеличиваем размер улики, чтобы показать, что она выбрана
     	transform.localScale = new Vector3(1.5f, 1.5f, 1);
+
+        target.GetComponent<Image>().enabled = true;
+    }
+
+
+    // Проверяем, попала ли улика на объект, на который нужно её перенести
+    // Сначала проверяем координаты по Х,
+    // потом по Y
+    bool CheckPos(Vector3 pos)
+    {
+        if (pos.x >= target.position.x - target.rect.width / 2 && pos.x <= target.position.x + target.rect.width / 2)
+        {
+            if (pos.y >= target.position.y - target.rect.height / 2 && pos.y <= target.position.y + target.rect.height / 2)
+            {
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }
