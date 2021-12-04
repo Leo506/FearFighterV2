@@ -13,8 +13,10 @@ public class InventoryController : MonoBehaviour, ISetUpObj, IObserver
     {
         subject = FindObjectOfType<Subject>();
         subject.AddObserver(this);
-        inventory = new Dictionary<int, int>();
         data = GetComponent<InventoryData>();
+
+        if (inventory == null)
+            inventory = new Dictionary<int, int>();
     }
 
 
