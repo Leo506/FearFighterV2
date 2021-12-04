@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour, IObserver
 {
@@ -34,5 +35,8 @@ public class GameController : MonoBehaviour, IObserver
             if (enemies.Count != 0)
                 enemies.Dequeue().MyQueue();
         }
+
+        if (eventValue == EventList.NEXT_LVL)
+            SceneManager.LoadScene("LoadingScene");
     }
 }

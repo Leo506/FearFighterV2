@@ -9,7 +9,8 @@ public enum EventList
     MAP_READY,
     GAME_READY_TO_START,
     ITEM_GET,
-    NO_ENEMIES
+    NO_ENEMIES,
+    NEXT_LVL
 }
 
 public class Subject : MonoBehaviour

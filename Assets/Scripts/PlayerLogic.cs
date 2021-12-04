@@ -68,39 +68,51 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
         animator.SetTrigger("Attack");
     }
 
-
-    void OnDrawGizmos()
+    private void OnCollisionEnter(Collision collision)
     {
-        Gizmos.color = Color.red;
+        var exit = collision.collider.GetComponent<Exit>();
 
-        Vector3 rayDir;
-        float distance;
-
-        switch (movement.currentViewDirection)
+        if (exit != null)
         {
-            case viewDirection.TOWARD:
-                rayDir = Vector3.forward;
-                distance = box.size.z;
-                break;
-            case viewDirection.DOWN:
-                rayDir = Vector3.back;
-                distance = box.size.z;
-                break;
-            case viewDirection.RIGHT:
-                rayDir = Vector3.right;
-                distance = box.size.x;
-                break;
-            case viewDirection.LEFT:
-                rayDir = Vector3.left;
-                distance = box.size.x;
-                break;
-            default:
-                rayDir = Vector3.zero;
-                distance = box.size.x;
-                break;
+            if (exit.available)
+                exit.GoNextLvl();
         }
-        Gizmos.DrawRay(transform.position, rayDir * (distance - 0.03f));
-        //Draw a cube at the maximum distance
-        Gizmos.DrawWireCube(transform.position + rayDir * (distance - 0.03f), box.size);
+            
     }
+
+
+    /* void OnDrawGizmos()
+     {
+         Gizmos.color = Color.red;
+
+         Vector3 rayDir;
+         float distance;
+
+         switch (movement.currentViewDirection)
+         {
+             case viewDirection.TOWARD:
+                 rayDir = Vector3.forward;
+                 distance = box.size.z;
+                 break;
+             case viewDirection.DOWN:
+                 rayDir = Vector3.back;
+                 distance = box.size.z;
+                 break;
+             case viewDirection.RIGHT:
+                 rayDir = Vector3.right;
+                 distance = box.size.x;
+                 break;
+             case viewDirection.LEFT:
+                 rayDir = Vector3.left;
+                 distance = box.size.x;
+                 break;
+             default:
+                 rayDir = Vector3.zero;
+                 distance = box.size.x;
+                 break;
+         }
+         Gizmos.DrawRay(transform.position, rayDir * (distance - 0.03f));
+         //Draw a cube at the maximum distance
+         Gizmos.DrawWireCube(transform.position + rayDir * (distance - 0.03f), box.size);
+     }*/
 }

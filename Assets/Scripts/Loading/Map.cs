@@ -9,6 +9,11 @@ namespace Loading {
 		[SerializeField] Subject subject;
 
 	    void Awake() {
+            foreach (var item in FindObjectsOfType<Map>())
+            {
+				if (item != this)
+					Destroy(item.gameObject);
+            }
 	    	DontDestroyOnLoad(this.gameObject);
 	    	subject.AddObserver(this);
 	    }
