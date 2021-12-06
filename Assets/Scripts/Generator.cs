@@ -43,7 +43,7 @@ public class Generator : MonoBehaviour, IObserver
                 #if UNITY_EDITOR
                     parser.GetMap("file://" + Application.streamingAssetsPath + $"/Scenes/BossArena/BA.xml");
                 #else
-                    parser.GetMap("file://" + Application.dataPath + $"!/assets/Scenes/BossArena/BA.xml");
+                    parser.GetMap("jar:file://" + Application.dataPath + $"!/assets/Scenes/BossArena/BA.xml");
                 #endif
                 break;
 
