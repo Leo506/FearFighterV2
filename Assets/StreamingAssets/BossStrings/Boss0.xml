@@ -5,6 +5,7 @@
 	<phrase id="_Clue2">clue2 clue2 clue2 clue2 clue2 clue2</phrase>
 	<phrase id="_Clue3">clue3 clue3 clue3 clue3 clue3 clue3</phrase>
 	<phrase id="_UncorrectClue">Неверно...</phrase>
-	<prase id="_EndDialog">Я умер...</prase>
-	<phase id="_Victory">ХА-ХА, жалкий людишка. Я победил</phase>
+	<phrase id="_EndDialog">Я умер...</phrase>
+	<phrase id="_Victory">ХА-ХА, жалкий людишка. Я победил</phrase>
+	<phrase id="_SecondPhase">Ты слишком глуп. Давай проверим тогда твою силу</phrase> 
 </Text>

@@ -7,22 +7,23 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 {
-    [SerializeField] float hp = 100;
-    [SerializeField] float attackRadius = 0.5f;
-    [SerializeField] LayerMask attackLayer;
-    [SerializeField] ParticleSystem getDamageEffect;
+    [SerializeField] protected float hp = 100;
+    [SerializeField] protected float attackRadius = 0.5f;
+    [SerializeField] protected LayerMask attackLayer;
+    [SerializeField] protected ParticleSystem getDamageEffect;
 
-    PlayerLogic player;
-    AIMovementComponent movement;
-    AttackComponent attack;
-    Subject subject;
+    protected PlayerLogic player;
+    protected AIMovementComponent movement;
+    protected AttackComponent attack;
+    protected Subject subject;
 
-    BoxCollider box;
+    protected BoxCollider box;
 
-    bool canAttack = true;
+    protected bool canAttack = true;
 
     public static int enemyCount = 0;
     public int id { get; private set; }
+
 
     private void Update()
     {
@@ -38,7 +39,8 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         }
     }
 
-    void Attack()
+
+    protected virtual void Attack()
     {
         Vector3 rayDir;
         float distance;
@@ -77,7 +79,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     }
 
 
-    void Reload()
+    protected virtual void Reload()
     {
         canAttack = true;
     }

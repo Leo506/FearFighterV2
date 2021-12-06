@@ -70,7 +70,7 @@ public class InventoryUI : MonoBehaviour
         text.font = font;
         text.text = $"x{count}";
         text.color = Color.red;
-        text.fontSize = 60;
+        text.fontSize = 50;
         text.alignment = TextAnchor.MiddleCenter;
     }
 }

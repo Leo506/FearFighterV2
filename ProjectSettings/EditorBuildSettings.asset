@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dialog.unity
     guid: cd14fc6cbce2fe5d6a663376f2037815
+  - enabled: 1
+    path: Assets/Scenes/BossFightPhase2.unity
+    guid: cd80d78ef05d1235594d7427627248d6
   m_configObjects: {}

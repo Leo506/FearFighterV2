@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
 
+public enum TypeOfScene 
+{
+    BOSS_ARENA,
+    SIMPLE_SCENE
+}
+
 public class Generator : MonoBehaviour, IObserver
 {
     public List<string> types;              // Типы объектов
@@ -11,12 +17,14 @@ public class Generator : MonoBehaviour, IObserver
     public GameObject roomRoot;             // "Корень комнаты"
     public PlayerLogic _playerPrefab;       // Префаб игрока
     public GameObject _enemyPrefab;         // Префаб врага
+    public TypeOfScene sceneType;           // Тип генерируемой сцены
 
-    public int countOfScene;
+    public int countOfScene;                // Количество сцен
 
     [SerializeField] Subject subject;
 
     [SerializeField] NavMeshSurface surface;
+
     XMLParser parser;
 
     Map map;
@@ -29,12 +37,28 @@ public class Generator : MonoBehaviour, IObserver
         int sceneIndex = Random.Range(0, countOfScene);
         parser = GetComponent<XMLParser>();
 
-#if UNITY_EDITOR
-        parser.GetMap("file://" + Application.streamingAssetsPath + $"/Scene{sceneIndex}.xml");
-#else
-        parser.GetMap("jar:file://" + Application.dataPath + $"!/assets/Scene{sceneIndex}.xml");
-#endif   
+        switch (sceneType) 
+        {
+            case TypeOfScene.BOSS_ARENA:
+                #if UNITY_EDITOR
+                    parser.GetMap("file://" + Application.streamingAssetsPath + $"/Scenes/BossArena/BA.xml");
+                #else
+                    parser.GetMap("file://" + Application.dataPath + $"!/assets/Scenes/BossArena/BA.xml");
+                #endif
+                break;
+
+            case TypeOfScene.SIMPLE_SCENE:
+                #if UNITY_EDITOR
+                    parser.GetMap("file://" + Application.streamingAssetsPath + $"/Scenes/Scene{sceneIndex}.xml");
+                #else
+                    parser.GetMap("jar:file://" + Application.dataPath + $"!/assets/Scenes/Scene{sceneIndex}.xml");
+                #endif
+                break;
+        }
+
+
     }
+
 
     public void OnNotify(GameObject obj, EventList eventValue)
     {
