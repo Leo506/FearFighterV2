@@ -41,8 +41,11 @@ public class GameController : MonoBehaviour, IObserver
         if (eventValue == EventList.NEXT_LVL)
         {
             lvlNumber++;
-            if (lvlNumber == 4)
+            if (lvlNumber == 4) 
+            {
+            	Destroy(FindObjectOfType<Loading.Map>().gameObject);
                 SceneManager.LoadScene("Dialog");
+            }
             else
                 SceneManager.LoadScene("LoadingScene");
         }
