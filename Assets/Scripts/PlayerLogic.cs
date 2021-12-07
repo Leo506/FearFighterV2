@@ -7,6 +7,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged
     PlayerMovement movement;
     BoxCollider box;
     AttackComponent attack;
+    Subject subject;
     
     [SerializeField] Animator animator;
     [SerializeField] float distanceCoeff = 1;
@@ -38,6 +39,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged
         	currentHP = maxHP;
 
         ui.ShowCurrentHp();
+        subject = FindObjectOfType<Subject>();
     }
 
 
@@ -130,7 +132,11 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged
     {
     	currentHP -= value;
     	ui.ShowCurrentHp();
-    	if (currentHP <= 0)
+    	if (currentHP <= 0) 
+    	{
+    		subject.Notify(this.gameObject, EventList.GAME_OVER);
+    		Destroy(this.gameObject);
     		Debug.Log("Игрок умер");
+    	}
     }
 }
