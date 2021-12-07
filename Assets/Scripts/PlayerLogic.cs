@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLogic : MonoBehaviour, ISetUpObj
+public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged
 {
     PlayerMovement movement;
     BoxCollider box;
@@ -12,8 +12,11 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
     [SerializeField] float distanceCoeff = 1;
     [SerializeField] UnityEngine.UI.Text text;  // TODO не забыть удалить
     [SerializeField] LayerMask attackLayer;
+    [SerializeField] PlayerUI ui;
+    public float maxHP = 100;
 
     public static float attackValue = 10;
+    public static float currentHP = -1;
 
 
     private void Update()
@@ -30,6 +33,11 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
         box = GetComponent<BoxCollider>();
         attack = new AttackComponent(box, transform, attackLayer);
         FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
+
+        if (currentHP == -1) 
+        	currentHP = maxHP;
+
+        ui.ShowCurrentHp();
     }
 
 
@@ -117,4 +125,12 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj
          //Draw a cube at the maximum distance
          Gizmos.DrawWireCube(transform.position + rayDir * (distance - 0.03f), box.size);
      }*/
+
+    public void GetDamage(float value) 
+    {
+    	currentHP -= value;
+    	ui.ShowCurrentHp();
+    	if (currentHP <= 0)
+    		Debug.Log("Игрок умер");
+    }
 }
