@@ -11,22 +11,26 @@ public enum EventList
     ITEM_GET,
     NO_ENEMIES,
     NEXT_LVL,
-    GAME_OVER
+    GAME_OVER,
+    VICTORY
 }
 
 public class Subject : MonoBehaviour
 {
     List<IObserver> observers = new List<IObserver>();
 
+
     public void AddObserver(IObserver observer)
     {
         observers.Add(observer);
     }
 
+
     public void RemoveObserver(IObserver observer)
     {
         observers.Remove(observer);
     }
+
 
     public void Notify(GameObject obj, EventList eventValue)
     {

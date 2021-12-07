@@ -56,6 +56,7 @@ namespace BossFightPhase2
 
 	            enemyCount--;
 	            subject.Notify(this.gameObject, EventList.NO_ENEMIES);
+	            subject.Notify(this.gameObject, EventList.VICTORY);
 	            Destroy(this.gameObject);
 	            return;
 	        }
@@ -63,6 +64,12 @@ namespace BossFightPhase2
 	        Instantiate(getDamageEffect, this.transform);
 
 	        movement.PushFromTarget();
-	    } 
+	    }
+
+
+	    protected override void Attack() 
+	    {
+	    	base.Attack();
+	    }
 	}
 }

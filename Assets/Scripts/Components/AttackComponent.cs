@@ -33,6 +33,7 @@ public class AttackComponent
     /// <param name="damageValue">Количество урона</param>
     public void Attack(Vector3 dir, float distance, float damageValue)
     {
+        Debug.Log("Attack in attack component");
         Vector3 center = objTransform.position + dir * distance;
         Vector3 size = new Vector3(
             box.size.x * objTransform.localScale.x,
@@ -43,6 +44,7 @@ public class AttackComponent
         Collider[] colliders = Physics.OverlapBox(center, size / 2, objTransform.rotation, layerMask);
         if (colliders.Length != 0)
         {
+            Debug.Log("There are colliders");
             foreach (var item in colliders)
             {
                 item.GetComponent<IGetDamaged>()?.GetDamage(damageValue);

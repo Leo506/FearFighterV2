@@ -75,6 +75,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         }
 
         attack.Attack(rayDir, distance, 10);
+        Debug.Log("Attack!!!");
         Invoke("Reload", 3);
     }
 
