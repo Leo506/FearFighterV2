@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 
 public class MenuController : MonoBehaviour, IObserver, ISetUpObj
@@ -18,6 +19,7 @@ public class MenuController : MonoBehaviour, IObserver, ISetUpObj
 
     public void Play() 
     {
+    	Time.timeScale = 1;
     	SceneManager.LoadScene("LoadingScene");
     	// TODO Ресет инвенторя, характеристик персонажа и тд
     }
@@ -33,6 +35,9 @@ public class MenuController : MonoBehaviour, IObserver, ISetUpObj
     {
     	if (eventValue == EventList.GAME_OVER) 
     	{
+    		foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<IResetObj>().ToArray())
+    			item.ResetObj();
+
     		gameOverCanvas.enabled = true;
     		Time.timeScale = 0;
     	}

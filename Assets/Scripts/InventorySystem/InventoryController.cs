@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(InventoryData))]
-public class InventoryController : MonoBehaviour, ISetUpObj, IObserver
+public class InventoryController : MonoBehaviour, ISetUpObj, IObserver, IResetObj
 {
     Subject subject;
     public static Dictionary<int, int> inventory { get; private set; }
@@ -31,5 +31,11 @@ public class InventoryController : MonoBehaviour, ISetUpObj, IObserver
             else
                 inventory.Add(type, 1);
         }
+    }
+
+
+    public void ResetObj() 
+    {
+        inventory.Clear();
     }
 }

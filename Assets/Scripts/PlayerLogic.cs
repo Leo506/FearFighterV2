@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged
+public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
 {
     PlayerMovement movement;
     BoxCollider box;
@@ -139,4 +139,11 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged
     		Debug.Log("Игрок умер");
     	}
     }
+
+
+    public void ResetObj() 
+    {
+    	attackValue = 10;
+    	currentHP = -1;
+    } 
 }
