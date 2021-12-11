@@ -4,101 +4,178 @@
     <Position>
       <X>-4.49</X>
       <Y>0.24</Y>
-      <Z>-4.49</Z>
+      <Z>-1.89</Z>
+    </Position>
+    <Position>
+      <X>-1.74</X>
+      <Y>0.24</Y>
+      <Z>-1.89</Z>
+    </Position>
+    <Position>
+      <X>1.05</X>
+      <Y>0.24</Y>
+      <Z>-1.89</Z>
+    </Position>
+    <Position>
+      <X>1.05</X>
+      <Y>0.24</Y>
+      <Z>0.11</Z>
+    </Position>
+    <Position>
+      <X>-1.32</X>
+      <Y>0.24</Y>
+      <Z>1.6</Z>
+    </Position>
+    <Position>
+      <X>-3.45</X>
+      <Y>0.24</Y>
+      <Z>3.75</Z>
+    </Position>
+    <Position>
+      <X>-3.45</X>
+      <Y>0.24</Y>
+      <Z>-3.18</Z>
+    </Position>
+    <Position>
+      <X>3.62</X>
+      <Y>0.24</Y>
+      <Z>-3.18</Z>
+    </Position>
+    <Position>
+      <X>3.62</X>
+      <Y>0.24</Y>
+      <Z>-0.68</Z>
     </Position>
     <Position>
       <X>-4.49</X>
       <Y>0.24</Y>
-      <Z>-2.08</Z>
+      <Z>-1.89</Z>
+    </Position>
+    <Position>
+      <X>-1.74</X>
+      <Y>0.24</Y>
+      <Z>-1.89</Z>
+    </Position>
+    <Position>
+      <X>1.05</X>
+      <Y>0.24</Y>
+      <Z>-1.89</Z>
+    </Position>
+    <Position>
+      <X>1.05</X>
+      <Y>0.24</Y>
+      <Z>0.11</Z>
+    </Position>
+    <Position>
+      <X>-1.32</X>
+      <Y>0.24</Y>
+      <Z>1.6</Z>
+    </Position>
+    <Position>
+      <X>-3.45</X>
+      <Y>0.24</Y>
+      <Z>3.75</Z>
+    </Position>
+    <Position>
+      <X>-3.45</X>
+      <Y>0.24</Y>
+      <Z>-3.18</Z>
+    </Position>
+    <Position>
+      <X>3.62</X>
+      <Y>0.24</Y>
+      <Z>-3.18</Z>
+    </Position>
+    <Position>
+      <X>3.62</X>
+      <Y>0.24</Y>
+      <Z>-0.68</Z>
     </Position>
     <Position>
       <X>-4.49</X>
       <Y>0.24</Y>
-      <Z>0.63</Z>
+      <Z>-1.89</Z>
     </Position>
     <Position>
-      <X>-4.49</X>
+      <X>-1.74</X>
       <Y>0.24</Y>
-      <Z>2.8</Z>
+      <Z>-1.89</Z>
     </Position>
     <Position>
-      <X>-1.76</X>
+      <X>1.05</X>
       <Y>0.24</Y>
-      <Z>2.8</Z>
+      <Z>-1.89</Z>
     </Position>
     <Position>
-      <X>-1.76</X>
+      <X>1.05</X>
       <Y>0.24</Y>
-      <Z>0.78</Z>
+      <Z>0.11</Z>
     </Position>
     <Position>
-      <X>-1.76</X>
+      <X>-1.32</X>
       <Y>0.24</Y>
-      <Z>-2.12</Z>
+      <Z>1.6</Z>
     </Position>
     <Position>
-      <X>-1.76</X>
+      <X>-3.45</X>
       <Y>0.24</Y>
-      <Z>-4.18</Z>
+      <Z>3.75</Z>
     </Position>
     <Position>
-      <X>0.71</X>
+      <X>-3.45</X>
       <Y>0.24</Y>
-      <Z>-4.18</Z>
+      <Z>-3.18</Z>
     </Position>
     <Position>
-      <X>0.71</X>
+      <X>3.62</X>
       <Y>0.24</Y>
-      <Z>-1.97</Z>
+      <Z>-3.18</Z>
     </Position>
     <Position>
-      <X>0.71</X>
+      <X>3.62</X>
       <Y>0.24</Y>
-      <Z>0.85</Z>
-    </Position>
-    <Position>
-      <X>0.71</X>
-      <Y>0.24</Y>
-      <Z>2.85</Z>
-    </Position>
-    <Position>
-      <X>3.35</X>
-      <Y>0.24</Y>
-      <Z>2.85</Z>
-    </Position>
-    <Position>
-      <X>3.35</X>
-      <Y>0.24</Y>
-      <Z>0.85</Z>
-    </Position>
-    <Position>
-      <X>3.35</X>
-      <Y>0.24</Y>
-      <Z>-2.01</Z>
-    </Position>
-    <Position>
-      <X>3.35</X>
-      <Y>0.24</Y>
-      <Z>-4.1</Z>
+      <Z>-0.68</Z>
     </Position>
   </Obstacle>
   <Obstacle type="Enemy">
     <Position>
-      <X>-2.92</X>
+      <X>-3.09</X>
       <Y>0</Y>
-      <Z>1.53</Z>
+      <Z>0.61</Z>
     </Position>
     <Position>
-      <X>-2.92</X>
+      <X>-3.09</X>
       <Y>0</Y>
-      <Z>3.87</Z>
+      <Z>2.46</Z>
+    </Position>
+    <Position>
+      <X>0.83</X>
+      <Y>0</Y>
+      <Z>2.46</Z>
+    </Position>
+    <Position>
+      <X>3</X>
+      <Y>0</Y>
+      <Z>2.46</Z>
+    </Position>
+    <Position>
+      <X>3</X>
+      <Y>0</Y>
+      <Z>-0.3</Z>
+    </Position>
+  </Obstacle>
+  <Obstacle type="Portal">
+    <Position>
+      <X>3.25</X>
+      <Y>0.36</Y>
+      <Z>1.17</Z>
     </Position>
   </Obstacle>
   <Obstacle type="Player">
     <Position>
       <X>0</X>
       <Y>0.17</Y>
-      <Z>-4.75</Z>
+      <Z>-4.44</Z>
     </Position>
   </Obstacle>
 </Map>
