@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 515103614}
   - component: {fileID: 515103613}
   - component: {fileID: 515103612}
+  - component: {fileID: 515103617}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -230,6 +231,7 @@ MonoBehaviour:
   countOfScene: 1
   subject: {fileID: 1350621365}
   surface: {fileID: 1388387394}
+  manager: {fileID: 515103617}
 --- !u!4 &515103616
 Transform:
   m_ObjectHideFlags: 0
@@ -244,6 +246,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &515103617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515103611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c94877ab9d10a21b056a41f1862d79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &996128402
 GameObject:
   m_ObjectHideFlags: 0

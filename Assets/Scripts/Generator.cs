@@ -10,7 +10,7 @@ public enum TypeOfScene
     SIMPLE_SCENE
 }
 
-public class Generator : MonoBehaviour, IObserver
+public class Generator : MonoBehaviour
 {
     public List<string> types;              // Типы объектов
     public GameObject[] objects;            // Объекты
@@ -25,62 +25,56 @@ public class Generator : MonoBehaviour, IObserver
 
     [SerializeField] NavMeshSurface surface;
 
-    XMLParser parser;
+    [SerializeField] ResourceManager manager;
 
-    Map map;
-    
 
-    // TODO не забыть удалить
     private void Start()
     {
-        subject.AddObserver(this);
         int sceneIndex = Random.Range(0, countOfScene);
-        parser = GetComponent<XMLParser>();
+
+        string path = "";
 
         switch (sceneType) 
         {
             case TypeOfScene.BOSS_ARENA:
                 #if UNITY_EDITOR
-                    parser.GetMap("file://" + Application.streamingAssetsPath + $"/Scenes/BossArena/BA.xml");
+                    path = "file://" + Application.streamingAssetsPath + $"/Scenes/BossArena/BA.xml";
                 #else
-                    parser.GetMap("jar:file://" + Application.dataPath + $"!/assets/Scenes/BossArena/BA.xml");
+                    path = "jar:file://" + Application.dataPath + $"!/assets/Scenes/BossArena/BA.xml";
                 #endif
                 break;
 
             case TypeOfScene.SIMPLE_SCENE:
                 #if UNITY_EDITOR
-                    parser.GetMap("file://" + Application.streamingAssetsPath + $"/Scenes/Scene{sceneIndex}.xml");
+                    path = "file://" + Application.streamingAssetsPath + $"/Scenes/Scene{sceneIndex}.xml";
                 #else
-                    parser.GetMap("jar:file://" + Application.dataPath + $"!/assets/Scenes/Scene{sceneIndex}.xml");
+                    path = "jar:file://" + Application.dataPath + $"!/assets/Scenes/Scene{sceneIndex}.xml";
                 #endif
                 break;
         }
 
+        StartCoroutine(GenerateRoom(path));
+
 
     }
 
 
-    public void OnNotify(GameObject obj, EventList eventValue)
-    {
-        if (eventValue == EventList.MAP_READY)
-        {
-            map = parser.map;
-            StartCoroutine(GenerateRoom());
-
-            //subject.Notify(this.gameObject, EventList.GAME_READY_TO_START);
-        }
-    }
 
 
     /// <summary>
     /// Создаёт комнату
     /// </summary>
-    IEnumerator GenerateRoom()
+    IEnumerator GenerateRoom(string path)
     {
-        foreach (string type in map.GetTypes())
+        ResourceManager man = new ResourceManager();
+        yield return man.LoadResource(ResourceType.SCENE_RES, path);
+
+        SceneResource scene = man.GetResource(ResourceType.SCENE_RES)[0] as SceneResource;
+
+        foreach (string type in scene.GetTypes())
         {
             var objToInstance = objects[types.IndexOf(type)];
-            foreach (Vector3 pos in map.GetPositions(type))
+            foreach (Vector3 pos in scene.GetPositions(type))
             {
                 var obj = Instantiate(objToInstance, roomRoot.transform);
                 obj.transform.localPosition = pos;

@@ -6,61 +6,10 @@ using UnityEngine.Networking;
 using System.Globalization;
 
 
-public struct Map
-{
-    Dictionary<string, List<Vector3>> objects;                    // Словарь тип объекта:список координат таких объектов
-
-
-    /// <summary>
-    /// Создаёт структуру, представляющую одну комнату
-    /// </summary>
-    /// <param name="objs">Словарь тип объекта:список координат таких объектов</param>
-    public Map(Dictionary<string, List<Vector3>> objs)
-    {
-        this.objects = new Dictionary<string, List<Vector3>>();
-        objects = objs;
-    }
-
-
-    /// <summary>
-    /// Возвращает список типов объектов
-    /// </summary>
-    /// <returns></returns>
-    public List<string> GetTypes()
-    {
-        List<string> types = new List<string>();
-        foreach (var item in objects.Keys)
-        {
-            types.Add(item);
-        }
-
-        return types;
-    }
-
-
-    /// <summary>
-    /// Возвращает список координат для каждого объекта определенного типа
-    /// </summary>
-    /// <param name="type">Тип объекта</param>
-    /// <returns></returns>
-    public List<Vector3> GetPositions(string type)
-    {
-        return objects[type];
-    }
-}
-
 public class XMLParser: MonoBehaviour
 {
     [SerializeField] Subject subject;
 
-    public Map map;
-
-    UnityWebRequest uwr;
-
-    public void GetMap(string path)
-    {
-        StartCoroutine(GetMapFromFile(path));
-    }
 
 
     public static void CreateNewMap(Dictionary<string, List<Vector3>> objects, string filePath)
@@ -119,76 +68,68 @@ public class XMLParser: MonoBehaviour
         doc.Save(Application.streamingAssetsPath + "/" + filePath);
     }
 
-    IEnumerator GetMapFromFile(string path)
+    public static SceneResource MapHandler(string xml)
     {
-        using (uwr = UnityWebRequest.Get(path))
+        xml = RemovePreambleByte(xml);
+
+        XmlDocument sceneDoc = new XmlDocument();
+        sceneDoc.LoadXml(xml);
+
+        XmlElement map = sceneDoc.DocumentElement;                                                 // Доступ к корневому элементу
+        Dictionary<string, List<Vector3>> objects = new Dictionary<string, List<Vector3>>();
+        List<Vector3> positions;
+        string type;
+
+        CultureInfo ci = new CultureInfo("en-US");
+        ci.NumberFormat.NumberDecimalSeparator = ".";
+
+        // Проходим по всем тегам Obstacle
+        foreach (XmlElement item in map)
         {
-            yield return uwr.SendWebRequest();
-            if (uwr.isNetworkError || uwr.isHttpError)
+            positions = new List<Vector3>();
+
+            // Получаем тип препятствия
+            type = item.Attributes.GetNamedItem("type").Value;
+
+            // Получаем координаты каждого препятствия
+            foreach (XmlNode position in item.ChildNodes)
             {
-                Debug.Log(uwr.error);
-            } else
-            {
-                XmlDocument sceneDoc;
-                sceneDoc = new XmlDocument();
-                var tmp = uwr.downloadHandler.text;
-                string _byteOrderMarkUtf8 = System.Text.Encoding.UTF8.GetString(System.Text.Encoding.UTF8.GetPreamble());
-                if (tmp.StartsWith(_byteOrderMarkUtf8))
+                float x = 0;
+                float y = 0;
+                float z = 0;
+
+                foreach (XmlNode coordinates in position.ChildNodes)
                 {
-                    tmp = tmp.Remove(0, _byteOrderMarkUtf8.Length);
-                }
-                sceneDoc.LoadXml(tmp);
+                    Debug.Log(coordinates.InnerText);
 
-                XmlElement map = sceneDoc.DocumentElement;                                                 // Доступ к корневому элементу
-                Dictionary<string, List<Vector3>> objects = new Dictionary<string, List<Vector3>>();
-                List<Vector3> positions;
-                string type;
+                    if (coordinates.Name == "X")
+                        float.TryParse(coordinates.InnerText, NumberStyles.Float, ci, out x);
 
-                if (map != null)
-                {
-                    CultureInfo ci = new CultureInfo("en-US");
-                    ci.NumberFormat.NumberDecimalSeparator = ".";
+                    if (coordinates.Name == "Y")
+                        float.TryParse(coordinates.InnerText, NumberStyles.Float, ci, out y);
 
-                    // Проходим по всем тегам Obstacle
-                    foreach (XmlElement item in map)
-                    {
-                        positions = new List<Vector3>();
-
-                        // Получаем тип препятствия
-                        type = item.Attributes.GetNamedItem("type").Value;
-
-                        // Получаем координаты каждого препятствия
-                        foreach (XmlNode position in item.ChildNodes)
-                        {
-                            float x = 0;
-                            float y = 0;
-                            float z = 0;
-
-                            foreach (XmlNode coordinates in position.ChildNodes)
-                            {
-                                Debug.Log(coordinates.InnerText);
-
-                                if (coordinates.Name == "X")
-                                    float.TryParse(coordinates.InnerText, NumberStyles.Float, ci, out x);
-
-                                if (coordinates.Name == "Y")
-                                    float.TryParse(coordinates.InnerText, NumberStyles.Float, ci, out y);
-
-                                if (coordinates.Name == "Z")
-                                    float.TryParse(coordinates.InnerText, NumberStyles.Float, ci, out z);
-                            }
-
-                            positions.Add(new Vector3(x, y, z));
-                        }
-
-                        objects.Add(type, positions);
-                    }
-
+                    if (coordinates.Name == "Z")
+                        float.TryParse(coordinates.InnerText, NumberStyles.Float, ci, out z);
                 }
 
-                this.map = new Map(objects);
-                subject.Notify(this.gameObject, EventList.MAP_READY);
+                positions.Add(new Vector3(x, y, z));
             }
+
+            objects.Add(type, positions);
         }
+
+            return new SceneResource(objects);
+    }
+
+
+    static string RemovePreambleByte(string str)
+    {
+        string _byteOrderMarkUtf8 = System.Text.Encoding.UTF8.GetString(System.Text.Encoding.UTF8.GetPreamble());
+        if (str.StartsWith(_byteOrderMarkUtf8))
+        {
+            str = str.Remove(0, _byteOrderMarkUtf8.Length);
+        }
+
+        return str;
     }
 }
