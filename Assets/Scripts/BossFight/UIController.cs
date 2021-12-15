@@ -9,12 +9,13 @@ namespace BossFight
 	public class UIController : MonoBehaviour
 	{
 	    [SerializeField] Text bossText;
-	    [SerializeField] BossTextLoader loader;
 	    public bool canLoad2Phase = false;
 
 	    Queue<string> requireIDs = new Queue<string>();  // Очередь со всеми id, которые нужно показать
 
 	    bool isShowing = false;
+
+		PhraseResource phrase;
 
 
 	    void Start() {
@@ -28,7 +29,7 @@ namespace BossFight
 
 	    	requireIDs.Enqueue(id);
 
-	    	if (!isShowing && loader.isLoaded)
+	    	if (!isShowing && phrase != null)
 	    		StartShow();
 	    }
 
@@ -48,13 +49,14 @@ namespace BossFight
 
 	    /// <summary>Показывает следующую фразу босса</summary>
 	    /// <param name="phraseID">ID фразы</param>
-	    public void ShowPhrase(string phraseID) {
+	    public void ShowPhrase(string phraseID) 
+		{
+			if (phrase != null)
+			{
+	    		string text = phrase.text[phraseID];
 
-	    	if (loader.isLoaded) {
-	    		string text = loader.bossText[phraseID];
-
-	    		StartCoroutine(Show(text));
-	    	}
+				StartCoroutine(Show(text));
+			}
 
 	    }
 
@@ -82,7 +84,22 @@ namespace BossFight
 
 
 	    IEnumerator WaitUntilLoad() {
-	    	yield return new WaitUntil(() => loader.isLoaded);
+			string path = "";
+			#if UNITY_EDITOR
+	        	path = "file://" + Application.streamingAssetsPath + $"/BossStrings/Boss0.xml";
+			#else
+	        	path = "jar:file://" + Application.dataPath + $"!/assets/BossStrings/Boss0.xml";
+			#endif
+
+	    	ResourceManager manager = new ResourceManager();
+
+			if (!manager.ResourceLoaded(ResourceType.TEXT_RES, path))
+				yield return manager.LoadResource(ResourceType.TEXT_RES, path);
+
+			phrase = new PhraseResource();
+			phrase.text = (manager.GetResource(ResourceType.TEXT_RES, path) as PhraseResource).text;
+			Debug.Log("phrase length: " + phrase.text.Count);
+
 	    	if (requireIDs.Count != 0)
 	    		ShowPhrase(requireIDs.Dequeue());
 	    }

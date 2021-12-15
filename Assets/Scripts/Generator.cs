@@ -66,10 +66,13 @@ public class Generator : MonoBehaviour
     /// </summary>
     IEnumerator GenerateRoom(string path)
     {
+        
         ResourceManager man = new ResourceManager();
-        yield return man.LoadResource(ResourceType.SCENE_RES, path);
+        
+        if (!man.ResourceLoaded(ResourceType.SCENE_RES, path))
+            yield return man.LoadResource(ResourceType.SCENE_RES, path);
 
-        SceneResource scene = man.GetResource(ResourceType.SCENE_RES)[0] as SceneResource;
+        SceneResource scene = man.GetResource(ResourceType.SCENE_RES, path)as SceneResource;
 
         foreach (string type in scene.GetTypes())
         {

@@ -17,12 +17,12 @@ public enum ResourceType
 
 public class ResourceManager
 {
-	static Dictionary<ResourceType, IResource> loadedResources = new Dictionary<ResourceType, IResource>();  // Словарь с загруженными ресурсами (тип : ресурс)
+	static Dictionary<ResourceType, List<IResource>> loadedResources = new Dictionary<ResourceType, List<IResource>>();  // Словарь с загруженными ресурсами (тип : ресурс)
 
 
 	/// <summary>Загружает требуемый ресурс</summary>
 	/// <param name="type">Тип ресурса</param>
-	/// <param name="id">id ресурса</param>
+	/// <param name="id">id ресурса (id - путь к файлу ресурса)</param>
     public IEnumerator LoadResource(ResourceType type, string id)
     {
     	switch (type)
@@ -42,19 +42,34 @@ public class ResourceManager
 				}
 
 				SceneResource map = XMLParser.MapHandler(tmp);
+				map.SetID(id);
 				
-				if (loadedResources.ContainsKey(ResourceType.SCENE_RES))
-					loadedResources[ResourceType.SCENE_RES] = map;
-
-				else
-					loadedResources.Add(ResourceType.SCENE_RES, map);
+				AddToLoadedResource(ResourceType.SCENE_RES, map);
 					
 				Debug.Log("Загруженна карта");
     			
     			break;
 
     		case ResourceType.TEXT_RES:
+
     			// Загружаем xml файл с текстом с определенным id
+				tmp = "";
+				
+				using (uwr = UnityWebRequest.Get(id))
+				{
+					yield return uwr.SendWebRequest();
+					if (uwr.isNetworkError || uwr.isHttpError)
+						Debug.Log(uwr.error);
+					else
+						tmp = uwr.downloadHandler.text;
+				}
+
+				PhraseResource phrase = XMLParser.PhraseHandler(tmp);
+				phrase.SetID(id);
+				
+				AddToLoadedResource(ResourceType.TEXT_RES, phrase);
+					
+				Debug.Log("Загружены слова");
     			break;
 
     		case ResourceType.MUSIC_RES:
@@ -77,13 +92,16 @@ public class ResourceManager
     /// <returns>IResource</returns>
     public IResource GetResource(ResourceType type, string id)
     {
-    	foreach (var item in loadedResources.Keys)
-    	{
-    		if (loadedResources[item].GetResType() == type)
-    			return loadedResources[item];
-    	}
+		if (loadedResources.ContainsKey(type))
+		{
+    		foreach	(var item in loadedResources[type])
+			{
+				if (item.GetID() == id)
+					return item;
+			}
+		}
 
-    	return null;
+		return null;
     }
 
 
@@ -92,14 +110,37 @@ public class ResourceManager
     /// <returns>Список ресурсов определенного типа<IResource></returns>
     public List<IResource> GetResource(ResourceType type)
     {
-    	List<IResource> resources = new List<IResource>();
+    	if (loadedResources.ContainsKey(type))
+			return loadedResources[type];
 
-    	foreach (var item in loadedResources.Keys)
-    	{
-    		if (loadedResources[item].GetResType() == type)
-    			resources.Add(loadedResources[item]);
-    	}
-
-    	return resources;
+    	return new List<IResource>();
     }
+
+
+	/// <summary>Проверяет, загружен ли ресурс</summary>
+    /// <param name="type">Тип ресурса</param>
+	/// <param name="id">id ресурса</param>
+    /// <returns>Загружен ли ресурс</returns>
+	public bool ResourceLoaded(ResourceType type, string id)
+	{
+		var res = GetResource(type, id);
+
+		return res != null;
+	}
+
+
+	/// <summary>Добавляет ресурс в словарь с загруженныеми ресурсами</summary>
+	/// <param name="type">Тип ресурса</param>
+	/// <param name="res">Ресурс</param>
+	void AddToLoadedResource(ResourceType type, IResource res)
+	{
+		if (loadedResources.ContainsKey(type))
+			loadedResources[type].Add(res);
+
+		else
+		{
+			loadedResources.Add(type, new List<IResource>());
+			loadedResources[type].Add(res);
+		}
+	}
 }

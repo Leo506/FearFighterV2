@@ -21,9 +21,9 @@ namespace BossFight
 	    public void LoadBossText(int bossId) {
 	    	string path;
 	#if UNITY_EDITOR
-	        path = "file://" + Application.streamingAssetsPath + $"/BossStrings/Boss{bossId}.xml";
+	        path = "file://" + Application.streamingAssetsPath + $"/BossStrings/Boss0.xml";
 	#else
-	        path = "jar:file://" + Application.dataPath + $"!/assets/BossStrings/Boss{bossId}.xml";
+	        path = "jar:file://" + Application.dataPath + $"!/assets/BossStrings/Boss0.xml";
 	#endif   
 	    	StartCoroutine(LoadTextFromFile(bossId, path));
 	    }

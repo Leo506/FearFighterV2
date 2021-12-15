@@ -5,6 +5,7 @@ using UnityEngine;
 public class SceneResource: IResource
 {
     Dictionary<string, List<Vector3>> objects;                    // Словарь тип объекта:список координат таких объектов
+    string id;                                                    // ID ресурса
 
 
     /// <summary>
@@ -45,8 +46,20 @@ public class SceneResource: IResource
     }
 
 
+    public void SetID(string id)
+    {
+        this.id = id;
+    }
+
+
     public ResourceType GetResType()
     {
         return ResourceType.SCENE_RES;
+    }
+
+
+    public string GetID()
+    {
+        return id;
     }
 }

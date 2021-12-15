@@ -68,6 +68,33 @@ public class XMLParser: MonoBehaviour
         doc.Save(Application.streamingAssetsPath + "/" + filePath);
     }
 
+
+    public static PhraseResource PhraseHandler(string xml)
+    {
+        //xml = RemovePreambleByte(xml);
+
+        XmlDocument doc = new XmlDocument();
+        doc.LoadXml(xml);
+
+        XmlElement text = doc.DocumentElement;
+        PhraseResource phrase = new PhraseResource();
+
+        if (text != null)
+        {
+            foreach (XmlElement txt in text)
+            {
+                var txtID = txt.Attributes.GetNamedItem("id").Value;
+                var txtValue = txt.InnerText;
+
+                Debug.Log("id: " + txtID + " value: " + txtValue);
+
+                phrase.text.Add(txtID, txtValue);
+            }
+        }
+
+        return phrase;
+    }
+
     public static SceneResource MapHandler(string xml)
     {
         xml = RemovePreambleByte(xml);

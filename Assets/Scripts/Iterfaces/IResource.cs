@@ -5,4 +5,7 @@ using UnityEngine;
 public interface IResource
 {
     ResourceType GetResType();
+    string GetID();
+
+    void SetID(string id);
 }
