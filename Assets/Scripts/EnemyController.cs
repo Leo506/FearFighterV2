@@ -7,9 +7,16 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 {
+    [Header("Здоровье врага")]
     [SerializeField] protected float hp = 100;
+
+    [Header("Радиус атаки")]
     [SerializeField] protected float attackRadius = 0.5f;
+
+    [Header("Маска атаки")]
     [SerializeField] protected LayerMask attackLayer;
+
+    [Header("Эффект получения урона")]
     [SerializeField] protected ParticleSystem getDamageEffect;
 
     protected PlayerLogic player;
@@ -23,6 +30,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
     public static int enemyCount = 0;
     public int id { get; private set; }
+    public float delayTime  = 1.5f;
 
 
     private void Update()
@@ -76,7 +84,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
         attack.Attack(rayDir, distance, 10);
         Debug.Log("Attack!!!");
-        Invoke("Reload", 3);
+        Invoke("Reload", delayTime);
     }
 
 
