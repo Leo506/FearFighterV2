@@ -25,6 +25,11 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
         text.text = transform.position.ToString();
     }
 
+    // TODO удалить
+    private void Start() {
+        SetUp();
+    }
+
     /// <summary>
     /// Настройка игрока
     /// </summary>
@@ -93,7 +98,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     }
 
 
-    /* void OnDrawGizmos()
+    void OnDrawGizmos()
      {
          Gizmos.color = Color.red;
 
@@ -126,7 +131,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
          Gizmos.DrawRay(transform.position, rayDir * (distance - 0.03f));
          //Draw a cube at the maximum distance
          Gizmos.DrawWireCube(transform.position + rayDir * (distance - 0.03f), box.size);
-     }*/
+     }
 
     public void GetDamage(float value) 
     {

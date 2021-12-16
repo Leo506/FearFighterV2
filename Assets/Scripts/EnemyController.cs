@@ -47,6 +47,11 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         }
     }
 
+    // TODO удалить
+    private void Start() {
+        SetUp();
+    }
+
 
     protected virtual void Attack()
     {
@@ -141,7 +146,12 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     {
         Gizmos.DrawRay(transform.position, transform.forward * box.size.z);
         //Draw a cube at the maximum distance
-        Gizmos.DrawWireCube(transform.position + movement.DetermineView(movement.currentView) * box.size.z, box.size);
+        Vector3 size = new Vector3(
+            box.size.x * transform.localScale.x,
+            box.size.y * transform.localScale.y,
+            box.size.z * transform.localScale.z
+            );
+        Gizmos.DrawWireCube(transform.position + movement.DetermineView(movement.currentView) * box.size.z + new Vector3(0, box.center.y * transform.localScale.y, 0), size);
     }
     
 }

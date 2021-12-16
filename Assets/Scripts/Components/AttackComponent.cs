@@ -34,7 +34,7 @@ public class AttackComponent
     public void Attack(Vector3 dir, float distance, float damageValue)
     {
         Debug.Log("Attack in attack component");
-        Vector3 center = objTransform.position + dir * distance;
+        Vector3 center = objTransform.position + dir * distance + new Vector3(0, box.center.y * objTransform.localScale.y, 0);
         Vector3 size = new Vector3(
             box.size.x * objTransform.localScale.x,
             box.size.y * objTransform.localScale.y,
