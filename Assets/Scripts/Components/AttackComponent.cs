@@ -31,7 +31,7 @@ public class AttackComponent
     /// <param name="dir">Направление атаки</param>
     /// <param name="distance">Максимальное расстояние</param>
     /// <param name="damageValue">Количество урона</param>
-    public void Attack(Vector3 dir, float distance, float damageValue)
+    public virtual void Attack(Vector3 dir, float distance, float damageValue)
     {
         Debug.Log("Attack in attack component");
         Vector3 center = objTransform.position + dir * distance + new Vector3(0, box.center.y * objTransform.localScale.y, 0);
@@ -50,5 +50,14 @@ public class AttackComponent
                 item.GetComponent<IGetDamaged>()?.GetDamage(damageValue);
             }
         }
+    }
+
+
+    /// <summary>
+    /// Атака
+    /// </summary>
+    public virtual void Attack()
+    {
+
     }
 }

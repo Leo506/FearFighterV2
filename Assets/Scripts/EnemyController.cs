@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     protected bool canAttack = true;
 
     public static int enemyCount = 0;
-    public int id { get; private set; }
+    public int id { get; protected set; }
     public float delayTime  = 1.5f;
 
 
@@ -47,10 +47,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         }
     }
 
-    // TODO удалить
-    private void Start() {
-        SetUp();
-    }
+    
 
 
     protected virtual void Attack()

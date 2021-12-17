@@ -217,12 +217,14 @@ MonoBehaviour:
   - Player
   - Enemy
   - Portal
+  - Shooter
   objects:
   - {fileID: 1129385397033107537, guid: b2b48da27ccaadd45aeda331dd236d88, type: 3}
   - {fileID: 4381288776348281998, guid: 74b04b9e07cf4a44b8209ee773832e8b, type: 3}
   - {fileID: 213978988609943417, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
   - {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
   - {fileID: 4108216490772793156, guid: 4e66ee7f2ceb275478aff4e600d7dc4b, type: 3}
+  - {fileID: 1795986920300494840, guid: 3c7a0b4d38618d10ea534a7e65faadae, type: 3}
   roomRoot: {fileID: 1388387388}
   _playerPrefab: {fileID: 6827823677972935303, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
   _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
