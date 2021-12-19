@@ -1,42 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Map>
-  <Obstacle type="Rock">
-    <Position>
-      <X>-4.49</X>
-      <Y>0.24</Y>
-      <Z>-0.39</Z>
-    </Position>
-    <Position>
-      <X>4.05</X>
-      <Y>0.24</Y>
-      <Z>-0.39</Z>
-    </Position>
-    <Position>
-      <X>0.07</X>
-      <Y>0.24</Y>
-      <Z>-4.15</Z>
-    </Position>
-    <Position>
-      <X>0.07</X>
-      <Y>0.24</Y>
-      <Z>1.21</Z>
-    </Position>
-    <Position>
-      <X>0.07</X>
-      <Y>0.24</Y>
-      <Z>4.59</Z>
-    </Position>
-    <Position>
-      <X>3.85</X>
-      <Y>0.24</Y>
-      <Z>2.98</Z>
-    </Position>
-    <Position>
-      <X>-3.18</X>
-      <Y>0.24</Y>
-      <Z>2.98</Z>
-    </Position>
-  </Obstacle>
   <Obstacle type="Player">
     <Position>
       <X>0</X>
@@ -44,33 +7,11 @@
       <Z>0</Z>
     </Position>
   </Obstacle>
-  <Obstacle type="Shooter">
-    <Position>
-      <X>3</X>
-      <Y>0</Y>
-      <Z>3.68</Z>
-    </Position>
-    <Position>
-      <X>-2.91</X>
-      <Y>0</Y>
-      <Z>3.68</Z>
-    </Position>
-  </Obstacle>
-  <Obstacle type="Enemy">
+  <Obstacle type="Portal">
     <Position>
       <X>0</X>
-      <Y>0</Y>
-      <Z>2.3</Z>
-    </Position>
-    <Position>
-      <X>3.05</X>
-      <Y>0</Y>
-      <Z>2.3</Z>
-    </Position>
-    <Position>
-      <X>-3.56</X>
-      <Y>0</Y>
-      <Z>2</Z>
+      <Y>0.36</Y>
+      <Z>1.48</Z>
     </Position>
   </Obstacle>
 </Map>
