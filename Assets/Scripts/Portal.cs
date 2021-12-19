@@ -8,6 +8,7 @@ public class Portal : MonoBehaviour, IObserver, ISetUpObj
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] BoxCollider box;
     [SerializeField] Canvas canvas;
+    [SerializeField] Pointer pointerPrefab;
 
     Subject subject;
     bool isActive = false;
@@ -20,10 +21,7 @@ public class Portal : MonoBehaviour, IObserver, ISetUpObj
             SceneManager.LoadScene("BossFightPhase2");
         else
         {
-            box.enabled = false;
-            spriteRenderer.enabled = false;
-            isActive = false;
-            canvas.enabled = false;
+            ActivatePortal(false);
         }
 
         Time.timeScale = 1;
@@ -43,11 +41,20 @@ public class Portal : MonoBehaviour, IObserver, ISetUpObj
         {
             if (Random.Range(0, 2) == 0)
             {
-                box.enabled = true;
-                spriteRenderer.enabled = true;
-                isActive = true;
+                ActivatePortal(true);
+
+                Transform player = FindObjectOfType<PlayerLogic>().transform;
+                Instantiate(pointerPrefab, player).SetTarget(this.transform);
             }
         }
+    }
+
+
+    void ActivatePortal(bool active)
+    {
+        box.enabled = active;
+        spriteRenderer.enabled = active;
+        isActive = active;
     }
 
 

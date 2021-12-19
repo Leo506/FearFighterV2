@@ -435,6 +435,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 4929778088309970057}
   box: {fileID: 1805707438253395227}
   canvas: {fileID: 8352885743217886540}
+  pointerPrefab: {fileID: 8497569786692719984, guid: 575f81ce4b059e046a343afe16e52a50, type: 3}
 --- !u!114 &-471747259969635165
 MonoBehaviour:
   m_ObjectHideFlags: 0
