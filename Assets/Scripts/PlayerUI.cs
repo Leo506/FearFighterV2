@@ -9,12 +9,13 @@ public class PlayerUI : MonoBehaviour, ISetUpObj
 
     public void SetUp() 
     {
-    	playerHPSlider.maxValue = GetComponent<PlayerLogic>().maxHP;
+    	playerHPSlider.maxValue = PlayerLogic.instance.maxHP;
     }
 
 
-    public void ShowCurrentHp() 
+    public void ShowCurrentHp(float value) 
     {
-    	playerHPSlider.value = PlayerLogic.currentHP;
+    	playerHPSlider.value = value;
+        Debug.Log("Current hp: " + value);
     }
 }

@@ -26,7 +26,7 @@ namespace BossFight
 	    	// то босс получает урон
 	    	if (requireClueId == id) {
 
-	    		hp -= PlayerLogic.attackValue;
+	    		hp -= PlayerLogic.instance.AttackValue;
 	    		requireClueId++;
 
 	    		if (hp <= 0) 

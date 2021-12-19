@@ -14,10 +14,52 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     [SerializeField] UnityEngine.UI.Text text;  // TODO не забыть удалить
     [SerializeField] LayerMask attackLayer;
     [SerializeField] PlayerUI ui;
+
+    public static PlayerLogic instance;
     public float maxHP = 100;
 
-    public static float attackValue = 10;
-    public static float currentHP = -1;
+    static float attackValue = 10;
+    static float currentHP = -1;
+
+    // Свойство для доступа и ограниченного изменения текущего здоровья
+    public float CurrentHP
+    {
+        get
+        {
+            return currentHP;
+        }
+
+        set
+        {
+            currentHP = value;
+            currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+            ui.ShowCurrentHp(currentHP);
+        }
+    }
+
+
+    // Свойство для доступа к значению атаки
+    public float AttackValue
+    {
+        get
+        {
+            return attackValue;
+        }
+
+        set
+        {
+            attackValue = value;
+        }
+    }
+
+
+    private void Awake() 
+    {
+        if (instance != this && instance != null)
+            Destroy(instance.gameObject);
+
+        instance = this;    
+    }
 
 
     private void Update()
@@ -25,10 +67,6 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
         text.text = transform.position.ToString();
     }
 
-    // TODO удалить
-    private void Start() {
-        SetUp();
-    }
 
     /// <summary>
     /// Настройка игрока
@@ -43,7 +81,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
         if (currentHP == -1) 
         	currentHP = maxHP;
 
-        ui.ShowCurrentHp();
+        ui.ShowCurrentHp(currentHP);
         subject = FindObjectOfType<Subject>();
     }
 
@@ -136,7 +174,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     public void GetDamage(float value) 
     {
     	currentHP -= value;
-    	ui.ShowCurrentHp();
+    	ui.ShowCurrentHp(currentHP);
     	if (currentHP <= 0) 
     	{
     		subject.Notify(this.gameObject, EventList.GAME_OVER);

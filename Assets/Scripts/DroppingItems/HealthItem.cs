@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordItem : DroppingObj
+public class HealthItem : DroppingObj
 {
     // Update is called once per frame
     void Update()
@@ -15,9 +15,10 @@ public class SwordItem : DroppingObj
         }
     }
 
+
     protected override void OnGet()
     {
-        PlayerLogic.instance.AttackValue *= 1.1f;
+        PlayerLogic.instance.CurrentHP += 10;
         base.OnGet();
     }
 }

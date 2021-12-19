@@ -26,10 +26,15 @@ public class InventoryController : MonoBehaviour, ISetUpObj, IObserver, IResetOb
         {
             int type = gameObject.GetComponent<DroppingObj>().itemType;
 
-            if (inventory.ContainsKey(type))
-                inventory[type] += 1;
-            else
-                inventory.Add(type, 1);
+            // -1 означет, что item не для добавления в инвентарь
+            if (type != -1)
+            {
+
+                if (inventory.ContainsKey(type))
+                    inventory[type] += 1;
+                else
+                    inventory.Add(type, 1);
+            }
         }
     }
 

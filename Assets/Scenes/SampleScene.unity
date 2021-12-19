@@ -2053,6 +2053,7 @@ MonoBehaviour:
   drop:
   - {fileID: 7717239673306690485, guid: 18ad0e0e6bd2b3146b7ccc648d1ae09f, type: 3}
   - {fileID: 926963303997766848, guid: 0c53b42ca2d577940892140a62cfdcdd, type: 3}
+  - {fileID: 9179347123834938890, guid: 84eb4aa35f8844317990c92e468287c0, type: 3}
   clues:
   - {fileID: 3049295001091489010, guid: bad3ce044b157b34d8cc61bbe96c097c, type: 3}
 --- !u!114 &1568811907
