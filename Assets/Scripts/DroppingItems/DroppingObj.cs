@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroppingObj : MonoBehaviour
+public class DroppingObj : MonoBehaviour, IUsingObj
 {
     protected bool canMove = false;
     protected Transform playerTransform;
@@ -36,7 +36,14 @@ public class DroppingObj : MonoBehaviour
 
     protected virtual void OnGet()
     {
+        Debug.Log("Использование дропа");
+        subject = FindObjectOfType<Subject>();
         subject.Notify(this.gameObject, EventList.ITEM_GET);
         Destroy(this.gameObject);
+    }
+
+    public void Use()
+    {
+        OnGet();
     }
 }

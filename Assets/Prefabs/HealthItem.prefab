@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6911453980524635906}
   - component: {fileID: 662525308231184245}
   - component: {fileID: 9179347123834938890}
+  - component: {fileID: 364196844887700202}
   m_Layer: 0
   m_Name: HealthItem
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6323054907460001079}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0.15, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 1}
+  m_LocalScale: {x: 0.04, y: 0.04, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -97,3 +98,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   itemType: -1
+--- !u!135 &364196844887700202
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6323054907460001079}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}

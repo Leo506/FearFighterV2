@@ -1,20 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
 {
-    [Header("Префабы дропа")]
-	[SerializeField] DroppingObj[] drop;
+    [Header("Префабы обычного дропа")]
+	[SerializeField] DroppingObj[] commonDrop;         // Префабы обычного дропа
+
 
     [Header("Префабы улик")]
-    [SerializeField] ClueItem[] clues;
+    [SerializeField] ClueItem[] clues;                 // Префабы улик
 
-    static List<int> spawnLvl = new List<int>();              // Уровни на которых будут спавниться улики
+    static int countOfClues = 0;                       // Текущее количество улик              
 
-    int enemyID;                                              // ID врага, с которого выпадет улика
-
-	List<DroppingObj> dropInScene = new List<DroppingObj>();  // Текущий дроп на сцене
 	Subject subject;
 
     public void SetUp() {
@@ -22,66 +21,28 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
     	subject.AddObserver(this);
 
 
-        // Выбираем на каких уровнях будут спавниться улики
-        if (spawnLvl.Count == 0)
+        // Находим точки для спавна обычного дропа
+        // и спавним в них случайные предметы обычного дропа
+        var dropPoints = FindObjectsOfType<MapObject>().Where(obj => obj.type == "DropPoint").ToArray();
+        Debug.Log("Drop points number: " + dropPoints.Count());
+        foreach (var point in dropPoints)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                int lvl = Random.Range(0, 4);
-                while (spawnLvl.Contains(lvl))
-                    lvl = Random.Range(0, 4);
-                spawnLvl.Add(lvl);
-            }
+            Instantiate(commonDrop[Random.Range(0, commonDrop.Length)]).transform.position = point.transform.position;
         }
-
-        // Если мы находимся на уровне, на котором нужно спавнить улику,
-        // выбираем врага, с которого она выпадет
-        if (spawnLvl.Contains(GameController.lvlNumber))
-        {
-            EnemyController[] enemies = FindObjectsOfType<EnemyController>();
-            enemyID = enemies[Random.Range(0, enemies.Length)].id;
-        }
-        else
-            enemyID = -1;
     }
 
-    public void OnNotify(GameObject obj, EventList eventValue) {
-
-    	// Обрабатываем смерть противника
-    	if (eventValue == EventList.ENEMY_DIED) 
+    public void OnNotify(GameObject obj, EventList eventValue) 
+    {
+        // Если уровень был зачистен
+        // И количество собранных улик меньше 3
+        // Спавним улику в нужном месте
+    	if (eventValue == EventList.NO_ENEMIES) 
         {
-            DroppingObj objToSpawn = null;
-
-            var enemy = obj.GetComponent<EnemyController>();
-            if (enemy != null)
+    		if (countOfClues < 3)
             {
-                // Если у умершего врага id совпадает с выбранным
-                // спавним улику
-                if (enemy.id == enemyID)
-                    objToSpawn = Instantiate(clues[Random.Range(0, clues.Length)]);
-
-                else
-                    objToSpawn = Instantiate(drop[Random.Range(0, drop.Length)]);
-            
-
-                var spawnPos = new Vector3(obj.transform.localPosition.x, objToSpawn.transform.localPosition.y, obj.transform.localPosition.z);
-                objToSpawn.transform.localPosition = spawnPos;
-                dropInScene.Add(objToSpawn);
+                Vector3 pos = FindObjectsOfType<MapObject>().Where( mapObj => mapObj.type == "CluePoint").ToArray()[0].transform.position;
+                Instantiate(clues[0]).transform.position = pos;
             }
-
-    		// Проверяем количество оставшихся врагов
-    		if (EnemyController.enemyCount <= 0) {
-    			subject.Notify(this.gameObject, EventList.NO_ENEMIES);
-    			return;
-    		}
-    	}
-
-    	if (eventValue == EventList.NO_ENEMIES) {
-    		Debug.Log("No enemies in scene. Move drop to player");
-    		foreach (var item in dropInScene) {
-    			item.Init();
-    			item.StartMove();
-    		}
     	}
     }
 }

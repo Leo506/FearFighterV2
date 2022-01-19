@@ -32,6 +32,12 @@ public class GameController : MonoBehaviour, IObserver
 
     public void OnNotify(GameObject obj, EventList eventValue)
     {
+        // Проверяем количество оставшихся врагов
+        if (EnemyController.enemyCount <= 0) {
+            subject.Notify(this.gameObject, EventList.NO_ENEMIES);
+            return;
+        }
+
         if (eventValue == EventList.ENEMY_DIED)
         {
             if (enemies.Count != 0)

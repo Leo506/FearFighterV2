@@ -8,6 +8,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     BoxCollider box;
     AttackComponent attack;
     Subject subject;
+    IUsingObj currentUsingObj;
     
     [SerializeField] Animator animator;
     [SerializeField] float distanceCoeff = 1;
@@ -123,6 +124,19 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
         animator.SetTrigger("Attack");
     }
 
+
+    /// <summary>
+    /// Использование предмета 
+    /// </summary>
+    public void Use()
+    {
+        if (currentUsingObj != null)
+        {
+            currentUsingObj.Use();
+            ui.ChangePlayerController();
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         var exit = collision.collider.GetComponent<Exit>();
@@ -133,6 +147,27 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
                 exit.GoNextLvl();
         }
             
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        IUsingObj obj = other.GetComponent<IUsingObj>();
+        if (obj != null)
+        {
+            ui.ChangePlayerController();
+            currentUsingObj = obj;    
+        }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        IUsingObj obj = other.GetComponent<IUsingObj>();
+        if (obj != null)
+        {
+            ui.ChangePlayerController();
+            currentUsingObj = null;
+        }
     }
 
 
