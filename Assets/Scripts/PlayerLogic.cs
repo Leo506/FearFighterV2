@@ -212,7 +212,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     	ui.ShowCurrentHp(currentHP);
     	if (currentHP <= 0) 
     	{
-    		subject.Notify(this.gameObject, EventList.GAME_OVER);
+    		subject.Notify(EventList.GAME_OVER);
     		Destroy(this.gameObject);
     		Debug.Log("Игрок умер");
     	}

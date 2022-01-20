@@ -27,11 +27,11 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
         Debug.Log("Drop points number: " + dropPoints.Count());
         foreach (var point in dropPoints)
         {
-            Instantiate(commonDrop[Random.Range(0, commonDrop.Length)]).transform.position = point.transform.position;
+            var obj = Instantiate(commonDrop[Random.Range(0, commonDrop.Length)]).transform.position = point.transform.position;
         }
     }
 
-    public void OnNotify(GameObject obj, EventList eventValue) 
+    public void OnNotify(EventList eventValue) 
     {
         // Если уровень был зачистен
         // И количество собранных улик меньше 3
@@ -40,8 +40,12 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
         {
     		if (countOfClues < 3)
             {
-                Vector3 pos = FindObjectsOfType<MapObject>().Where( mapObj => mapObj.type == "CluePoint").ToArray()[0].transform.position;
-                Instantiate(clues[0]).transform.position = pos;
+                var points = FindObjectsOfType<MapObject>().Where( mapObj => mapObj.type == "CluePoint").ToArray();
+                if (points.Count() != 0)
+                {
+                    Vector3 pos = points[0].transform.position;
+                    Instantiate(clues[0]).transform.position = pos;
+                }
             }
     	}
     }

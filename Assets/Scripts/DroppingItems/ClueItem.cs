@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class ClueItem : DroppingObj
 {
-
-    // Update is called once per frame
-    void Update()
+    protected override void OnGet()
     {
-        if (canMove)
-        {
-            Moving();
-            if (CheckDistance())
-                OnGet();
-        }
+        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+        InventoryItem item = new InventoryItem(sprite, () => {}, "ClueItem");
+        InventoryController.instance.AddItem(item);
+        Destroy(this.gameObject);
     }
 }

@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class HealthItem : DroppingObj
 {
-    // Update is called once per frame
-    void Update()
-    {
-        if (canMove)
-        {
-            Moving();
-            if (CheckDistance())
-                OnGet();
-        }
-    }
-
 
     protected override void OnGet()
     {
-        PlayerLogic.instance.CurrentHP += 10;
-        base.OnGet();
+        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+        InventoryItem item = new InventoryItem(sprite, () => {
+
+            if (InventoryController.instance.GetItemNumber("HealthItem") != 0)
+            {
+                PlayerLogic.instance.CurrentHP += 10;
+                Debug.Log("+ 10 HP !!!");
+                InventoryController.instance.RemoveItem("HealthItem");
+                Subject.instance.Notify(EventList.ITEM_USED);
+            }
+                
+        }, "HealthItem");
+        InventoryController.instance.AddItem(item);
+        Destroy(this.gameObject);
     }
 }

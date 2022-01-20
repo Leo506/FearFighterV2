@@ -17,7 +17,7 @@ public class Exit : MonoBehaviour, IObserver
         subject.AddObserver(this);
     }
 
-    public void OnNotify(GameObject obj, EventList eventValue)
+    public void OnNotify(EventList eventValue)
     {
         if (eventValue == EventList.NO_ENEMIES)
             available = true;
@@ -29,7 +29,7 @@ public class Exit : MonoBehaviour, IObserver
     /// </summary>
     public void GoNextLvl()
     {
-        subject.Notify(this.gameObject, EventList.NEXT_LVL);
+        subject.Notify(EventList.NEXT_LVL);
     }
 
 }

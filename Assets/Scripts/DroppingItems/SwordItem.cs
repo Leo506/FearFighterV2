@@ -4,20 +4,12 @@ using UnityEngine;
 
 public class SwordItem : DroppingObj
 {
-    // Update is called once per frame
-    void Update()
-    {
-        if (canMove)
-        {
-            Moving();
-            if (CheckDistance())
-                OnGet();
-        }
-    }
 
     protected override void OnGet()
     {
-        PlayerLogic.instance.AttackValue *= 1.1f;
-        base.OnGet();
+        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+        InventoryItem item = new InventoryItem(sprite, () => {}, "SwordItem");
+        InventoryController.instance.AddItem(item);
+        Destroy(this.gameObject);
     }
 }

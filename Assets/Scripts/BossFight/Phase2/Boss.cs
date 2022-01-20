@@ -34,7 +34,6 @@ namespace BossFightPhase2
 	    	hpSlider.value = hp;
 
 	    	player = FindObjectOfType<PlayerLogic>();
-        	subject = FindObjectOfType<Subject>();
 
         	movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), player.transform);
 
@@ -55,8 +54,8 @@ namespace BossFightPhase2
 	        {
 
 	            enemyCount--;
-	            subject.Notify(this.gameObject, EventList.NO_ENEMIES);
-	            subject.Notify(this.gameObject, EventList.VICTORY);
+	            Subject.instance.Notify(EventList.NO_ENEMIES);
+	            Subject.instance.Notify(EventList.VICTORY);
 	            Destroy(this.gameObject);
 	            return;
 	        }

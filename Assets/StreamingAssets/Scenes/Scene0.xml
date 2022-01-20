@@ -2,89 +2,92 @@
 <Map>
   <Obstacle type="Rock">
     <Position>
-      <X>-4.49</X>
+      <X>-4.484</X>
       <Y>0.24</Y>
-      <Z>-1.43</Z>
+      <Z>-4.49</Z>
     </Position>
     <Position>
-      <X>-0.71</X>
+      <X>-2.472</X>
       <Y>0.24</Y>
-      <Z>-1.43</Z>
+      <Z>-4.49</Z>
     </Position>
     <Position>
-      <X>2.46</X>
+      <X>-2.472</X>
       <Y>0.24</Y>
-      <Z>-1.43</Z>
+      <Z>-1.64</Z>
     </Position>
     <Position>
-      <X>2.46</X>
+      <X>-2.472</X>
       <Y>0.24</Y>
-      <Z>1.71</Z>
+      <Z>2.45</Z>
     </Position>
     <Position>
-      <X>2.46</X>
+      <X>0.18</X>
       <Y>0.24</Y>
-      <Z>3.74</Z>
+      <Z>2.45</Z>
     </Position>
     <Position>
-      <X>-3.41</X>
+      <X>3.92</X>
       <Y>0.24</Y>
-      <Z>3.74</Z>
+      <Z>2.45</Z>
+    </Position>
+  </Obstacle>
+  <Obstacle type="DropPoint">
+    <Position>
+      <X>0</X>
+      <Y>0.22</Y>
+      <Z>0</Z>
+    </Position>
+    <Position>
+      <X>3.02</X>
+      <Y>0.22</Y>
+      <Z>0</Z>
+    </Position>
+    <Position>
+      <X>3.02</X>
+      <Y>0.22</Y>
+      <Z>4</Z>
+    </Position>
+    <Position>
+      <X>-1.4</X>
+      <Y>0.22</Y>
+      <Z>4</Z>
+    </Position>
+    <Position>
+      <X>-4.19</X>
+      <Y>0.22</Y>
+      <Z>4</Z>
+    </Position>
+    <Position>
+      <X>-4.19</X>
+      <Y>0.22</Y>
+      <Z>-1.53</Z>
+    </Position>
+  </Obstacle>
+  <Obstacle type="CluePoint">
+    <Position>
+      <X>-1.99</X>
+      <Y>0.22</Y>
+      <Z>0</Z>
     </Position>
   </Obstacle>
   <Obstacle type="Enemy">
     <Position>
-      <X>-3.26</X>
-      <Y>0</Y>
-      <Z>0</Z>
-    </Position>
-    <Position>
-      <X>-0.17</X>
-      <Y>0</Y>
-      <Z>0</Z>
-    </Position>
-  </Obstacle>
-  <Obstacle type="Shooter">
-    <Position>
       <X>0</X>
       <Y>0</Y>
-      <Z>2.35</Z>
+      <Z>0</Z>
+    </Position>
+    <Position>
+      <X>1.9</X>
+      <Y>0</Y>
+      <Z>1.11</Z>
     </Position>
   </Obstacle>
   <Obstacle type="Player">
     <Position>
       <X>0</X>
       <Y>0.17</Y>
-      <Z>-4.52</Z>
-    </Position>
-  </Obstacle>
-  <Obstacle type="CluePoint">
-    <Position>
-      <X>2.04</X>
-      <Y>0.22</Y>
-      <Z>0</Z>
-    </Position>
-  </Obstacle>
-  <Obstacle type="DropPoint">
-    <Position>
-      <X>-2.35</X>
-      <Y>0.22</Y>
-      <Z>-0.27</Z>
-    </Position>
-    <Position>
-      <X>-2.35</X>
-      <Y>0.22</Y>
-      <Z>2.51</Z>
-    </Position>
-    <Position>
-      <X>3.77</X>
-      <Y>0.22</Y>
-      <Z>2.51</Z>
-    </Position>
-    <Position>
-      <X>3.77</X>
-      <Y>0.22</Y>
-      <Z>-1.63</Z>
+      <Z>-3.27</Z>
     </Position>
   </Obstacle>
 </Map>

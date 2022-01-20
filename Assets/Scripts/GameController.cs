@@ -6,18 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour, IObserver
 {
-    [SerializeField] Subject subject;
     Queue<EnemyController> enemies = new Queue<EnemyController>();
 
     public static int lvlNumber = 0;
 
     private void Start()
     {
-        subject.AddObserver(this);
+        Subject.instance.AddObserver(this);
 
         foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<ISetUpObj>().ToArray())
         {
-            Debug.Log("Set up!!!");
+            //Debug.Log("Set up!!!");
             item.SetUp();
         }
 
@@ -30,18 +29,20 @@ public class GameController : MonoBehaviour, IObserver
     }
 
 
-    public void OnNotify(GameObject obj, EventList eventValue)
+    public void OnNotify(EventList eventValue)
     {
-        // Проверяем количество оставшихся врагов
-        if (EnemyController.enemyCount <= 0) {
-            subject.Notify(this.gameObject, EventList.NO_ENEMIES);
-            return;
-        }
+        
 
         if (eventValue == EventList.ENEMY_DIED)
         {
             if (enemies.Count != 0)
                 enemies.Dequeue().MyQueue();
+            
+        // Проверяем количество оставшихся врагов
+        if (EnemyController.enemyCount <= 0) {
+            Subject.instance.Notify(EventList.NO_ENEMIES);
+            return;
+        }
         }
 
         if (eventValue == EventList.NEXT_LVL)
@@ -55,5 +56,23 @@ public class GameController : MonoBehaviour, IObserver
             else
                 SceneManager.LoadScene("LoadingScene");
         }
+    }
+
+
+    /// <summary>
+    /// Ставит игру на паузу
+    /// </summary>
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
+
+
+    /// <summary>
+    /// Снимает с паузы игру
+    /// </summary>
+    public void Unpause()
+    {
+        Time.timeScale = 1;
     }
 }

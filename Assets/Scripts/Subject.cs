@@ -12,17 +12,27 @@ public enum EventList
     NO_ENEMIES,
     NEXT_LVL,
     GAME_OVER,
-    VICTORY
+    VICTORY,
+    ITEM_USED
 }
 
 public class Subject : MonoBehaviour
 {
     List<IObserver> observers = new List<IObserver>();
+    public static Subject instance;
+
+    private void Awake() 
+    {
+        if (instance != this && instance != null)
+            Destroy(instance.gameObject);
+        instance = this;   
+    }
 
 
     public void AddObserver(IObserver observer)
     {
         observers.Add(observer);
+        Debug.Log("Count of observers: " + observers.Count);
     }
 
 
@@ -32,11 +42,11 @@ public class Subject : MonoBehaviour
     }
 
 
-    public void Notify(GameObject obj, EventList eventValue)
+    public void Notify(EventList eventValue)
     {
-        foreach (var item in observers)
+        for (int i = 0; i < observers.Count; i++)
         {
-            item.OnNotify(obj, eventValue);
+            observers[i]?.OnNotify(eventValue);
         }
     }
 }

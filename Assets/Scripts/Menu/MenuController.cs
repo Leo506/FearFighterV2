@@ -32,7 +32,7 @@ public class MenuController : MonoBehaviour, IObserver, ISetUpObj
     }
 
 
-    public void OnNotify(GameObject obj, EventList eventValue) 
+    public void OnNotify(EventList eventValue) 
     {
     	if (eventValue == EventList.GAME_OVER) 
     	{

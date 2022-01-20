@@ -22,7 +22,6 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     protected PlayerLogic player;
     protected AIMovementComponent movement;
     protected AttackComponent attack;
-    protected Subject subject;
 
     protected BoxCollider box;
 
@@ -99,7 +98,6 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     public void SetUp()
     {
         player = FindObjectOfType<PlayerLogic>();
-        subject = FindObjectOfType<Subject>();
 
         id = enemyCount;
         enemyCount++;
@@ -121,10 +119,13 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         Debug.Log("Get damage by " + value + " points");
         if (hp <= 0)
         {
-
+            
             enemyCount--;
-            subject.Notify(this.gameObject, EventList.ENEMY_DIED);
+            Debug.Log("Enemy died");
+            Subject.instance.Notify(EventList.ENEMY_DIED);
+            Debug.Log("Enemy died2");
             Destroy(this.gameObject);
+            Debug.Log("Enemy died3");
             return;
         }
 

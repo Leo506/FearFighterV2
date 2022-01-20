@@ -34,7 +34,7 @@ public class Portal : MonoBehaviour, IObserver, ISetUpObj
     }
 
 
-    public void OnNotify(GameObject obj, EventList eventValue)
+    public void OnNotify(EventList eventValue)
     {
         // После зачистки уровня рандомим появится ли портал к боссу
         if (eventValue == EventList.NO_ENEMIES)

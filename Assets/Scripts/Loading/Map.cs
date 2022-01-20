@@ -19,7 +19,7 @@ namespace Loading {
 	    }
 
 
-	    public void OnNotify(GameObject obj, EventList eventValue) {
+	    public void OnNotify(EventList eventValue) {
 	    	if (eventValue == EventList.GAME_READY_TO_START)
 	    		//StartCoroutine(Wait());
 	    		SceneManager.LoadScene("SampleScene");

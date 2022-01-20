@@ -34,7 +34,6 @@ public class ShooterEnemy : EnemyController, ISetUpObj, IGetDamaged
     public void SetUp()
     {
         player = FindObjectOfType<PlayerLogic>();
-        subject = FindObjectOfType<Subject>();
 
         id = enemyCount;
         enemyCount++;

@@ -86,7 +86,7 @@ public class Generator : MonoBehaviour
         }
 
         surface.BuildNavMesh();
-        subject.Notify(this.gameObject, EventList.GAME_READY_TO_START);
+        subject.Notify(EventList.GAME_READY_TO_START);
     }
     
 }

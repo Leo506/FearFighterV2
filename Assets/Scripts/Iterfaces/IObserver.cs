@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IObserver
 {
-    void OnNotify(GameObject obj, EventList eventValue);
+    void OnNotify(EventList eventValue);
 }
