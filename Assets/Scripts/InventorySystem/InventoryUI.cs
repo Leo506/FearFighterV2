@@ -44,6 +44,9 @@ public class InventoryUI : MonoBehaviour, IObserver
             image.GetComponent<Image>().sprite = item.sprite;
             image.GetComponent<Button>().onClick.AddListener(item.UseItem);
 
+            // Устанавливаем текст количества предмета
+            image.GetComponentInChildren<Text>().text = InventoryController.inventory.ElementAt(i).Value.ToString();
+
         }
     }
 

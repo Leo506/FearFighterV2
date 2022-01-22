@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4306434298708220479}
   - component: {fileID: 6624922784416682454}
   - component: {fileID: 3049295001091489010}
+  - component: {fileID: 1208366180885705297}
   m_Layer: 0
   m_Name: Clue
   m_TagString: Untagged
@@ -95,4 +96,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703a1b2a062d2f240bccc094c1360715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+--- !u!135 &1208366180885705297
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417490669142152208}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.16
+  m_Center: {x: 0, y: 0, z: 0}
