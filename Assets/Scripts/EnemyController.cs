@@ -121,11 +121,9 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         {
             
             enemyCount--;
-            Debug.Log("Enemy died");
             Subject.instance.Notify(EventList.ENEMY_DIED);
-            Debug.Log("Enemy died2");
+            GetComponent<HaveDropComponent>()?.Drop();
             Destroy(this.gameObject);
-            Debug.Log("Enemy died3");
             return;
         }
 

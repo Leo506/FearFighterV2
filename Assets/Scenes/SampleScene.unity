@@ -2710,6 +2710,8 @@ MonoBehaviour:
   - {fileID: 7717239673306690485, guid: 18ad0e0e6bd2b3146b7ccc648d1ae09f, type: 3}
   clues:
   - {fileID: 3049295001091489010, guid: bad3ce044b157b34d8cc61bbe96c097c, type: 3}
+  enemydrop:
+  - {fileID: 926963303997766848, guid: 0c53b42ca2d577940892140a62cfdcdd, type: 3}
 --- !u!114 &1568811907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3196,7 +3198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6805ad737f5111645924354cfc6002d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 119514645}
 --- !u!65 &1902988632
 BoxCollider:
   m_ObjectHideFlags: 0
