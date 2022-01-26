@@ -12,6 +12,9 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
     [Header("Префабы улик")]
     [SerializeField] ClueItem[] clues;                 // Префабы улик
 
+    [Header("Префабы дропа с врагов")]
+    [SerializeField] DroppingObj[] enemydrop;
+
     static int countOfClues = 0;                       // Текущее количество улик              
 
 	Subject subject;
@@ -19,6 +22,8 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
     public void SetUp() {
     	subject = FindObjectOfType<Subject>();
     	subject.AddObserver(this);
+
+        SetHaveDropEnemies();
 
 
         // Находим точки для спавна обычного дропа
@@ -48,5 +53,30 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
                 }
             }
     	}
+    }
+
+
+    void SetHaveDropEnemies()
+    {
+        int count = Random.Range(1, EnemyController.enemyCount / 2);  // Количество врагов с дропом
+        Debug.Log("Count of drop enemies: " + count);
+        List<int> indexes = new List<int>();
+        var enemies = FindObjectsOfType<EnemyController>();
+
+        // Создаём список индексов врагов, с которых будет падать дроп
+        for (int i = 0; i < count; i++)
+        {
+            var index = Random.Range(0, EnemyController.enemyCount);
+            while (indexes.Contains(index))
+                index = Random.Range(0, EnemyController.enemyCount);
+            indexes.Add(index);
+        }
+
+        foreach (var item in indexes)
+        {
+            Debug.Log("Index of drop enemy: " + item);
+            HaveDropComponent hdc = enemies[item].gameObject.AddComponent<HaveDropComponent>();
+            hdc.SetItem(enemydrop[Random.Range(0, enemydrop.Length)]);
+        }
     }
 }
