@@ -143,8 +143,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
 
         if (exit != null)
         {
-            if (exit.available)
-                exit.GoNextLvl();
+            exit.GoNextLvl();
         }
             
     }
