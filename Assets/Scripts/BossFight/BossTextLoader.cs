@@ -5,12 +5,25 @@ using System.Xml;
 using UnityEngine.Networking;
 using System.Globalization;
 
+public struct Question
+{
+	public int id;                // id вопроса
+	public string questionText;   // Текст вопроса
+	public List<string> answers;  // Варианты ответа
+	public string rightAnswer;    // Правильный ответ
+
+	public override string ToString()
+	{
+		return $"Question id: {id}, text: {questionText}, right: {rightAnswer}";
+	}
+}
+
 namespace BossFight
 {
 	public class BossTextLoader : MonoBehaviour
 	{
 
-	    public Dictionary<string, string> bossText = new Dictionary<string, string>();
+	    public List<Question> bossText = new List<Question>();
 	    public bool isLoaded { get; private set; }
 
 	    void Start() {
@@ -50,13 +63,33 @@ namespace BossFight
 	    			XmlElement text = bossDoc.DocumentElement;  // Корневой элемент
 
 	    			if (text != null) {
-	    				foreach (XmlElement txt in text) {
-	    					var textId = txt.Attributes.GetNamedItem("id").Value;
-	    					var textValue = txt.InnerText;
+	    				foreach (XmlElement question in text) 
+						{
+	    					var qId = question.Attributes.GetNamedItem("id").Value;                  // Ищем id вопроса
+							var qText = question.Attributes.GetNamedItem("text").Value.ToString();  // Получаем его текст
+							
+							// Заполняем список ответами
+							List<string> answers = new List<string>();
+							string right = "";  // Заготовка для верного ответа
 
-	    					Debug.Log("id: " + textId + " value: " + textValue);
+							// Проходим по всем тегам Answer
+							foreach	(XmlElement item in question)
+							{
+								answers.Add(item.InnerText);
 
-	    					bossText.Add(textId, textValue);
+								// Запоминаем верный ответ
+								if (item.Attributes.GetNamedItem("isRight").Value == "1")
+									right = item.InnerText;
+							}
+
+							Question q;
+							q.id = int.Parse(qId);
+							q.questionText = qText;
+							q.answers = answers;
+							q.rightAnswer = right;
+
+	    					bossText.Add(q);
+							Debug.Log(q);
 	    				}
 
 	    				isLoaded = true;

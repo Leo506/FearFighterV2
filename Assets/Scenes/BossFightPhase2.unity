@@ -295,18 +295,26 @@ MonoBehaviour:
   - Test
   - Player
   - Enemy
-  - Boss
+  - Portal
+  - Shooter
+  - CluePoint
+  - DropPoint
+  - BossDialog
   objects:
   - {fileID: 1129385397033107537, guid: b2b48da27ccaadd45aeda331dd236d88, type: 3}
   - {fileID: 4381288776348281998, guid: 74b04b9e07cf4a44b8209ee773832e8b, type: 3}
   - {fileID: 213978988609943417, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
   - {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
-  - {fileID: 2458198705522686798, guid: 252fe543d78a7693598b7776a14a2b03, type: 3}
+  - {fileID: 4108216490772793156, guid: 4e66ee7f2ceb275478aff4e600d7dc4b, type: 3}
+  - {fileID: 1795986920300494840, guid: 3c7a0b4d38618d10ea534a7e65faadae, type: 3}
+  - {fileID: 8621483045909846785, guid: 8cecd737711fdf418bbcbf07d3367f4b, type: 3}
+  - {fileID: 1879382517563275773, guid: f66c8def9669e4bf897577b253c20623, type: 3}
+  - {fileID: 7184513739954188262, guid: 33039951c7c4b518caffafd2a9bc0ba3, type: 3}
   roomRoot: {fileID: 1486353455}
   _playerPrefab: {fileID: 6827823677972935303, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
   _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
   sceneType: 0
-  countOfScene: 2
+  countOfScene: 1
   subject: {fileID: 1631777336}
   surface: {fileID: 1486353456}
 --- !u!4 &560172546

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Text>
-	<phrase id="_StartDialog">Приветствую тебя text text text text</phrase>
-	<phrase id="_Clue1">clue1 clue1 clue1 clue1 clue1 clue1</phrase>
-	<phrase id="_Clue2">clue2 clue2 clue2 clue2 clue2 clue2</phrase>
-	<phrase id="_Clue3">clue3 clue3 clue3 clue3 clue3 clue3</phrase>
-	<phrase id="_UncorrectClue">Неверно...</phrase>
-	<phrase id="_EndDialog">Я умер...</phrase>
-	<phrase id="_Victory">ХА-ХА, жалкий людишка. Я победил</phrase>
-	<phrase id="_SecondPhase">Ты слишком глуп. Давай проверим тогда твою силу</phrase> 
+	<Question id = "0" text = "ВопросВопросВопросВопрос">
+		<Answer id = "0" isRight = "1">Ответ 0</Answer>
+		<Answer id = "1" isRight = "0">Ответ 0</Answer>
+	</Question>
+
+	<Question id = "1" text = "Вопрос1Вопрос1Вопрос1Вопрос1">
+		<Answer id = "0" isRight = "1">Ответ 1</Answer>
+		<Answer id = "1" isRight = "0">Ответ 1</Answer>
+	</Question>
+
+	<Question id = "2" text = "Вопрос2Вопрос2Вопрос2Вопрос">
+		<Answer id = "0" isRight = "1">Ответ 2</Answer>
+		<Answer id = "1" isRight = "0">Ответ 2</Answer>
+	</Question>
 </Text>
