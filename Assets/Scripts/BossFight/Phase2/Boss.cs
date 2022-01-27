@@ -29,7 +29,7 @@ namespace BossFightPhase2
 
 	    public void SetUp() 
 	    {
-	    	hp = BossFight.Boss.hp;
+	    	hp = 100;
 	    	hpSlider.maxValue = 100;
 	    	hpSlider.value = hp;
 

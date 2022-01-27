@@ -132,6 +132,11 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         movement.PushFromTarget();
     }
 
+    public void StopMovement(bool stop)
+    {
+        movement.canMove = stop;
+    }
+
 
     public void MyQueue()
     {

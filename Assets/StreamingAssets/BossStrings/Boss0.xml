@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Text>
-	<Question id = "0" text = "ВопросВопросВопросВопрос">
-		<Answer id = "0" isRight = "1">Ответ 0</Answer>
-		<Answer id = "1" isRight = "0">Ответ 0</Answer>
+	<Question id = "0" text = "Правда ли, что все пауки опасны и ядовиты?">
+		<Answer id = "0" isRight = "1">Нет</Answer>
+		<Answer id = "1" isRight = "0">Да</Answer>
 	</Question>
 
 	<Question id = "1" text = "Вопрос1Вопрос1Вопрос1Вопрос1">
-		<Answer id = "0" isRight = "1">Ответ 1</Answer>
-		<Answer id = "1" isRight = "0">Ответ 1</Answer>
+		<Answer id = "0" isRight = "1">Ответ 2</Answer>
+		<Answer id = "1" isRight = "0">Ответ 3</Answer>
 	</Question>
 
 	<Question id = "2" text = "Вопрос2Вопрос2Вопрос2Вопрос">
-		<Answer id = "0" isRight = "1">Ответ 2</Answer>
-		<Answer id = "1" isRight = "0">Ответ 2</Answer>
+		<Answer id = "0" isRight = "1">Ответ 4</Answer>
+		<Answer id = "1" isRight = "0">Ответ 5</Answer>
 	</Question>
 </Text>

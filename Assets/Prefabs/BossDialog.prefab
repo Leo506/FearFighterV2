@@ -200,7 +200,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8281016403011843433}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1792523467}
+        m_TargetAssemblyTypeName: BossFight.UIController, Assembly-CSharp
+        m_MethodName: PressButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 3584772470762781056}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5144530376557027814
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +411,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6146635162486231957}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1792523467}
+        m_TargetAssemblyTypeName: BossFight.UIController, Assembly-CSharp
+        m_MethodName: PressButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5822319437999538959}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5814097785088311796
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +512,8 @@ GameObject:
   - component: {fileID: 6691399916360606390}
   - component: {fileID: 5253411194787696161}
   - component: {fileID: 7314628512242605300}
+  - component: {fileID: 1792523467}
+  - component: {fileID: 1792523468}
   m_Layer: 5
   m_Name: BossDialog
   m_TagString: Untagged
@@ -590,6 +616,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: BossDialog
+--- !u!114 &1792523467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184513739954188262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30cc645c3756153d0b03dbc301aa2061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossText: {fileID: 6771771835552354920}
+  answerButtons:
+  - {fileID: 3519266798287394158}
+  - {fileID: 7123884439311770341}
+--- !u!114 &1792523468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184513739954188262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbe8163bcbcb298ab103aa7891222be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasToClose:
+  - MainCanvas
+  - PlayerCanvas
 --- !u!1 &7966042484721717584
 GameObject:
   m_ObjectHideFlags: 0

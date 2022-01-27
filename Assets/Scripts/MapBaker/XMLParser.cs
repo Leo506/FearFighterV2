@@ -79,18 +79,41 @@ public class XMLParser: MonoBehaviour
         XmlElement text = doc.DocumentElement;
         PhraseResource phrase = new PhraseResource();
 
+        List<Question> qList = new List<Question>();
+
         if (text != null)
         {
-            foreach (XmlElement txt in text)
+            foreach (XmlElement question in text) 
             {
-                var txtID = txt.Attributes.GetNamedItem("id").Value;
-                var txtValue = txt.InnerText;
+                var qId = question.Attributes.GetNamedItem("id").Value;                  // Ищем id вопроса
+                var qText = question.Attributes.GetNamedItem("text").Value.ToString();  // Получаем его текст
+                
+                // Заполняем список ответами
+                List<string> answers = new List<string>();
+                string right = "";  // Заготовка для верного ответа
 
-                Debug.Log("id: " + txtID + " value: " + txtValue);
+                // Проходим по всем тегам Answer
+                foreach	(XmlElement item in question)
+                {
+                    answers.Add(item.InnerText);
 
-                phrase.text.Add(txtID, txtValue);
+                    // Запоминаем верный ответ
+                    if (item.Attributes.GetNamedItem("isRight").Value == "1")
+                        right = item.InnerText;
+                }
+
+                Question q;
+                q.id = int.Parse(qId);
+                q.questionText = qText;
+                q.answers = answers;
+                q.rightAnswer = right;
+
+                qList.Add(q);
+                Debug.Log(q);
             }
         }
+
+        phrase.questions = qList;
 
         return phrase;
     }

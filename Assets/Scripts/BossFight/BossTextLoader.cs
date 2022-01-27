@@ -5,18 +5,6 @@ using System.Xml;
 using UnityEngine.Networking;
 using System.Globalization;
 
-public struct Question
-{
-	public int id;                // id вопроса
-	public string questionText;   // Текст вопроса
-	public List<string> answers;  // Варианты ответа
-	public string rightAnswer;    // Правильный ответ
-
-	public override string ToString()
-	{
-		return $"Question id: {id}, text: {questionText}, right: {rightAnswer}";
-	}
-}
 
 namespace BossFight
 {

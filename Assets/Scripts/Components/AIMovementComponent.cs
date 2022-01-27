@@ -8,6 +8,7 @@ public class AIMovementComponent
     NavMeshAgent agent;
     Transform target;
     public viewDirection currentView { get; private set; }
+    public bool canMove;
 
 
     /// <summary>
@@ -15,9 +16,12 @@ public class AIMovementComponent
     /// </summary>
     public void Move()
     {
-        agent.SetDestination(target.position);
-        if (agent.velocity != Vector3.zero)
-            currentView = DetermineView(agent.velocity);
+        if (canMove)
+        {
+            agent.SetDestination(target.position);
+            if (agent.velocity != Vector3.zero)
+                currentView = DetermineView(agent.velocity);
+        }
     }
 
 
