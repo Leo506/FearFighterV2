@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour, IObserver
 {
     Queue<EnemyController> enemies = new Queue<EnemyController>();
 
-    public static int lvlNumber = 0;
+    public static int lvlNumber = 2;
 
     private void Start()
     {
@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour, IObserver
             if (lvlNumber == 4) 
             {
             	Destroy(FindObjectOfType<Loading.Map>().gameObject);
-                SceneManager.LoadScene("Dialog");
+                SceneManager.LoadScene("BossFightPhase2");
             }
             else
                 SceneManager.LoadScene("LoadingScene");

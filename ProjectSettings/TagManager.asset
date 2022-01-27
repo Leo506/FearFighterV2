@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MainCanvas
   - PlayerCanvas
+  - InventoryCanvas
   layers:
   - Default
   - TransparentFX

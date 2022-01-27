@@ -15,7 +15,7 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
     [Header("Префабы дропа с врагов")]
     [SerializeField] DroppingObj[] enemydrop;
 
-    static int countOfClues = 0;                       // Текущее количество улик              
+    public static int countOfClues = 0;                       // Текущее количество улик
 
 	Subject subject;
 

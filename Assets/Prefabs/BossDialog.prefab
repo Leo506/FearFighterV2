@@ -550,7 +550,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7184513739954188262}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -647,6 +647,7 @@ MonoBehaviour:
   canvasToClose:
   - MainCanvas
   - PlayerCanvas
+  - InventoryCanvas
 --- !u!1 &7966042484721717584
 GameObject:
   m_ObjectHideFlags: 0

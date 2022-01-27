@@ -8,7 +8,7 @@ public class AIMovementComponent
     NavMeshAgent agent;
     Transform target;
     public viewDirection currentView { get; private set; }
-    public bool canMove;
+    public bool canMove = true;
 
 
     /// <summary>

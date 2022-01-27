@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class DialogController : MonoBehaviour, ISetUpObj
+public class DialogController : MonoBehaviour
 {
     // TODO поменять PhraseResource на QuestionsResource
     PhraseResource questions;  // Вопросы от босса
@@ -15,10 +15,6 @@ public class DialogController : MonoBehaviour, ISetUpObj
     int currentQuestionId;
 
     [SerializeField] string[] canvasToClose;
-
-    public void SetUp() {
-        StartDialog(0);
-    }
 
 
     /// <summary>
