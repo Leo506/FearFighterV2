@@ -76,6 +76,7 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
         {
             Debug.Log("Index of drop enemy: " + item);
             HaveDropComponent hdc = enemies[item].gameObject.AddComponent<HaveDropComponent>();
+            enemies[item].gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             hdc.SetItem(enemydrop[Random.Range(0, enemydrop.Length)]);
         }
     }
