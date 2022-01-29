@@ -59,7 +59,6 @@ public class TimerController : MonoBehaviour, IResetObj
     void UpdateTimeText()
     {
         timeText.text = playTime.minutes + ":" + playTime.seconds;
-        Debug.Log(playTime);
     }
 
     IEnumerator UpdateTimer()

@@ -35,6 +35,14 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IResetObj
         }
     }
 
+    /// <summary>
+    /// This function is called when the MonoBehaviour will be destroyed.
+    /// </summary>
+    void OnDestroy()
+    {
+        GameController.NoEnemiesEvent -= OnNoEnemies;
+    }
+
 
     public void ResetObj()
     {
@@ -48,6 +56,7 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IResetObj
         // Спавним улику в нужном месте
         if (countOfClues < 3)
         {
+            Debug.Log("Spawning clue...\nNumber of enemies: " + EnemyController.enemyCount);
             var points = FindObjectsOfType<MapObject>().Where( mapObj => mapObj.type == "CluePoint").ToArray();
             if (points.Count() != 0)
             {
