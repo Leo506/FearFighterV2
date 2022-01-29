@@ -87,8 +87,20 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IResetObj
         {
             Debug.Log("Index of drop enemy: " + item);
             HaveDropComponent hdc = enemies[item].gameObject.AddComponent<HaveDropComponent>();
-            enemies[item].gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             hdc.SetItem(enemydrop[Random.Range(0, enemydrop.Length)]);
+
+            // Ресайз характеристик врага
+            enemies[item].gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);  // Ресайз показателя scale
+            
+            // Ресайз размера коллайдера
+            Vector3 size = enemies[item].gameObject.GetComponent<BoxCollider>().size;
+            size = new Vector3(size.x / 1.5f, size.y / 1.5f, size.z / 1.5f);
+            enemies[item].gameObject.GetComponent<BoxCollider>().size = size;
+
+            // Ресайз NavMeshAgent'а
+            UnityEngine.AI.NavMeshAgent agent = enemies[item].gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
+            agent.radius /= 1.5f;
+            agent.height /= 1.5f;
         }
     }
 }
