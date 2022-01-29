@@ -14,11 +14,11 @@ public class ClueItem : DroppingObj
                 FindObjectOfType<DialogController>().StartDialog(id);
                 Time.timeScale = 1;
                 InventoryController.instance.RemoveItem($"ClueItem{id}");
-                Subject.instance.Notify(EventList.ITEM_USED);
             }
-        }, $"ClueItem{DroppingObjController.countOfClues}");
+        }, $"ClueItem{id}");
         DroppingObjController.countOfClues++;
         InventoryController.instance.AddItem(item);
+        Debug.Log("Get a clue with id " + id);
         Destroy(this.gameObject);
     }
 }

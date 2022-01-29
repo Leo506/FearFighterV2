@@ -8,9 +8,6 @@ using System.Globalization;
 
 public class XMLParser: MonoBehaviour
 {
-    [SerializeField] Subject subject;
-
-
 
     public static void CreateNewMap(Dictionary<string, List<Vector3>> objects, string filePath)
     {

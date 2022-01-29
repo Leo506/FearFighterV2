@@ -15,7 +15,6 @@ public class HealthItem : DroppingObj
                 PlayerLogic.instance.CurrentHP += 10;
                 Debug.Log("+ 10 HP !!!");
                 InventoryController.instance.RemoveItem("HealthItem");
-                Subject.instance.Notify(EventList.ITEM_USED);
             }
                 
         }, "HealthItem");

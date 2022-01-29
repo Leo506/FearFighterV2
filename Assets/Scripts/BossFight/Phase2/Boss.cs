@@ -11,6 +11,7 @@ namespace BossFightPhase2
 		[Header("Слайдер для отображения хп")]
 		[SerializeField] UnityEngine.UI.Slider hpSlider;
 
+		public static event System.Action BossDiedEvent;
 
 		private void Update()
 	    {
@@ -45,7 +46,7 @@ namespace BossFightPhase2
 	    }
 
 
-	    public void GetDamage(float value) 
+	    public override void GetDamage(float value) 
 	    {
 	    	hp -= value;
 	    	hpSlider.value = hp;
@@ -54,8 +55,8 @@ namespace BossFightPhase2
 	        {
 
 	            enemyCount--;
-	            Subject.instance.Notify(EventList.NO_ENEMIES);
-	            Subject.instance.Notify(EventList.VICTORY);
+	            base.Die();
+	            BossDiedEvent?.Invoke();
 	            Destroy(this.gameObject);
 	            return;
 	        }

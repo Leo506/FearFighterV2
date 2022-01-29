@@ -6,10 +6,12 @@ using System;
 
 public class InventoryItem
 {
-    public Sprite sprite { get; private set; }        // Спрайт объект
+    public Sprite sprite { get; private set; }               // Спрайт объект
     public UnityAction usingFunction { get; private set; }   // Функция использования
 
     public string id { get; private set; }
+
+    public static event System.Action ItemUsedEvent;
 
 
     /// <summary>
@@ -32,5 +34,6 @@ public class InventoryItem
     public void UseItem()
     {
         usingFunction();
+        ItemUsedEvent?.Invoke();
     }
 }

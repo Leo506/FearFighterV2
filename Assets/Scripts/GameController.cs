@@ -4,58 +4,54 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour, IObserver
+public class GameController : MonoBehaviour
 {
     Queue<EnemyController> enemies = new Queue<EnemyController>();
 
     public static int lvlNumber = 2;
 
+    public static event System.Action NoEnemiesEvent;
+
     private void Start()
     {
-        Subject.instance.AddObserver(this);
+        EnemyController.EnemyDiedEvent += OnEnemyDied;
+        Exit.OnNextLvlEvent += OnNextLvl;
 
         foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<ISetUpObj>().ToArray())
-        {
-            //Debug.Log("Set up!!!");
             item.SetUp();
-        }
 
         foreach (var item in FindObjectsOfType<EnemyController>())
-        {
             enemies.Enqueue(item);
-        }
 
         enemies.Dequeue().MyQueue();
     }
 
-
-    public void OnNotify(EventList eventValue)
+    private void OnDestroy() 
     {
-        
+        EnemyController.EnemyDiedEvent -= OnEnemyDied;
+        Exit.OnNextLvlEvent -= OnEnemyDied;
+    }
 
-        if (eventValue == EventList.ENEMY_DIED)
-        {
-            if (enemies.Count != 0)
-                enemies.Dequeue().MyQueue();
-            
-        // Проверяем количество оставшихся врагов
-        if (EnemyController.enemyCount <= 0) {
-            Subject.instance.Notify(EventList.NO_ENEMIES);
-            return;
-        }
-        }
 
-        if (eventValue == EventList.NEXT_LVL)
+    void OnEnemyDied()
+    {
+        if (enemies.Count != 0)
+            enemies.Dequeue().MyQueue();
+        else
+            NoEnemiesEvent?.Invoke();
+    }
+
+
+    void OnNextLvl()
+    {
+        lvlNumber++;
+        if (lvlNumber == 4) 
         {
-            lvlNumber++;
-            if (lvlNumber == 4) 
-            {
-            	Destroy(FindObjectOfType<Loading.Map>().gameObject);
-                SceneManager.LoadScene("BossFightPhase2");
-            }
-            else
-                SceneManager.LoadScene("LoadingScene");
+            Destroy(FindObjectOfType<Loading.Map>().gameObject);
+            SceneManager.LoadScene("BossFightPhase2");
         }
+        else
+            SceneManager.LoadScene("LoadingScene");
     }
 
 

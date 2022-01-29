@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Exit : MonoBehaviour
 {
+    public static event System.Action OnNextLvlEvent;
 
     /// <summary>
     /// Запрос на переход на следующий уровень
     /// </summary>
     public void GoNextLvl()
     {
-        Subject.instance.Notify(EventList.NEXT_LVL);
+        OnNextLvlEvent?.Invoke();
     }
 
 }

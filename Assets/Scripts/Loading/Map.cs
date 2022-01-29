@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Loading {
-	public class Map : MonoBehaviour, IObserver
+	public class Map : MonoBehaviour
 	{
-		[SerializeField] Subject subject;
-
 	    void Awake() {
             foreach (var item in FindObjectsOfType<Map>())
             {
@@ -15,19 +13,17 @@ namespace Loading {
 					Destroy(item.gameObject);
             }
 	    	DontDestroyOnLoad(this.gameObject);
-	    	subject.AddObserver(this);
+			Generator.MapReadyEvent += LoadGameplayScene;
 	    }
 
+		private void OnDestroy() 
+		{
+			Generator.MapReadyEvent -= LoadGameplayScene;
+		}
 
-	    public void OnNotify(EventList eventValue) {
-	    	if (eventValue == EventList.GAME_READY_TO_START)
-	    		//StartCoroutine(Wait());
-	    		SceneManager.LoadScene("SampleScene");
-	    }
-
-	    IEnumerator Wait() {
-	    	yield return new WaitForSeconds(3);
-	    	SceneManager.LoadScene("SampleScene");
-	    }
+		void LoadGameplayScene()
+		{
+			SceneManager.LoadScene("SampleScene");
+		}
 	}
 }

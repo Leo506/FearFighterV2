@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 
 [RequireComponent(typeof(InventoryData))]
-public class InventoryUI : MonoBehaviour, IObserver
+public class InventoryUI : MonoBehaviour
 {
     [SerializeField] GameObject content;
 
@@ -14,7 +14,13 @@ public class InventoryUI : MonoBehaviour, IObserver
 
     private void Start() 
     {
-        Subject.instance.AddObserver(this);    
+        InventoryItem.ItemUsedEvent += UpdateInventoryShow; 
+    }
+
+    
+    void OnDestroy()
+    {
+        InventoryItem.ItemUsedEvent -= UpdateInventoryShow;
     }
 
 
@@ -64,12 +70,5 @@ public class InventoryUI : MonoBehaviour, IObserver
         {
             Destroy(content.transform.GetChild(i).gameObject);
         }
-    }
-
-
-    public void OnNotify(EventList eventValue)
-    {
-        if (eventValue == EventList.ITEM_USED)
-            UpdateInventoryShow();
     }
 }

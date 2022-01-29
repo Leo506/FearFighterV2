@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
+public class DroppingObjController : MonoBehaviour, ISetUpObj, IResetObj
 {
     [Header("Префабы обычного дропа")]
 	[SerializeField] DroppingObj[] commonDrop;         // Префабы обычного дропа
@@ -17,11 +17,10 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
 
     public static int countOfClues = 0;                       // Текущее количество улик
 
-	Subject subject;
 
-    public void SetUp() {
-    	subject = FindObjectOfType<Subject>();
-    	subject.AddObserver(this);
+    public void SetUp() 
+    {
+        GameController.NoEnemiesEvent += OnNoEnemies;
 
         SetHaveDropEnemies();
 
@@ -36,23 +35,26 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IObserver
         }
     }
 
-    public void OnNotify(EventList eventValue) 
+
+    public void ResetObj()
+    {
+        countOfClues = 0;
+    }
+
+    public void OnNoEnemies() 
     {
         // Если уровень был зачистен
         // И количество собранных улик меньше 3
         // Спавним улику в нужном месте
-    	if (eventValue == EventList.NO_ENEMIES) 
+        if (countOfClues < 3)
         {
-    		if (countOfClues < 3)
+            var points = FindObjectsOfType<MapObject>().Where( mapObj => mapObj.type == "CluePoint").ToArray();
+            if (points.Count() != 0)
             {
-                var points = FindObjectsOfType<MapObject>().Where( mapObj => mapObj.type == "CluePoint").ToArray();
-                if (points.Count() != 0)
-                {
-                    Vector3 pos = points[0].transform.position;
-                    Instantiate(clues[0]).transform.position = pos;
-                }
+                Vector3 pos = points[0].transform.position;
+                Instantiate(clues[0]).transform.position = pos;
             }
-    	}
+        }
     }
 
 

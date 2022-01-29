@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Portal : MonoBehaviour, IObserver, ISetUpObj
+public class Portal : MonoBehaviour, ISetUpObj
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] BoxCollider box;
     [SerializeField] Canvas canvas;
     [SerializeField] Pointer pointerPrefab;
 
-    Subject subject;
     bool isActive = false;
 
 
@@ -29,23 +28,19 @@ public class Portal : MonoBehaviour, IObserver, ISetUpObj
 
     public void SetUp()
     {
-        subject = FindObjectOfType<Subject>();
-        subject.AddObserver(this);
+        GameController.NoEnemiesEvent += OnNoEnemies;
     }
 
 
-    public void OnNotify(EventList eventValue)
+    void OnNoEnemies()
     {
         // После зачистки уровня рандомим появится ли портал к боссу
-        if (eventValue == EventList.NO_ENEMIES)
+        if (Random.Range(0, 2) == 0)
         {
-            if (Random.Range(0, 2) == 0)
-            {
-                ActivatePortal(true);
+            ActivatePortal(true);
 
-                Transform player = FindObjectOfType<PlayerLogic>().transform;
-                Instantiate(pointerPrefab, player).SetTarget(this.transform);
-            }
+            Transform player = FindObjectOfType<PlayerLogic>().transform;
+            Instantiate(pointerPrefab, player).SetTarget(this.transform);
         }
     }
 

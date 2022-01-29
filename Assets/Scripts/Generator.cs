@@ -21,11 +21,12 @@ public class Generator : MonoBehaviour
 
     public int countOfScene;                // Количество сцен
 
-    [SerializeField] Subject subject;
 
     [SerializeField] NavMeshSurface surface;
 
     [SerializeField] ResourceManager manager;
+
+    public static event System.Action MapReadyEvent; 
 
 
     private void Start()
@@ -86,7 +87,7 @@ public class Generator : MonoBehaviour
         }
 
         surface.BuildNavMesh();
-        subject.Notify(EventList.GAME_READY_TO_START);
+        MapReadyEvent?.Invoke();
     }
     
 }

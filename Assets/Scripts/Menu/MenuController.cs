@@ -5,16 +5,23 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 
 
-public class MenuController : MonoBehaviour, IObserver, ISetUpObj
+public class MenuController : MonoBehaviour, ISetUpObj
 {
 	[SerializeField] Canvas gameOverCanvas;
 	[SerializeField] Canvas victoryCanvas;
-	[SerializeField] Subject subject;
 
 
 	public void SetUp() 
 	{
-		subject.AddObserver(this);
+		PlayerLogic.PlayerDiedEvent += GameOver;
+		BossFightPhase2.Boss.BossDiedEvent += Victory;
+	}
+
+	
+	void OnDestroy()
+	{
+		PlayerLogic.PlayerDiedEvent -= GameOver;
+		BossFightPhase2.Boss.BossDiedEvent -= Victory;
 	}
 
 
@@ -32,26 +39,23 @@ public class MenuController : MonoBehaviour, IObserver, ISetUpObj
     }
 
 
-    public void OnNotify(EventList eventValue) 
-    {
-    	if (eventValue == EventList.GAME_OVER) 
-    	{
-    		foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<IResetObj>().ToArray())
-    			item.ResetObj();
+	void GameOver()
+	{
+		foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<IResetObj>().ToArray())
+			item.ResetObj();
 
-    		gameOverCanvas.enabled = true;
-    		Time.timeScale = 0;
-    	}
+		gameOverCanvas.enabled = true;
+		Time.timeScale = 0;
+	}
 
 
-    	if (eventValue == EventList.VICTORY) 
-    	{
-    		foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<IResetObj>().ToArray())
-    			item.ResetObj();
+	void Victory()
+	{
+		foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<IResetObj>().ToArray())
+			item.ResetObj();
 
-    		victoryCanvas.enabled = true;
-    		Time.timeScale = 0;
-    	}
-    }
+		victoryCanvas.enabled = true;
+		Time.timeScale = 0;
+	}
 
 }

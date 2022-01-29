@@ -32,7 +32,7 @@ struct PlayTime
     }
 }
 
-public class TimerController : MonoBehaviour, IObserver, IResetObj
+public class TimerController : MonoBehaviour, IResetObj
 {
     static PlayTime playTime = new PlayTime();
 
@@ -41,13 +41,14 @@ public class TimerController : MonoBehaviour, IObserver, IResetObj
     private void Start()
     {
         StartCoroutine(UpdateTimer());
-        Subject.instance.AddObserver(this);
+        Exit.OnNextLvlEvent += () => StopAllCoroutines();
     }
 
-    public void OnNotify(EventList eventValue)
+
+    
+    void OnDestroy()
     {
-        if (eventValue == EventList.NEXT_LVL)
-            StopAllCoroutines();
+        Exit.OnNextLvlEvent -= () => StopAllCoroutines();
     }
 
     public void ResetObj()

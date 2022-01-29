@@ -31,6 +31,8 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     public int id { get; protected set; }
     public float delayTime  = 1.5f;
 
+    public static event System.Action EnemyDiedEvent;
+
 
     private void Update()
     {
@@ -113,7 +115,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
 
 
-    public void GetDamage(float value)
+    public virtual void GetDamage(float value)
     {
         hp -= value;
         Debug.Log("Get damage by " + value + " points");
@@ -121,7 +123,8 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         {
             
             enemyCount--;
-            Subject.instance.Notify(EventList.ENEMY_DIED);
+            Debug.Log("ENEMY DIED. Enemy on scene: " + enemyCount);
+            EnemyDiedEvent?.Invoke();
             GetComponent<HaveDropComponent>()?.Drop();
             Destroy(this.gameObject);
             return;
@@ -153,6 +156,11 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
             box.size.z * transform.localScale.z
             );
         Gizmos.DrawWireCube(transform.position + movement.DetermineView(movement.currentView) * box.size.z + new Vector3(0, box.center.y * transform.localScale.y, 0), size);
+    }
+
+    protected void Die()
+    {
+        EnemyDiedEvent?.Invoke();
     }
     
 }
