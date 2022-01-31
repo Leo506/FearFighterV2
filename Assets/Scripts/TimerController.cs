@@ -38,17 +38,29 @@ public class TimerController : MonoBehaviour, IResetObj
 
     [SerializeField] UnityEngine.UI.Text timeText;
 
+    System.Action stopAction, startAction;
+
     private void Start()
     {
         StartCoroutine(UpdateTimer());
-        Exit.OnNextLvlEvent += () => StopAllCoroutines();
+        
+        stopAction = () => StopAllCoroutines();
+        startAction = () => StartCoroutine(UpdateTimer());
+        
+        Exit.OnNextLvlEvent += stopAction;
+        
+        GameController.Pause += stopAction;
+        GameController.Unpause += startAction;
     }
 
 
     
     void OnDestroy()
     {
-        Exit.OnNextLvlEvent -= () => StopAllCoroutines();
+        Exit.OnNextLvlEvent -= stopAction;
+        
+        GameController.Pause -= stopAction;
+        GameController.Unpause -= startAction;
     }
 
     public void ResetObj()

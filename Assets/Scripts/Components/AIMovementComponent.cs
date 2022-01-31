@@ -21,7 +21,8 @@ public class AIMovementComponent
             agent.SetDestination(target.position);
             if (agent.velocity != Vector3.zero)
                 currentView = DetermineView(agent.velocity);
-        }
+        } else
+            agent.SetDestination(agent.gameObject.transform.position);
     }
 
 

@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
             if (movement.GetDistanceToTarget() <= attackRadius)
             {
-                if (canAttack)
+                if (canAttack && movement.canMove)
                     Attack();
             }
         }
@@ -109,8 +109,18 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         box = GetComponent<BoxCollider>();
         attack = new AttackComponent(box, transform, attackLayer);
 
-        Debug.Log("movement component is null " + movement == null);
-        Debug.Log("attack component is null " + attack == null);
+        GameController.Pause += () => movement.canMove = canAttack = false;
+        GameController.Unpause += () => movement.canMove = canAttack = true;
+    }
+
+
+    /// <summary>
+    /// This function is called when the MonoBehaviour will be destroyed.
+    /// </summary>
+    void OnDestroy()
+    {
+        GameController.Pause -= () => movement.canMove = canAttack = false;
+        GameController.Unpause -= () => movement.canMove = canAttack = true;
     }
 
 

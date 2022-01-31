@@ -10,7 +10,11 @@ public class GameController : MonoBehaviour
 
     public static int lvlNumber = 2;
 
+
+    // События, которые вызывает GameController
     public static event System.Action NoEnemiesEvent;
+    public static event System.Action Pause;
+    public static event System.Action Unpause;
 
     private void Start()
     {
@@ -58,17 +62,17 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// Ставит игру на паузу
     /// </summary>
-    public void Pause()
+    public void SetPause()
     {
-        Time.timeScale = 0;
+        Pause?.Invoke();
     }
 
 
     /// <summary>
     /// Снимает с паузы игру
     /// </summary>
-    public void Unpause()
+    public void SetUnpause()
     {
-        Time.timeScale = 1;
+        Unpause?.Invoke();
     }
 }

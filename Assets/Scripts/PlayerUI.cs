@@ -1,17 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour, ISetUpObj
 {
-    [SerializeField] UnityEngine.UI.Slider playerHPSlider;
-    [SerializeField] UnityEngine.UI.Button usingControllerJoystic;
-    [SerializeField] UnityEngine.UI.Button attackControllerJoystic;
+    [SerializeField] Slider playerHPSlider;
+    //[SerializeField] Button usingControllerJoystic;
+    [SerializeField] GameObject attackControllerJoystic;
+    [SerializeField] GameObject movementController;
 
 
     public void SetUp() 
     {
     	playerHPSlider.maxValue = PlayerLogic.instance.maxHP;
+
+        GameController.Pause += EnablePlayerInputUI;
+        GameController.Unpause += EnablePlayerInputUI;
+    }
+
+
+    /// <summary>
+    /// This function is called when the MonoBehaviour will be destroyed.
+    /// </summary>
+    void OnDestroy()
+    {
+        GameController.Pause -= EnablePlayerInputUI;
+        GameController.Unpause -= EnablePlayerInputUI;
+    }
+
+
+    /// <summary>
+    /// Включает или выключает пользовательский интерфейс ввода в зависимости от значения параметра
+    /// </summary>
+    /// <param name="enable">Включить - true, выключить - false</param>
+    void EnablePlayerInputUI()
+    {
+        attackControllerJoystic.SetActive(!attackControllerJoystic.activeSelf);
+        movementController.SetActive(!movementController.activeSelf);
     }
 
 
@@ -27,8 +53,8 @@ public class PlayerUI : MonoBehaviour, ISetUpObj
     /// </summary>
     public void ChangePlayerController()
     {
-        Debug.Log("Change controllers!");
-        usingControllerJoystic.gameObject.SetActive(!usingControllerJoystic.gameObject.activeSelf);
-        attackControllerJoystic.gameObject.SetActive(!attackControllerJoystic.gameObject.activeSelf);
+        // Debug.Log("Change controllers!");
+        // usingControllerJoystic.gameObject.SetActive(!usingControllerJoystic.gameObject.activeSelf);
+        // attackControllerJoystic.gameObject.SetActive(!attackControllerJoystic.gameObject.activeSelf);
     }
 }

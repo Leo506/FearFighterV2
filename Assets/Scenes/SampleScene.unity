@@ -605,7 +605,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1568811904}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: Unpause
+        m_MethodName: SetUnpause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1703,7 +1703,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1199418222}
+      - m_Target: {fileID: 1199418226}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ShowInventory
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1949711134}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -1713,12 +1725,12 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1949711134}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 1568811904}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: SetPause
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3391,7 +3403,6 @@ MonoBehaviour:
   content: {fileID: 954323155}
   font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   inventoryImagePrefab: {fileID: 3872288353653543917, guid: ce810b3e1af2fd480aa2a85515f67cd2, type: 3}
-  inventoryAnimator: {fileID: 1199418226}
 --- !u!114 &1986060025
 MonoBehaviour:
   m_ObjectHideFlags: 0

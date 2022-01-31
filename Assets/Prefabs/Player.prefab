@@ -490,8 +490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHPSlider: {fileID: 3622564168274477004}
-  usingControllerJoystic: {fileID: 5326620174242123277}
-  attackControllerJoystic: {fileID: 1526743734}
+  attackControllerJoystic: {fileID: 1526743732}
+  movementController: {fileID: 6732560590576977411}
 --- !u!1 &213978989023742395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,6 +1261,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2929252285020697097, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -1272,7 +1276,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
   m_PrefabInstance: {fileID: 8487059066780825584}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6732560590576977411}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
@@ -1281,5 +1285,10 @@ MonoBehaviour:
 --- !u!224 &6732560590576977410 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+  m_PrefabInstance: {fileID: 8487059066780825584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6732560590576977411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
   m_PrefabInstance: {fileID: 8487059066780825584}
   m_PrefabAsset: {fileID: 0}
