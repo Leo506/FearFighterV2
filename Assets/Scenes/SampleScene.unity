@@ -557,7 +557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 0}
+  m_AnchoredPosition: {x: 49, y: 0}
   m_SizeDelta: {x: 60, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &237921602
@@ -615,16 +615,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1199418222}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 1199418226}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: CloseInventory
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1949711134}
@@ -1292,7 +1292,6 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
   sceneType: 0
   countOfScene: 2
-  subject: {fileID: 119514645}
   surface: {fileID: 0}
 --- !u!114 &601400247
 MonoBehaviour:
@@ -1335,7 +1334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ac17ef05778ff4f9f3c3016fd90874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 119514645}
 --- !u!1 &704848928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,18 +1707,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1568811904}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: Pause
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2134,6 +2120,7 @@ GameObject:
   - component: {fileID: 1199418222}
   - component: {fileID: 1199418224}
   - component: {fileID: 1199418223}
+  - component: {fileID: 1199418226}
   m_Layer: 5
   m_Name: InventoryCanvas
   m_TagString: InventoryCanvas
@@ -2222,6 +2209,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &1199418226
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199418221}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5d7c126757a3ea7da0dd7c67f2bebb9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1266221637
 GameObject:
   m_ObjectHideFlags: 0
@@ -2486,7 +2492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: 0.00018310547}
+  m_AnchoredPosition: {x: 199, y: 0.00018310547}
   m_SizeDelta: {x: 200, y: -0.7689514}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1289047304
@@ -2726,7 +2732,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverCanvas: {fileID: 425135562}
   victoryCanvas: {fileID: 1720109068}
-  subject: {fileID: 119514645}
 --- !u!114 &1568811908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3386,6 +3391,7 @@ MonoBehaviour:
   content: {fileID: 954323155}
   font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   inventoryImagePrefab: {fileID: 3872288353653543917, guid: ce810b3e1af2fd480aa2a85515f67cd2, type: 3}
+  inventoryAnimator: {fileID: 1199418226}
 --- !u!114 &1986060025
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] Font font;
     [SerializeField] GameObject inventoryImagePrefab;
 
+    [SerializeField] Animator inventoryAnimator;
+
     private void Start() 
     {
         InventoryItem.ItemUsedEvent += UpdateInventoryShow; 
@@ -29,8 +31,7 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     public void UpdateInventoryShow()
     {
-        Debug.Log("Inventory count: " + InventoryController.inventory.Count);
-
+        inventoryAnimator.SetTrigger("ShowInventory");
         ClearUI();
 
         for (int i = 0; i < InventoryController.inventory.Count; i++)
