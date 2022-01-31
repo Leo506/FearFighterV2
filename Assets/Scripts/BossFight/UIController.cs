@@ -30,6 +30,7 @@ namespace BossFight
 		/// <param name="text">Текст</param>
 	    public void ShowText(string text)
 		{
+			StopAllCoroutines();
 			StartCoroutine(Showing(text));
 		}
 

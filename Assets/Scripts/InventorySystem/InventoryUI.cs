@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-[RequireComponent(typeof(InventoryData))]
+
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] GameObject content;

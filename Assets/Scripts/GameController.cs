@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
     private void OnDestroy() 
     {
         EnemyController.EnemyDiedEvent -= OnEnemyDied;
-        Exit.OnNextLvlEvent -= OnEnemyDied;
+        Exit.OnNextLvlEvent -= OnNextLvl;
     }
 
 

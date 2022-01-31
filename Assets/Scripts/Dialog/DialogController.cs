@@ -11,10 +11,9 @@ public class DialogController : MonoBehaviour
     Canvas canvas;
     BossFight.UIController ui;
     BossFightPhase2.Boss boss;
+    GameController gameController;
 
     int currentQuestionId;
-
-    [SerializeField] string[] canvasToClose;
 
 
     /// <summary>
@@ -23,13 +22,14 @@ public class DialogController : MonoBehaviour
     /// <param name="id">id вопроса</param>
     public void StartDialog(int id)
     {
-        foreach (var item in canvasToClose)
-        {
-            GameObject.FindWithTag(item).GetComponent<Canvas>().enabled = false;
-        }
+        // Скрываем InventoryCanvas
+        GameObject.FindWithTag("InventoryCanvas").GetComponent<Animator>().SetTrigger("CloseInventory");
 
+        // Ищем и кешируем Game Controller (игра уже находится на паузе)
+        gameController = FindObjectOfType<GameController>();
+
+        // Находим босса
         boss = (BossFightPhase2.Boss)FindObjectOfType<EnemyController>();
-        boss.StopMovement(false);
 
         canvas = GetComponent<Canvas>();
         canvas.enabled = true;
@@ -82,10 +82,8 @@ public class DialogController : MonoBehaviour
             PlayerLogic.instance.GetDamage(20);
         
         canvas.enabled = false;
-        foreach (var item in canvasToClose)
-        {
-            GameObject.FindWithTag(item).GetComponent<Canvas>().enabled = true;
-        }
-        boss.StopMovement(true);
+        
+        // Убираем паузу
+        gameController.SetUnpause();
     }
 }
