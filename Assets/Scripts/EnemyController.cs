@@ -117,7 +117,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     /// <summary>
     /// This function is called when the MonoBehaviour will be destroyed.
     /// </summary>
-    void OnDestroy()
+    protected void OnDestroy()
     {
         GameController.Pause -= () => movement.canMove = canAttack = false;
         GameController.Unpause -= () => movement.canMove = canAttack = true;
@@ -128,7 +128,11 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     public virtual void GetDamage(float value)
     {
         hp -= value;
-        Debug.Log("Get damage by " + value + " points");
+
+        Instantiate(getDamageEffect, this.transform);
+
+        movement.PushFromTarget();
+
         if (hp <= 0)
         {
             
@@ -139,10 +143,6 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
             Destroy(this.gameObject);
             return;
         }
-
-        Instantiate(getDamageEffect, this.transform);
-
-        movement.PushFromTarget();
     }
 
     public void StopMovement(bool stop)

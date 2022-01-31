@@ -13,20 +13,6 @@ namespace BossFightPhase2
 
 		public static event System.Action BossDiedEvent;
 
-		private void Update()
-	    {
-	        if (movement != null)
-	        {
-	            movement.Move();
-
-	            if (movement.GetDistanceToTarget() <= attackRadius)
-	            {
-	                if (canAttack)
-	                    Attack();
-	            }
-	        }
-	    }
-
 
 	    public void SetUp() 
 	    {
@@ -34,12 +20,7 @@ namespace BossFightPhase2
 	    	hpSlider.maxValue = 100;
 	    	hpSlider.value = hp;
 
-	    	player = FindObjectOfType<PlayerLogic>();
-
-        	movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), player.transform);
-
-	        box = GetComponent<BoxCollider>();
-	        attack = new AttackComponent(box, transform, attackLayer);
+	    	base.SetUp();
 
 	        getDamageEffect.transform.localScale = new Vector3(1, 1, 1);
 
@@ -48,28 +29,12 @@ namespace BossFightPhase2
 
 	    public override void GetDamage(float value) 
 	    {
-	    	hp -= value;
-	    	hpSlider.value = hp;
-	        Debug.Log("Get damage by " + value + " points");
-	        if (hp <= 0)
-	        {
-
-	            enemyCount--;
-	            base.Die();
+	        if (hp - value <= 0)
 	            BossDiedEvent?.Invoke();
-	            Destroy(this.gameObject);
-	            return;
-	        }
 
-	        Instantiate(getDamageEffect, this.transform);
+	        hpSlider.value = hp - value;
 
-	        movement.PushFromTarget();
-	    }
-
-
-	    protected override void Attack() 
-	    {
-	    	base.Attack();
+			base.GetDamage(value);
 	    }
 	}
 }
