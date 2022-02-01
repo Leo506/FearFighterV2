@@ -22,6 +22,7 @@ public class HaveDropComponent : MonoBehaviour
     /// </summary>
     public void Drop()
     {
-        Instantiate(item).transform.position = this.transform.position;
+        Vector3 pos = new Vector3(this.transform.position.x, item.transform.position.y, this.transform.position.z);
+        Instantiate(item).transform.position = pos;
     }
 }
