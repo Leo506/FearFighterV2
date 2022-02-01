@@ -85,5 +85,8 @@ public class DialogController : MonoBehaviour
         
         // Убираем паузу
         gameController.SetUnpause();
+
+        // Восстанавливаем "главный" Canvas
+        GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>().enabled = true;
     }
 }
