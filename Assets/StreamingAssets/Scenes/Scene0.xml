@@ -3,32 +3,32 @@
   <Obstacle type="Rock">
     <Position>
       <X>-4.484</X>
-      <Y>0.24</Y>
+      <Y>0.0</Y>
       <Z>-4.49</Z>
     </Position>
     <Position>
       <X>-2.472</X>
-      <Y>0.24</Y>
+      <Y>0.0</Y>
       <Z>-4.49</Z>
     </Position>
     <Position>
       <X>-2.472</X>
-      <Y>0.24</Y>
+      <Y>0.0</Y>
       <Z>-1.64</Z>
     </Position>
     <Position>
       <X>-2.472</X>
-      <Y>0.24</Y>
+      <Y>0.0</Y>
       <Z>2.45</Z>
     </Position>
     <Position>
       <X>0.18</X>
-      <Y>0.24</Y>
+      <Y>0.0</Y>
       <Z>2.45</Z>
     </Position>
     <Position>
       <X>3.92</X>
-      <Y>0.24</Y>
+      <Y>0.0</Y>
       <Z>2.45</Z>
     </Position>
   </Obstacle>

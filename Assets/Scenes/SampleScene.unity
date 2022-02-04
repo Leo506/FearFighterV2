@@ -726,7 +726,7 @@ MonoBehaviour:
   m_FollowOffset: {x: 0, y: 1.61, z: -0.83}
   m_XDamping: 1
   m_YDamping: 1
-  m_ZDamping: 1
+  m_ZDamping: 4
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -2678,6 +2678,7 @@ GameObject:
   - component: {fileID: 1568811906}
   - component: {fileID: 1568811907}
   - component: {fileID: 1568811908}
+  - component: {fileID: 1568811909}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -2757,6 +2758,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 13847177}
+--- !u!114 &1568811909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568811903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8050bc86aeb4948b5274518700bcb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 530372780}
 --- !u!1 &1635546038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3128,7 +3142,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -3178,13 +3192,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800972886}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.4188421, y: -0.12088408, z: 0.056369167, w: 0.89820987}
   m_LocalPosition: {x: -3.1099696, y: -1.0823001, z: -0.7982114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: -15.33, z: 0}
 --- !u!1 &1902988630
 GameObject:
   m_ObjectHideFlags: 0

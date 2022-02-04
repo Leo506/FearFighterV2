@@ -155,7 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ac17ef05778ff4f9f3c3016fd90874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 1350621365}
 --- !u!114 &515103613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +221,7 @@ MonoBehaviour:
   - DropPoint
   - BossDialog
   objects:
-  - {fileID: 1129385397033107537, guid: b2b48da27ccaadd45aeda331dd236d88, type: 3}
+  - {fileID: 6666654100398188084, guid: d72544691ac600040adea4debb508758, type: 3}
   - {fileID: 4381288776348281998, guid: 74b04b9e07cf4a44b8209ee773832e8b, type: 3}
   - {fileID: 213978988609943417, guid: d73ed95ac696e2a459a2c18c89839977, type: 3}
   - {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
@@ -236,7 +235,6 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 5088093951198742540, guid: 0356548aba763ac4098c977f0db850ee, type: 3}
   sceneType: 1
   countOfScene: 1
-  subject: {fileID: 1350621365}
   surface: {fileID: 1388387394}
 --- !u!4 &515103616
 Transform:
@@ -411,7 +409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d7ba9cae9f8ea33bcd26c0c697de37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 1350621365}
 --- !u!64 &1388387390
 MeshCollider:
   m_ObjectHideFlags: 0

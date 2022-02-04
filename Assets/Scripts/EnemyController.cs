@@ -111,6 +111,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
         GameController.Pause += () => movement.canMove = canAttack = false;
         GameController.Unpause += () => movement.canMove = canAttack = true;
+
     }
 
 
