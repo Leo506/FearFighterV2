@@ -30,18 +30,19 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        direction = new Vector3(joystick.Direction.x, 0, joystick.Direction.y).normalized;
+        int multiplier = (CameraController.instance.isReverse) ? -1 : 1;
+        direction = new Vector3(joystick.Direction.x, 0, joystick.Direction.y).normalized * multiplier;
         if (Mathf.Abs(joystick.Vertical) > Mathf.Abs(joystick.Horizontal))
         {
-            if (joystick.Vertical > 0)
+            if (joystick.Vertical * multiplier > 0)
                 currentViewDirection = viewDirection.TOWARD;
-            else if (joystick.Vertical < 0)
+            else if (joystick.Vertical * multiplier < 0)
                 currentViewDirection = viewDirection.DOWN;
         } else
         {
-            if (joystick.Horizontal > 0)
+            if (joystick.Horizontal * multiplier > 0)
                 currentViewDirection = viewDirection.RIGHT;
-            else if (joystick.Horizontal < 0)
+            else if (joystick.Horizontal * multiplier < 0)
                 currentViewDirection = viewDirection.LEFT;
         }
     }

@@ -6,7 +6,18 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] Cinemachine.CinemachineVirtualCamera vCamera;
 
+    public static CameraController instance;
+
     public bool isReverse = false;
+
+
+    private void Awake()
+    {
+        if (instance != this && instance != null)
+            Destroy(instance.gameObject);
+
+        instance = this;
+    }
 
     public void ChangeView()
     {
