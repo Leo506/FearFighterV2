@@ -26,6 +26,7 @@ public class DroppingObj : MonoBehaviour
     {
         canMove = true;
         playerTransform = transform;
+        Debug.Log("Player position: " + playerTransform.position);
     }
 
     protected virtual void OnGet()

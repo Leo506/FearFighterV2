@@ -128,6 +128,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
 
         attack.Attack(rayDir, distance, attackValue);
         animator.SetTrigger("Attack");
+        FindObjectOfType<CameraController>().ChangeView();
     }
 
 

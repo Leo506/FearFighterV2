@@ -6,7 +6,7 @@ public class CoinItem : DroppingObj
 {
     protected override void OnGet()
     {
-        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+        Sprite sprite = GetComponentInChildren<SpriteRenderer>().sprite;
         InventoryItem item = new InventoryItem(sprite, () => {}, "MoneyItem");
         InventoryController.instance.AddItem(item);
         Destroy(this.gameObject);

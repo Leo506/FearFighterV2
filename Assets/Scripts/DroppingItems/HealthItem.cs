@@ -7,7 +7,7 @@ public class HealthItem : DroppingObj
 
     protected override void OnGet()
     {
-        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+        Sprite sprite = GetComponentInChildren<SpriteRenderer>().sprite;
         InventoryItem item = new InventoryItem(sprite, () => {
 
             if (InventoryController.instance.GetItemNumber("HealthItem") != 0)

@@ -6,7 +6,7 @@ public class ClueItem : DroppingObj
 {
     protected override void OnGet()
     {
-        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+        Sprite sprite = GetComponentInChildren<SpriteRenderer>().sprite;
         int id = DroppingObjController.countOfClues;
         InventoryItem item = new InventoryItem(sprite, () => {
             if (GameController.lvlNumber == 4)

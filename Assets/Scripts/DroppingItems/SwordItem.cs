@@ -7,7 +7,7 @@ public class SwordItem : DroppingObj
 
     protected override void OnGet()
     {
-        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+        Sprite sprite = GetComponentInChildren<SpriteRenderer>().sprite;
         InventoryItem item = new InventoryItem(sprite, () => {}, "SwordItem");
         InventoryController.instance.AddItem(item);
         Destroy(this.gameObject);
