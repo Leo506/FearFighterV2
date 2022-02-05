@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int multiplier = (CameraController.instance.isReverse) ? -1 : 1;
+        int multiplier = (CameraController.instance != null) ? ( (CameraController.instance.isReverse) ? -1 : 1) : 1;  //TODO переписать в удобочитаемом формате
         direction = new Vector3(joystick.Direction.x, 0, joystick.Direction.y).normalized * multiplier;
         if (Mathf.Abs(joystick.Vertical) > Mathf.Abs(joystick.Horizontal))
         {

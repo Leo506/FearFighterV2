@@ -113,6 +113,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
         GameController.Pause += () => movement.canMove = canAttack = false;
         GameController.Unpause += () => movement.canMove = canAttack = true;
+        Exit.OnNextLvlEvent += () => enemyCount = 0;
 
     }
 
@@ -124,6 +125,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     {
         GameController.Pause -= () => movement.canMove = canAttack = false;
         GameController.Unpause -= () => movement.canMove = canAttack = true;
+        Exit.OnNextLvlEvent -= () => enemyCount = 0;
     }
 
 
