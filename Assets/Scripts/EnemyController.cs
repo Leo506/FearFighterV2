@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     [Header("Эффект получения урона")]
     [SerializeField] protected ParticleSystem getDamageEffect;
 
+    [SerializeField] GameObject boomObj;
+
     protected PlayerLogic player;
     protected AIMovementComponent movement;
     protected AttackComponent attack;
@@ -130,7 +132,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     {
         hp -= value;
 
-        Instantiate(getDamageEffect, this.transform);
+        var boom = Instantiate(getDamageEffect, boomObj.transform);
 
         movement.PushFromTarget();
 
