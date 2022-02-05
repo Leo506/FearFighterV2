@@ -23,6 +23,10 @@ public class HaveDropComponent : MonoBehaviour
     public void Drop()
     {
         Vector3 pos = new Vector3(this.transform.position.x, item.transform.position.y, this.transform.position.z);
-        Instantiate(item).transform.position = pos;
+        var obj = Instantiate(item);
+        obj.transform.position = pos;
+
+        if (CameraController.instance.isReverse)
+            obj.GetComponentInChildren<SpriteRenderer>().transform.localRotation = Quaternion.Euler(45, 180, 0);
     }
 }
