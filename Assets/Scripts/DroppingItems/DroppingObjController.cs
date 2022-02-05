@@ -61,7 +61,11 @@ public class DroppingObjController : MonoBehaviour, ISetUpObj, IResetObj
             if (points.Count() != 0)
             {
                 Vector3 pos = points[0].transform.position;
-                Instantiate(clues[0]).transform.position = pos;
+                var clue = Instantiate(clues[0]);
+                clue.transform.position = pos;
+
+                if (CameraController.instance.isReverse)
+                    clue.GetComponentInChildren<SpriteRenderer>().transform.localRotation = Quaternion.Euler(45, 180, 0);
             }
         }
     }
