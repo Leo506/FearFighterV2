@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3198387935
+CRC: 604598204
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 35f08de920030e8b4b688073d58f778e
+    Hash: 94162b24aa022dd8a2a5c15db4468a39
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 607b32ccc23f41d3116299e44f5edca4
+    Hash: cc6e90607dc747b3aa378243db65a696
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -46,15 +46,21 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 433ad2906318ff743ae61aefc086578d, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: e2592d51aec1c35a9ac7e2529974cf36, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: eb83f923d163ea84a81994ed2b0f7628, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4dbe8163bcbcb298ab103aa7891222be, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: afbe991b242db434fadb3b9f1840ec29, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 30cc645c3756153d0b03dbc301aa2061, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cbb1d1fcb3095dc4a8d9a8de45ee9a3b, type: 3}
 - Class: 114
@@ -82,5 +88,6 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/Prefabs/Map0.prefab
+- Assets/Prefabs/Map00.prefab
+- Assets/Prefabs/BA00.prefab
 Dependencies: []

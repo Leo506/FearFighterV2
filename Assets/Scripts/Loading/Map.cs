@@ -13,17 +13,6 @@ namespace Loading {
 					Destroy(item.gameObject);
             }
 	    	DontDestroyOnLoad(this.gameObject);
-			Generator.MapReadyEvent += LoadGameplayScene;
 	    }
-
-		private void OnDestroy() 
-		{
-			Generator.MapReadyEvent -= LoadGameplayScene;
-		}
-
-		void LoadGameplayScene()
-		{
-			SceneManager.LoadScene("SampleScene");
-		}
 	}
 }
