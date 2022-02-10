@@ -24,10 +24,10 @@ public class GameController : MonoBehaviour, IResetObj
         foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<ISetUpObj>().ToArray())
             item.SetUp();
 
-        foreach (var item in FindObjectsOfType<EnemyController>())
+        /*foreach (var item in FindObjectsOfType<EnemyController>())
             enemies.Enqueue(item);
 
-        enemies.Dequeue().MyQueue();
+        enemies.Dequeue().MyQueue();*/
     }
 
     private void OnDestroy() 

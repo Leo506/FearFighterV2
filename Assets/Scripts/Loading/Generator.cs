@@ -32,7 +32,7 @@ public class Generator : MonoBehaviour
                 break;
 
             case TypeOfScene.SIMPLE_SCENE:
-                mapName = "Map00";
+                mapName = "Map02";
                 break;
         }
 

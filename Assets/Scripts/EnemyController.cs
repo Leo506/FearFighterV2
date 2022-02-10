@@ -21,6 +21,8 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
     [SerializeField] GameObject boomObj;
 
+    [SerializeField] Transform[] path;
+
     protected PlayerLogic player;
     protected AIMovementComponent movement;
     protected AttackComponent attack;
@@ -106,7 +108,12 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         id = enemyCount;
         enemyCount++;
 
-        movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), player.transform);
+        Vector3[] targets = new Vector3[path.Length];
+        for (int i = 0; i < path.Length; i++)
+        {
+            targets[i] = path[i].position;
+        }
+        movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), targets, player.transform);
 
         box = GetComponent<BoxCollider>();
         attack = new AttackComponent(box, transform, attackLayer);

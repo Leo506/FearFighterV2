@@ -3,10 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+enum MovementState
+{
+    FREE_MOVE,
+    FOLLOW_PLAYER
+}
+
+
 public class AIMovementComponent
 {
     NavMeshAgent agent;
-    Transform target;
+    int currentTargetIndex;
+    int dir;
+    Vector3[] targets;
+    Transform player;
+    MovementState currentState = MovementState.FREE_MOVE;
     public viewDirection currentView { get; private set; }
     public bool canMove = true;
 
@@ -16,13 +27,43 @@ public class AIMovementComponent
     /// </summary>
     public void Move()
     {
+        // Если объект может двигаться
         if (canMove)
         {
-            agent.SetDestination(target.position);
+            // Если объект находиться в состоянии свободного движения,
+            // то двигается по маршруту
+            if (currentState == MovementState.FREE_MOVE)
+            {
+                agent.SetDestination(targets[currentTargetIndex]);
+
+                if (Vector3.Distance(targets[currentTargetIndex], agent.transform.position) <= agent.stoppingDistance)
+                {
+                    currentTargetIndex += dir;
+                    if (currentTargetIndex >= targets.Length || currentTargetIndex < 0)
+                    {
+                        currentTargetIndex -= dir;
+                        dir *= -1;
+                    }
+                }
+            }
+            
+            // Иначе следует за игроком
+            else
+                agent.SetDestination(player.position);
+
             if (agent.velocity != Vector3.zero)
                 currentView = DetermineView(agent.velocity);
-        } else
-            agent.SetDestination(agent.gameObject.transform.position);
+        }
+        else
+            agent.SetDestination(agent.transform.position);
+
+        // Определяем, находиться ли игрок достаточно близко,
+        // чтобы начать следовать за ним
+        if (currentState == MovementState.FREE_MOVE)
+        {
+            if (Vector3.Distance(player.position, agent.transform.position) <= 1)
+                currentState = MovementState.FOLLOW_PLAYER;
+        }
     }
 
 
@@ -30,13 +71,17 @@ public class AIMovementComponent
     /// Создает новый компонент AIMovementComponent
     /// </summary>
     /// <param name="agent">Агент, через которого осуществляется движение</param>
-    /// <param name="target">Цель движения</param>
-    public AIMovementComponent(NavMeshAgent agent, Transform target)
+    /// <param name="path">Путь свободного движения</param>
+    /// <param name="player">Игрок, за которым надо будет следовать</param>
+    public AIMovementComponent(NavMeshAgent agent, Vector3[] path, Transform player)
     {
         this.agent = agent;
-        this.target = target;
+        this.targets = path;
+        this.dir = 1;
+        this.currentTargetIndex = 0;
+        this.player = player;
 
-        this.agent.stoppingDistance *= 3;
+        //this.agent.stoppingDistance *= 3;
     }
 
 
@@ -46,7 +91,10 @@ public class AIMovementComponent
     /// <returns></returns>
     public float GetDistanceToTarget()
     {
-        return Vector3.Distance(agent.transform.position, target.transform.position);
+        if (currentState == MovementState.FREE_MOVE)
+            return Vector3.Distance(targets[currentTargetIndex], agent.transform.position);
+        else
+            return Vector3.Distance(agent.transform.position, player.position);
     }
 
 
@@ -112,6 +160,6 @@ public class AIMovementComponent
     /// </summary>
     public void PushFromTarget()
     {
-        agent?.Move((agent.transform.position - target.transform.position).normalized * 0.5f);
+        agent?.Move((agent.transform.position - player.position).normalized * 0.5f);
     }
 }
