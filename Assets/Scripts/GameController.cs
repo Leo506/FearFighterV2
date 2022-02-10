@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class GameController : MonoBehaviour, IResetObj
 {
     Queue<EnemyController> enemies = new Queue<EnemyController>();
 
@@ -74,5 +74,10 @@ public class GameController : MonoBehaviour
     public void SetUnpause()
     {
         Unpause?.Invoke();
+    }
+
+    public void ResetObj()
+    {
+        lvlNumber = 2;
     }
 }

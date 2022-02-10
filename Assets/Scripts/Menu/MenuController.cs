@@ -29,7 +29,10 @@ public class MenuController : MonoBehaviour, ISetUpObj
     {
     	Time.timeScale = 1;
     	SceneManager.LoadScene("LoadingScene");
-    	// TODO Ресет инвенторя, характеристик персонажа и тд
+        foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<IResetObj>().ToList())
+        {
+			item.ResetObj();
+        }
     }
 
 
