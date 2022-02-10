@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1308bca8440a7499ce32b2f95958c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boom: {fileID: 455331627107759679, guid: 5fd8d6901305c8d4890a23683d4a6472, type: 3}
   types:
   - Rock
   - Test

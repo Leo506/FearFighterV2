@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     [SerializeField] protected LayerMask attackLayer;
 
     [Header("Эффект получения урона")]
-    [SerializeField] protected ParticleSystem getDamageEffect;
+    public ParticleSystem getDamageEffect;
 
     [SerializeField] GameObject boomObj;
 

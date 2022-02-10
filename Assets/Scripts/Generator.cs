@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Linq;
+using System.IO;
 
 public enum TypeOfScene 
 {
@@ -12,6 +12,7 @@ public enum TypeOfScene
 
 public class Generator : MonoBehaviour
 {
+    public ParticleSystem boom;
     public List<string> types;              // Типы объектов
     public GameObject[] objects;            // Объекты
     public GameObject roomRoot;             // "Корень комнаты"
@@ -54,7 +55,7 @@ public class Generator : MonoBehaviour
                 break;
         }
 
-        StartCoroutine(GenerateRoom(path));
+        GenerateRoom(sceneIndex);
 
 
     }
@@ -65,29 +66,25 @@ public class Generator : MonoBehaviour
     /// <summary>
     /// Создаёт комнату
     /// </summary>
-    IEnumerator GenerateRoom(string path)
+    public void GenerateRoom(int sceneIndex)
     {
-        
-        ResourceManager man = new ResourceManager();
-        
-        if (!man.ResourceLoaded(ResourceType.SCENE_RES, path))
-            yield return man.LoadResource(ResourceType.SCENE_RES, path);
 
-        SceneResource scene = man.GetResource(ResourceType.SCENE_RES, path)as SceneResource;
+        AssetBundle localBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, $"GameMaps/maps"));
 
-        foreach (string type in scene.GetTypes())
+        if (localBundle == null)
         {
-            var objToInstance = objects[types.IndexOf(type)];
-            foreach (Vector3 pos in scene.GetPositions(type))
-            {
-                var obj = Instantiate(objToInstance, roomRoot.transform);
-                obj.transform.localPosition = pos;
-                yield return null;
-            }
+            Debug.LogError("Failed to load asset bundle");
+            return;
         }
 
+        GameObject asset = localBundle.LoadAsset<GameObject>($"Map{sceneIndex}");
+        Instantiate(asset, roomRoot.transform);
+        localBundle.Unload(false);
+
         surface.BuildNavMesh();
+        FindObjectOfType<EnemyController>().getDamageEffect = boom;
         MapReadyEvent?.Invoke();
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
     
 }

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3458123286
+CRC: 3198387935
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1e15f8669c23a7afb59b965bca00e917
+    Hash: 35f08de920030e8b4b688073d58f778e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8387efc446bf250c6d704f0de2985cc7
+    Hash: 607b32ccc23f41d3116299e44f5edca4
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -26,8 +26,6 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 - Class: 54
-  Script: {instanceID: 0}
-- Class: 64
   Script: {instanceID: 0}
 - Class: 65
   Script: {instanceID: 0}
@@ -56,11 +54,7 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: afbe991b242db434fadb3b9f1840ec29, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 65d7ba9cae9f8ea33bcd26c0c697de37, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cbb1d1fcb3095dc4a8d9a8de45ee9a3b, type: 3}
 - Class: 114
@@ -89,5 +83,4 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Prefabs/Map0.prefab
-- Assets/Prefabs/Map1.prefab
 Dependencies: []
