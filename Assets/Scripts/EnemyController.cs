@@ -31,11 +31,12 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
     protected bool canAttack = true;
 
-    public static int enemyCount = 0;
     public int id { get; protected set; }
     public float delayTime  = 1.5f;
 
     public static event System.Action EnemyDiedEvent;
+    public static int enemyCount = 0;
+    public static List<EnemyController> enemiesOnScene;
 
 
     private void Update()
@@ -121,6 +122,11 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         GameController.Pause += () => movement.canMove = canAttack = false;
         GameController.Unpause += () => movement.canMove = canAttack = true;
         Exit.OnNextLvlEvent += () => enemyCount = 0;
+        Exit.OnNextLvlEvent += () => enemiesOnScene?.Clear();
+
+        if (enemiesOnScene == null)
+            enemiesOnScene = new List<EnemyController>();
+        enemiesOnScene.Add(this);
 
     }
 
@@ -133,6 +139,13 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         GameController.Pause -= () => movement.canMove = canAttack = false;
         GameController.Unpause -= () => movement.canMove = canAttack = true;
         Exit.OnNextLvlEvent -= () => enemyCount = 0;
+        Exit.OnNextLvlEvent -= () => enemiesOnScene?.Clear();
+    }
+
+
+    public bool IsAngry()
+    {
+        return movement.currentState == MovementState.FOLLOW_PLAYER;
     }
 
 
@@ -152,6 +165,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
             Debug.Log("ENEMY DIED. Enemy on scene: " + enemyCount);
             EnemyDiedEvent?.Invoke();
             GetComponent<HaveDropComponent>()?.Drop();
+            enemiesOnScene.Remove(this);
             Destroy(this.gameObject);
             return;
         }

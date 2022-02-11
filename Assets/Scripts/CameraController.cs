@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CameraController : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class CameraController : MonoBehaviour
         int visible = 0;
         int invisible = 0;
 
-        foreach (var item in FindObjectsOfType<EnemyController>())
+        foreach (var item in EnemyController.enemiesOnScene.Where(e => e.IsAngry()).ToList())
         {
             var screenPos = Camera.main.WorldToViewportPoint(item.transform.position);
             if (screenPos.x < 0 || screenPos.x > 1 || screenPos.y < 0 || screenPos.y > 1)

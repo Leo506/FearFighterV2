@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-enum MovementState
+public enum MovementState
 {
     FREE_MOVE,
     FOLLOW_PLAYER
@@ -17,7 +17,8 @@ public class AIMovementComponent
     int dir;
     Vector3[] targets;
     Transform player;
-    MovementState currentState = MovementState.FREE_MOVE;
+    
+    public MovementState currentState { get; private set; }
     public viewDirection currentView { get; private set; }
     public bool canMove = true;
 
@@ -80,6 +81,7 @@ public class AIMovementComponent
         this.dir = 1;
         this.currentTargetIndex = 0;
         this.player = player;
+        this.currentState = MovementState.FREE_MOVE;
 
         //this.agent.stoppingDistance *= 3;
     }
