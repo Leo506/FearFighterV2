@@ -19,9 +19,14 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     [Header("Эффект получения урона")]
     public ParticleSystem getDamageEffect;
 
+    [Header("Точка спавна эффекта удара")]
     [SerializeField] GameObject boomObj;
 
+    [Header("Точки маршрута")]
     [SerializeField] Transform[] path;
+
+    [Header("Индикатор обнаружения врага")]
+    [SerializeField] Indicator indicator;
 
     protected PlayerLogic player;
     protected AIMovementComponent movement;
@@ -114,7 +119,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         {
             targets[i] = path[i].position;
         }
-        movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), targets, player.transform);
+        movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), targets, player.transform, indicator);
 
         box = GetComponent<BoxCollider>();
         attack = new AttackComponent(box, transform, attackLayer);

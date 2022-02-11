@@ -12,11 +12,12 @@ public enum MovementState
 
 public class AIMovementComponent
 {
-    NavMeshAgent agent;
-    int currentTargetIndex;
-    int dir;
-    Vector3[] targets;
-    Transform player;
+    private NavMeshAgent agent;
+    private int currentTargetIndex;
+    private int dir;
+    private Vector3[] targets;
+    private Transform player;
+    private Indicator indicator;
     
     public MovementState currentState { get; private set; }
     public viewDirection currentView { get; private set; }
@@ -63,7 +64,10 @@ public class AIMovementComponent
         if (currentState == MovementState.FREE_MOVE)
         {
             if (Vector3.Distance(player.position, agent.transform.position) <= 1)
+            {
                 currentState = MovementState.FOLLOW_PLAYER;
+                indicator.SetIndicator();
+            }
         }
     }
 
@@ -74,7 +78,7 @@ public class AIMovementComponent
     /// <param name="agent">Агент, через которого осуществляется движение</param>
     /// <param name="path">Путь свободного движения</param>
     /// <param name="player">Игрок, за которым надо будет следовать</param>
-    public AIMovementComponent(NavMeshAgent agent, Vector3[] path, Transform player)
+    public AIMovementComponent(NavMeshAgent agent, Vector3[] path, Transform player, Indicator indicator)
     {
         this.agent = agent;
         this.targets = path;
@@ -82,6 +86,7 @@ public class AIMovementComponent
         this.currentTargetIndex = 0;
         this.player = player;
         this.currentState = MovementState.FREE_MOVE;
+        this.indicator = indicator;
 
         //this.agent.stoppingDistance *= 3;
     }
