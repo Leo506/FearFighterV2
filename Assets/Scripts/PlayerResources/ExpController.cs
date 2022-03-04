@@ -6,6 +6,10 @@ public class ExpController
 {
     static int exp = 0;  // Кол-во опыта у игрока
 
+    /// <summary>
+    /// Событие вызывается, когда меняется значение опыта игрока
+    /// </summary>
+    public static event System.Action ExpChanged;
 
     /// <summary>
     /// Количество опыта у игрока
@@ -21,7 +25,10 @@ public class ExpController
         private set
         {
             if (value >= 0)
+            {
                 exp = value;
+                ExpChanged?.Invoke();
+            }
         }
     }
 }
