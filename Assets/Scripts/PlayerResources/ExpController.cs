@@ -11,7 +11,7 @@ public class ExpController
     /// Количество опыта у игрока
     /// </summary>
     /// <value></value>
-    public int Exp
+    public static int Exp
     {
         get
         {
