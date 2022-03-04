@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.UI;
 
 
 public class MenuController : MonoBehaviour, ISetUpObj
 {
 	[SerializeField] Canvas gameOverCanvas;
 	[SerializeField] Canvas victoryCanvas;
+
+	[Header("Victory canvas")]
+	[SerializeField] Text moneyTextVictory, expTextVictory;
+
+	[Header("Game over canvas")]
+	[SerializeField] Text moneyTextFailed, expTextFailed;
 
 
 	public void SetUp() 
@@ -35,6 +42,16 @@ public class MenuController : MonoBehaviour, ISetUpObj
         }
     }
 
+	public void Replay()
+	{
+		Time.timeScale = 1;
+    	SceneManager.LoadScene("MainMenu");
+        foreach (var item in FindObjectsOfType<MonoBehaviour>().OfType<IResetObj>().ToList())
+        {
+			item.ResetObj();
+        }
+	}
+
 
     public void Quit() 
     {
@@ -49,6 +66,8 @@ public class MenuController : MonoBehaviour, ISetUpObj
 
 		gameOverCanvas.enabled = true;
 		Time.timeScale = 0;
+
+		SetAwardTexts();
 	}
 
 
@@ -59,6 +78,14 @@ public class MenuController : MonoBehaviour, ISetUpObj
 
 		victoryCanvas.enabled = true;
 		Time.timeScale = 0;
+
+		SetAwardTexts();
+	}
+
+	void SetAwardTexts()
+	{
+		moneyTextVictory.text = moneyTextFailed.text = AwardController.GetMoneyAward().ToString();
+		expTextVictory.text = expTextFailed.text = AwardController.GetExpAward().ToString();
 	}
 
 }

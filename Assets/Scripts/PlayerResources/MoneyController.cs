@@ -22,7 +22,7 @@ public class MoneyController
 			return money;
 		}
 
-		private set
+		set
 		{
 			if (value >= 0)
 			{

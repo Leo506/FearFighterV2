@@ -22,7 +22,7 @@ public class ExpController
             return exp;
         }
 
-        private set
+        set
         {
             if (value >= 0)
             {
