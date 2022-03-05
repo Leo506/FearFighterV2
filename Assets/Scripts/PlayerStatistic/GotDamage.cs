@@ -2,44 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerStatistic))]
-public class GotDamage : MonoBehaviour, IStatisticData
+public class GotDamage : BaseStatistic
 {
-    PlayerStatistic playerStatistic;
     private static float gotDamage = 0;
 
 
-    private void Awake() 
+    protected override void Subscribe()
     {
-        playerStatistic = GetComponent<PlayerStatistic>();
-        Register();    
-    }
-
-    private void OnDestroy() 
-    {
-        UnRegister();
-    }
-
-    public void Register()
-    {
-        // Регистрируемся у PlayerStatistic
-        playerStatistic.AddStatistic(this);
         PlayerLogic.PlayerGotDamage += UpdateStatistic;
     }
 
-    public void UnRegister()
+    protected override void Unsubscribe()
     {
-        playerStatistic.RemoveStatistic(this);
         PlayerLogic.PlayerGotDamage -= UpdateStatistic;
     }
 
-    public object GetValue()
+    protected override object GetMyValue()
     {
         return gotDamage;
     }
 
 
-    public void UpdateStatistic(float value)
+    void UpdateStatistic(float value)
     {
         gotDamage += value;
         Debug.Log($"GotDamage {gotDamage}");

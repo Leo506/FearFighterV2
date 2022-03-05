@@ -2,47 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerStatistic))]
-public class GamesCount : MonoBehaviour, IStatisticData
+public class GamesCount : BaseStatistic
 {
-    PlayerStatistic playerStatistic;
     private static int countOfGames = 0;
 
 
-    private void Awake() 
+    protected override void Subscribe()
     {
-        playerStatistic = GetComponent<PlayerStatistic>();
-        Register();    
-    }
-
-    private void OnDestroy() 
-    {
-        UnRegister();
-    }
-
-    public void Register()
-    {
-        // Регистрируемся у PlayerStatistic
-        playerStatistic.AddStatistic(this);
         PlayerLogic.PlayerDiedEvent += UpdateStatistic;
         BossFightPhase2.Boss.BossDiedEvent += UpdateStatistic;
 
     }
 
-    public void UnRegister()
+    protected override void Unsubscribe()
     {
-        playerStatistic.RemoveStatistic(this);
         PlayerLogic.PlayerDiedEvent -= UpdateStatistic;
         BossFightPhase2.Boss.BossDiedEvent -= UpdateStatistic;
     }
 
-    public object GetValue()
+    protected override object GetMyValue()
     {
         return countOfGames;
     }
 
 
-    public void UpdateStatistic()
+    void UpdateStatistic()
     {
         countOfGames++;
         Debug.Log($"CountOfGames {countOfGames}");
