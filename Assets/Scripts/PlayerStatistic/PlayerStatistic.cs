@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
+[RequireComponent(typeof(GamesCount))]
+[RequireComponent(typeof(GotDamage))]
 public class PlayerStatistic : MonoBehaviour
 {
 
@@ -25,35 +28,16 @@ public class PlayerStatistic : MonoBehaviour
     public static int CountOfKilledEnemy { get { return countOfKilledEnemy; } private set { countOfKilledEnemy = value; Debug.Log($"countOfKilledEnemy:{countOfKilledEnemy}"); } }
     #endregion
 
+    public List<IStatisticData> statistics = new List<IStatisticData>();
 
-    static bool eventsSetted = false;
 
-    private void Awake() 
+    public void AddStatistic(IStatisticData statistic)
     {
-        if (!eventsSetted)
-        {
-            HealthItem.HealthUsedEvent += () => CountOfUsedHealth++;
-
-            PlayerLogic.PlayerDiedEvent += () => CountOfGames++;
-            BossFightPhase2.Boss.BossDiedEvent += () => CountOfGames++;
-
-            PlayerLogic.PlayerGotDamage += (value) => GotDamage+=value;
-
-            EnemyController.EnemyDiedEvent += () => CountOfKilledEnemy++;
-
-            eventsSetted = true;
-        }
+        statistics.Add(statistic);
     }
 
-    private void OnDestroy() 
-    {   
-        // HealthItem.HealthUsedEvent -= () => CountOfUsedHealth++;
-
-        // PlayerLogic.PlayerDiedEvent -= () => CountOfGames++;
-        // BossFightPhase2.Boss.BossDiedEvent -= () => CountOfGames++;
-
-        // PlayerLogic.PlayerGotDamage -= (value) => GotDamage+=value;
-
-        // EnemyController.EnemyDiedEvent -= () => CountOfKilledEnemy++;
+    public void RemoveStatistic(IStatisticData statistic)
+    {
+        statistics.Remove(statistic);
     }
 }
