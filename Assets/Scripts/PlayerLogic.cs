@@ -17,6 +17,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
 
     public static PlayerLogic instance;
     public static event System.Action PlayerDiedEvent;
+    public static event System.Action<float> PlayerGotDamage;
     public float maxHP = 100;
 
     static float attackValue = 10;
@@ -216,6 +217,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     {
     	currentHP -= value;
     	ui.ShowCurrentHp(currentHP);
+        PlayerGotDamage?.Invoke(value);
     	if (currentHP <= 0) 
     	{
     		PlayerDiedEvent?.Invoke();

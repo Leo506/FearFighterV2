@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthItem : DroppingObj
 {
+    public static System.Action HealthUsedEvent;
 
     protected override void OnGet()
     {
@@ -13,6 +14,7 @@ public class HealthItem : DroppingObj
             if (InventoryController.instance.GetItemNumber("HealthItem") != 0)
             {
                 PlayerLogic.instance.CurrentHP += 10;
+                HealthUsedEvent?.Invoke();
                 Debug.Log("+ 10 HP !!!");
                 InventoryController.instance.RemoveItem("HealthItem");
             }
