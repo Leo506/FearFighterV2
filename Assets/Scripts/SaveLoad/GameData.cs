@@ -5,12 +5,18 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    Achievement[] achievements;
-    List<IStatisticData> statistics;
+    private List<ISaveable> objToSave;
 
     public GameData()
     {
-        achievements = AchievementManager.GetAchievements();
-        statistics = PlayerStatistic.instance.statistics;
+        objToSave = SaveFactory.GetSaveableObjects();
+    }
+
+    public void Load()
+    {
+        foreach (var item in objToSave)
+        {
+            item.Load();
+        }
     }
 }

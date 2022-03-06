@@ -24,13 +24,12 @@ public class SaveAndLoad
     /// <summary>
     /// Загружает данные игрока из файла сохранения
     /// </summary>
-    /// <returns>Объект GameData с информацией игрока</returns>
-    public static GameData LoadGame()
+    public static void LoadGame()
     {
         var path = Path.Combine(Application.persistentDataPath, "gameData.FF");
 
         if (!File.Exists(path))
-            return null;
+            return;
 
         GameData data = null;
 
@@ -40,6 +39,6 @@ public class SaveAndLoad
             data = formatter.Deserialize(fs) as GameData;
         }
 
-        return data;
+        data.Load();
     }
 }

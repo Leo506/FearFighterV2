@@ -37,4 +37,14 @@ public class AchievementManager
     {
         return achievements;
     }
+
+
+    /// <summary>
+    /// Устанавливает новые достижения
+    /// </summary>
+    /// <param name="achiev">Массив достижений</param>
+    public static void SetAchievements(Achievement[] achiev)
+    {
+        achievements = achiev;
+    }
 }
