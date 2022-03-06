@@ -7,6 +7,17 @@ using System.Linq;
 [RequireComponent(typeof(GotDamage))]
 public class PlayerStatistic : MonoBehaviour
 {
+    public static PlayerStatistic instance;
+
+    private void Awake()
+    {
+        if (instance != this && instance != null)
+        {
+            Destroy(instance.gameObject);
+        }
+
+        instance = this;
+    }
 
     // Накопительные характеристики
     #region 

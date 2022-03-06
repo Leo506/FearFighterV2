@@ -27,4 +27,14 @@ public class AchievementManager
         else
             return array[0];
     }
+
+
+    /// <summary>
+    /// Получение всех достижений в игре
+    /// </summary>
+    /// <returns>Массив структур достижений</returns>
+    public static Achievement[] GetAchievements()
+    {
+        return achievements;
+    }
 }
