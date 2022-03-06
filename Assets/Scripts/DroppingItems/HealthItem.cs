@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthItem : DroppingObj
 {
-    public static System.Action HealthUsedEvent;
+    public static event System.Action HealthUsedEvent;
 
     protected override void OnGet()
     {

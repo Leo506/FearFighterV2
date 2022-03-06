@@ -5,6 +5,8 @@ using System.Linq;
 
 [RequireComponent(typeof(GamesCount))]
 [RequireComponent(typeof(GotDamage))]
+[RequireComponent(typeof(UsedHealth))]
+[RequireComponent(typeof(KilledEnemy))]
 public class PlayerStatistic : MonoBehaviour
 {
     public static PlayerStatistic instance;
