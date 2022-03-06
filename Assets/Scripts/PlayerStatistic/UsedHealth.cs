@@ -25,5 +25,12 @@ public class UsedHealth : BaseStatistic
     void UpdateStatistic()
     {
         countOfUsedHealth++;
-    }    
+    }
+
+    protected override void SetMyValue(object value)
+    {
+        int? tmp = value as int?;
+        if (tmp != null)
+            countOfUsedHealth = tmp.Value;
+    }
 }

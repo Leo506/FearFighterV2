@@ -31,4 +31,11 @@ public class GamesCount : BaseStatistic
         countOfGames++;
         Debug.Log($"CountOfGames {countOfGames}");
     }
+
+    protected override void SetMyValue(object value)
+    {
+        int? tmp = value as int?;
+        if (tmp != null)
+            countOfGames = tmp.Value;
+    }
 }

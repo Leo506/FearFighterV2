@@ -28,4 +28,11 @@ public class GotDamage : BaseStatistic
         gotDamage += value;
         Debug.Log($"GotDamage {gotDamage}");
     }
+
+    protected override void SetMyValue(object value)
+    {
+        float? tmp = value as float?;
+        if (tmp != null)
+            gotDamage = tmp.Value;
+    }
 }

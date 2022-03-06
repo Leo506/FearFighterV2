@@ -36,6 +36,11 @@ public class BaseStatistic : MonoBehaviour, IStatisticData
     {
         return GetMyValue();
     }
+
+    public void SetValue(object value)
+    {
+        SetMyValue(value);
+    }
     #endregion
 
     protected virtual object GetMyValue()
@@ -48,4 +53,7 @@ public class BaseStatistic : MonoBehaviour, IStatisticData
 
     protected virtual void Unsubscribe()
     {}
+
+    protected virtual void SetMyValue(object value)
+    { }
 }

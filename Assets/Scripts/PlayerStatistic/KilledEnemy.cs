@@ -28,4 +28,11 @@ public class KilledEnemy : BaseStatistic
         countOfKilledEnemy++;
         Debug.Log($"Count of killed enemies: {countOfKilledEnemy}");
     }
+
+    protected override void SetMyValue(object value)
+    {
+        int? tmp = value as int?;
+        if (tmp != null)
+            countOfKilledEnemy = tmp.Value;
+    }
 }
