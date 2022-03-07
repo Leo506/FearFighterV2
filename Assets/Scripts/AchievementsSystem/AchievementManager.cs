@@ -8,7 +8,10 @@ public class AchievementManager
     // Список достижений
     static Achievement[] achievements = new Achievement[] 
     {
-        new Achievement(() => { return 0f; }, 0, 100),
+        new Achievement(() => 
+        {
+            var tmp = PlayerStatistic.GetStatistic<GamesCount>();
+            return tmp == null ? 0f : tmp.countOfGames / 3.0f; }, 0, 100),
         new Achievement(() => { return 0f; }, 1, 500)
     };
 

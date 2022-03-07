@@ -6,13 +6,17 @@ using System.Xml.Linq;
 
 public class StatisticFactory
 {
+    /// <summary>
+    /// Получение всех объектов статистики
+    /// </summary>
+    /// <returns>Список объектов, реализующий итерфейс статистики</returns>
     public static List<StatisticData> GetStatistics()
     {
         List<StatisticData> statistics = new List<StatisticData>();
         foreach (var item in GetTypes())
         {
             var type = Type.GetType(item);
-            StatisticData objToAdd = type.GetMethod("GetInstance")?.Invoke(null, null) as StatisticData;
+            StatisticData objToAdd = Activator.CreateInstance(type) as StatisticData;
             if (objToAdd != null)
                 statistics.Add(objToAdd);
         }

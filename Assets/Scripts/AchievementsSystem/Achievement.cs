@@ -9,7 +9,13 @@ public struct Achievement
 	/// <summary>
 	/// Значение тукущего прогресса достижения
 	/// </summary>
-	public float currentProgress { get; private set; }                // Значение текущего прогресса (от 0 до 1)
+	public float currentProgress 
+	{ 
+		get
+        {
+			return progressFunction();
+        }
+	}
 
 
 	/// <summary>
@@ -41,7 +47,6 @@ public struct Achievement
 	public Achievement(Func<float> progress, int id, int award)
 	{
 		progressFunction = progress;
-		currentProgress = progressFunction();
 		this.id = id;
 		awardAmount = award;
 		awardGot = false;

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public abstract class StatisticData
+
+public interface StatisticData
 {
     /// <summary>
     /// Объект регистрируется на необходимые ему события
     /// </summary>
-    public abstract void Registrate();
+    void Registrate();
+
 }

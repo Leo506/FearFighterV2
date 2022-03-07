@@ -29,6 +29,21 @@ public class PlayerStatistic : MonoBehaviour
     }
 
 
+    public static T GetStatistic<T>()
+        where T: class
+    {
+        if (_statistics == null)
+            return null;
+
+
+        var tmp = _statistics.Where(s => (s as T) != null).ToArray();
+        if (tmp.Length == 0)
+            return null;
+
+        return tmp[0] as T;
+    }
+
+
     // TODO удалить все не нужное внизу
     // Накопительные характеристики
     #region 
