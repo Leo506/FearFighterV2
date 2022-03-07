@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Linq;
 using System;
+using System.IO;
 
 public class SaveFactory
 {
+
     /// <summary>
     /// Получение всех объектов, которые надо сохранить
     /// </summary>
@@ -13,8 +15,9 @@ public class SaveFactory
     public static List<ISaveable> GetSaveableObjects()
     {
         List<ISaveable> objToSave = new List<ISaveable>();
-
-        foreach (var item in GetTypes())
+        string xml;
+        GetXml(out xml);
+        foreach (var item in GetTypes(xml))
         {
             var type = Type.GetType(item);
             ISaveable objToAdd = Activator.CreateInstance(type) as ISaveable;
@@ -25,9 +28,9 @@ public class SaveFactory
     }
 
 
-    private static IEnumerable<string> GetTypes()
+    private static IEnumerable<string> GetTypes(string xml)
     {
-        XDocument doc = XDocument.Load(System.IO.Path.Combine(Application.streamingAssetsPath, "saveObjs.xml"));
+        XDocument doc = XDocument.Parse(xml);
 
         XElement root = doc.Element("SaveObjs");
 
@@ -35,5 +38,14 @@ public class SaveFactory
         {
             yield return item.Value;
         }
+    }
+
+    private static void GetXml(out string xml)
+    {
+        AssetBundle asset = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "GameMaps/xml"));
+
+        xml = asset.LoadAsset<TextAsset>("saveObjs.xml").text;
+
+        asset.Unload(true);
     }
 }

@@ -20,4 +20,11 @@ public class TestSaveLoad : MonoBehaviour
     {
         SaveAndLoad.SaveGame();
     }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+            SaveAndLoad.SaveGame();
+    }
+
 }
