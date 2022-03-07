@@ -8,8 +8,8 @@ public class AchievementManager
     // Список достижений
     static Achievement[] achievements = new Achievement[] 
     {
-        new Achievement(() => { return 1.0f; }, 0, 100),
-        new Achievement(() => { return 0.5f; }, 1, 500)
+        new Achievement(() => { return 0f; }, 0, 100),
+        new Achievement(() => { return 0f; }, 1, 500)
     };
 
 

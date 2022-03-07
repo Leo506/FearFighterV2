@@ -2,40 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamesCount : BaseStatistic
+[System.Serializable]
+public class GamesCount : StatisticData
 {
-    private static int countOfGames = 0;
+    public int countOfGames { get; private set; }  // Кол-во сыгранных игр
 
+    // Реализация синглтона
+    #region
+    private static GamesCount instance;
 
-    protected override void Subscribe()
+    private GamesCount()
     {
-        PlayerLogic.PlayerDiedEvent += UpdateStatistic;
-        BossFightPhase2.Boss.BossDiedEvent += UpdateStatistic;
+        countOfGames = 0;
 
+        PlayerLogic.PlayerDiedEvent += () => { countOfGames++; Debug.Log($"count of games {countOfGames}"); } ;
+        BossFightPhase2.Boss.BossDiedEvent += () => { countOfGames++; Debug.Log($"count of games {countOfGames}"); } ;
+
+        instance = this;
     }
 
-    protected override void Unsubscribe()
+    public static GamesCount GetInstance()
     {
-        PlayerLogic.PlayerDiedEvent -= UpdateStatistic;
-        BossFightPhase2.Boss.BossDiedEvent -= UpdateStatistic;
+        if (instance == null)
+            new GamesCount();
+
+        return instance;
     }
+    #endregion
 
-    protected override object GetMyValue()
+    public override void Registrate()
     {
-        return countOfGames;
-    }
-
-
-    void UpdateStatistic()
-    {
-        countOfGames++;
-        Debug.Log($"CountOfGames {countOfGames}");
-    }
-
-    protected override void SetMyValue(object value)
-    {
-        int? tmp = value as int?;
-        if (tmp != null)
-            countOfGames = tmp.Value;
+        PlayerLogic.PlayerDiedEvent += () => { countOfGames++; Debug.Log($"count of games {countOfGames}"); };
+        BossFightPhase2.Boss.BossDiedEvent += () => { countOfGames++; Debug.Log($"count of games {countOfGames}"); };
     }
 }

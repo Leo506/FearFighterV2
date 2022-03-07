@@ -3,24 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-[RequireComponent(typeof(GamesCount))]
-[RequireComponent(typeof(GotDamage))]
-[RequireComponent(typeof(UsedHealth))]
-[RequireComponent(typeof(KilledEnemy))]
 public class PlayerStatistic : MonoBehaviour
 {
-    public static PlayerStatistic instance;
+
+    private static List<StatisticData> _statistics;
+    public static List<StatisticData> Statistics
+    {
+        get
+        {
+            return _statistics;
+        }
+        set
+        {
+            if (_statistics == null)
+                _statistics = value;
+        }
+    }
 
     private void Awake()
     {
-        if (instance != this && instance != null)
+        if (_statistics == null)
         {
-            Destroy(instance.gameObject);
+            _statistics = new List<StatisticData>() { GamesCount.GetInstance() };
         }
-
-        instance = this;
     }
 
+
+    // TODO удалить все не нужное внизу
     // Накопительные характеристики
     #region 
     static int countOfGames = 0;        // Кол-во сыгранных игр
@@ -41,16 +50,4 @@ public class PlayerStatistic : MonoBehaviour
     public static int CountOfKilledEnemy { get { return countOfKilledEnemy; } private set { countOfKilledEnemy = value; Debug.Log($"countOfKilledEnemy:{countOfKilledEnemy}"); } }
     #endregion
 
-    public List<IStatisticData> statistics = new List<IStatisticData>();
-
-
-    public void AddStatistic(IStatisticData statistic)
-    {
-        statistics.Add(statistic);
-    }
-
-    public void RemoveStatistic(IStatisticData statistic)
-    {
-        statistics.Remove(statistic);
-    }
 }

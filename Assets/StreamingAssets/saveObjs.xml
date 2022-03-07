@@ -2,4 +2,5 @@
 <SaveObjs>
   <type>AchievementSave</type>
   <type>ResourcesSave</type>
+  <type>StatisticSave</type>
 </SaveObjs>
