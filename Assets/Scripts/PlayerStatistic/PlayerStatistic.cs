@@ -24,7 +24,7 @@ public class PlayerStatistic : MonoBehaviour
     {
         if (_statistics == null)
         {
-            _statistics = new List<StatisticData>() { GamesCount.GetInstance() };
+            _statistics = StatisticFactory.GetStatistics();
         }
     }
 
