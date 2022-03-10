@@ -56,41 +56,14 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     protected virtual void Attack()
     {
         
-        // Vector2 dirToPlayer = (player.transform.position - this.transform.position).normalized;
-        // viewDirection dir = movement.DetermineView(dirToPlayer);
-        
-        // Vector2 rayDir;
-        // float distance;
+        Vector2 dirToPlayer = (player.transform.position - this.transform.position).normalized;
+        viewDirection dir = Movement.DetermineView(dirToPlayer);
+        Vector2 point = Movement.GetAttackArea(box, transform, dir);
+        canAttack = false;
 
-        // float scale = box.size.x * (transform.localScale.x / 2);
-
-        // switch (dir)
-        // {
-        //     case viewDirection.UP:
-        //         rayDir = Vector2.up + new Vector2(0, scale);
-        //         distance = box.size.y;
-        //         break;
-        //     case viewDirection.DOWN:
-        //         rayDir = Vector2.down + new Vector2(0, -scale);
-        //         distance = box.size.y;
-        //         break;
-        //     case viewDirection.RIGHT:
-        //         rayDir = Vector2.right + new Vector2(scale, 0);
-        //         distance = box.size.x;
-        //         break;
-        //     case viewDirection.LEFT:
-        //         rayDir = Vector2.left + new Vector2(-scale, 0);
-        //         distance = box.size.x;
-        //         break;
-        //     default:
-        //         rayDir = Vector3.zero;
-        //         distance = box.size.x;
-        //         break;
-        // }
-
-        // attack.Attack(rayDir, distance, 10);
-        // Debug.Log("Attack!!!");
-        // Invoke("Reload", delayTime);
+        attack.Attack(point, 10);
+        Debug.Log("Attack!!!");
+        Invoke("Reload", delayTime);
     }
 
 
@@ -178,7 +151,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
     void OnDrawGizmos()
     {
-        // Gizmos.color = Color.red;
+        Gizmos.color = Color.green;
 
         // Vector2 rayDir;
         // float distance;
@@ -213,8 +186,11 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         // }
         //  //Gizmos.DrawRay(transform.position, rayDir * (distance - 0.03f));
         //  //Draw a cube at the maximum distance
-        //  var size = box.size * transform.localScale.x;
-        //  Gizmos.DrawWireCube((Vector2)transform.position + rayDir, size);
+        var size = box.size * transform.localScale.x;
+        Vector2 dirToPlayer = (player.transform.position - this.transform.position).normalized;
+        viewDirection dir = Movement.DetermineView(dirToPlayer);
+        Vector2 point = Movement.GetAttackArea(box, transform, dir);
+        Gizmos.DrawWireCube(point, size);
     }
 
     protected void Die()

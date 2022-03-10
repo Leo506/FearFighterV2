@@ -2,14 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum viewDirection
-{
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT,
-    NULL
-}
+
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;

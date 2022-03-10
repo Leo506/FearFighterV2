@@ -29,9 +29,8 @@ public class AttackComponent
     /// Атака
     /// </summary>
     /// <param name="dir">Направление атаки</param>
-    /// <param name="distance">Максимальное расстояние</param>
     /// <param name="damageValue">Количество урона</param>
-    public virtual void Attack(Vector2 dir, float distance, float damageValue)
+    public virtual void Attack(Vector2 dir, float damageValue)
     {
         Vector2 point = (Vector2)objTransform.position + dir;
         Vector2 size = box.size * objTransform.localScale.x;

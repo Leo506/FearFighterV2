@@ -100,36 +100,9 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     public void Attack()
     {
 
-        Vector2 rayDir;
-        float distance;
+        Vector2 point = Movement.GetAttackArea(box, transform, movement.currentViewDirection);
 
-        float scale = box.size.x * (transform.localScale.x / 2);
-
-        switch (movement.currentViewDirection)
-        {
-            case viewDirection.UP:
-                rayDir = Vector2.up + new Vector2(0, scale);
-                distance = box.size.y;
-                break;
-            case viewDirection.DOWN:
-                rayDir = Vector2.down + new Vector2(0, -scale);
-                distance = box.size.y;
-                break;
-            case viewDirection.RIGHT:
-                rayDir = Vector2.right + new Vector2(scale, 0);
-                distance = box.size.x;
-                break;
-            case viewDirection.LEFT:
-                rayDir = Vector2.left + new Vector2(-scale, 0);
-                distance = box.size.x;
-                break;
-            default:
-                rayDir = Vector3.zero;
-                distance = box.size.x;
-                break;
-        }
-
-        attack.Attack(rayDir, distance, attackValue);
+        attack.Attack(point, attackValue);
         animator.SetTrigger("Attack");
         // FindObjectOfType<CameraController>().ChangeView();
     }
