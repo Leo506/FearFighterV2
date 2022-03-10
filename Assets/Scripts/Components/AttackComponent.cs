@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class AttackComponent
 {
-    BoxCollider2D box;
-    Transform objTransform;
-    int layerMask;
+    BoxCollider2D box;  // Коллайдер объекта, к которому привязан компонент
+    Transform objTransform;  // Трансформ этого объекта
+    int layerMask;           // Маска
 
     public RaycastHit hit;
 
@@ -31,25 +31,14 @@ public class AttackComponent
     /// <param name="dir">Направление атаки</param>
     /// <param name="distance">Максимальное расстояние</param>
     /// <param name="damageValue">Количество урона</param>
-    public virtual void Attack(Vector3 dir, float distance, float damageValue)
+    public virtual void Attack(Vector2 dir, float distance, float damageValue)
     {
-        // Debug.Log("Attack in attack component");
-        // Vector3 center = objTransform.position + dir * distance + new Vector3(0, box.center.y * objTransform.localScale.y, 0);
-        // Vector3 size = new Vector3(
-        //     box.size.x * objTransform.localScale.x,
-        //     box.size.y * objTransform.localScale.y,
-        //     1
-        //     );
+        Vector2 point = (Vector2)objTransform.position + dir;
+        Vector2 size = box.size * objTransform.localScale.x;
 
-        // Collider[] colliders = Physics.OverlapBox(center, size / 2, objTransform.rotation, layerMask);
-        // if (colliders.Length != 0)
-        // {
-        //     Debug.Log("There are colliders");
-        //     foreach (var item in colliders)
-        //     {
-        //         item.GetComponent<IGetDamaged>()?.GetDamage(damageValue);
-        //     }
-        // }
+        Collider2D collider = Physics2D.OverlapBox(point, size, 0);
+        Debug.Log("Collider: " + collider);
+        collider?.GetComponent<IGetDamaged>()?.GetDamage(damageValue);
     }
 
 

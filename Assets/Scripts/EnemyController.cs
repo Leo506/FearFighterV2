@@ -73,7 +73,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
         switch (dir)
         {
-            case viewDirection.TOWARD:
+            case viewDirection.UP:
                 rayDir = Vector3.forward;
                 distance = box.size.z;
                 break;

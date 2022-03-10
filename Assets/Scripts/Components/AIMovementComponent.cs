@@ -134,7 +134,7 @@ public class AIMovementComponent
         else
         {
             if (dir.z > 0)
-                return viewDirection.TOWARD;
+                return viewDirection.UP;
             else if (dir.z < 0)
                 return viewDirection.DOWN;
             else
@@ -147,7 +147,7 @@ public class AIMovementComponent
     {
         switch (view)
         {
-            case viewDirection.TOWARD:
+            case viewDirection.UP:
                 return Vector3.forward;
             case viewDirection.DOWN:
                 return Vector3.back;

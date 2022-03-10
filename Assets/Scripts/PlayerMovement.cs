@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum viewDirection
 {
-    TOWARD,
+    UP,
     DOWN,
     RIGHT,
     LEFT,
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(joystick.Vertical) > Mathf.Abs(joystick.Horizontal))
         {
             if (joystick.Vertical > 0)
-                currentViewDirection = viewDirection.TOWARD;
+                currentViewDirection = viewDirection.UP;
             else if (joystick.Vertical < 0)
                 currentViewDirection = viewDirection.DOWN;
         } else

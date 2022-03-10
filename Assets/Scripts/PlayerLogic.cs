@@ -100,34 +100,36 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     public void Attack()
     {
 
-        // Vector3 rayDir;
-        // float distance;
+        Vector2 rayDir;
+        float distance;
 
-        // switch (movement.currentViewDirection)
-        // {
-        //     case viewDirection.TOWARD:
-        //         rayDir = Vector3.forward;
-        //         distance = box.size.z;
-        //         break;
-        //     case viewDirection.DOWN:
-        //         rayDir = Vector3.back;
-        //         distance = box.size.z;
-        //         break;
-        //     case viewDirection.RIGHT:
-        //         rayDir = Vector3.right;
-        //         distance = box.size.x;
-        //         break;
-        //     case viewDirection.LEFT:
-        //         rayDir = Vector3.left;
-        //         distance = box.size.x;
-        //         break;
-        //     default:
-        //         rayDir = Vector3.zero;
-        //         distance = box.size.x;
-        //         break;
-        // }
+        float scale = box.size.x * (transform.localScale.x / 2);
 
-        // attack.Attack(rayDir, distance, attackValue);
+        switch (movement.currentViewDirection)
+        {
+            case viewDirection.UP:
+                rayDir = Vector2.up + new Vector2(0, scale);
+                distance = box.size.y;
+                break;
+            case viewDirection.DOWN:
+                rayDir = Vector2.down + new Vector2(0, -scale);
+                distance = box.size.y;
+                break;
+            case viewDirection.RIGHT:
+                rayDir = Vector2.right + new Vector2(scale, 0);
+                distance = box.size.x;
+                break;
+            case viewDirection.LEFT:
+                rayDir = Vector2.left + new Vector2(-scale, 0);
+                distance = box.size.x;
+                break;
+            default:
+                rayDir = Vector3.zero;
+                distance = box.size.x;
+                break;
+        }
+
+        attack.Attack(rayDir, distance, attackValue);
         animator.SetTrigger("Attack");
         // FindObjectOfType<CameraController>().ChangeView();
     }
@@ -178,40 +180,43 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     }
 
 
-    /*void OnDrawGizmos()
+    void OnDrawGizmos()
      {
-         Gizmos.color = Color.red;
+        Gizmos.color = Color.red;
 
-         Vector3 rayDir;
-         float distance;
+        Vector2 rayDir;
+        float distance;
 
-         switch (movement.currentViewDirection)
-         {
-             case viewDirection.TOWARD:
-                 rayDir = Vector3.forward;
-                 distance = box.size.z;
-                 break;
-             case viewDirection.DOWN:
-                 rayDir = Vector3.back;
-                 distance = box.size.z;
-                 break;
-             case viewDirection.RIGHT:
-                 rayDir = Vector3.right;
-                 distance = box.size.x;
-                 break;
-             case viewDirection.LEFT:
-                 rayDir = Vector3.left;
-                 distance = box.size.x;
-                 break;
-             default:
-                 rayDir = Vector3.zero;
-                 distance = box.size.x;
-                 break;
-         }
-         Gizmos.DrawRay(transform.position, rayDir * (distance - 0.03f));
+        float scale = box.size.x * (transform.localScale.x / 2);
+
+        switch (movement.currentViewDirection)
+        {
+            case viewDirection.UP:
+                rayDir = Vector2.up + new Vector2(0, scale);
+                distance = box.size.y;
+                break;
+            case viewDirection.DOWN:
+                rayDir = Vector2.down + new Vector2(0, -scale);
+                distance = box.size.y;
+                break;
+            case viewDirection.RIGHT:
+                rayDir = Vector2.right + new Vector2(scale, 0);
+                distance = box.size.x;
+                break;
+            case viewDirection.LEFT:
+                rayDir = Vector2.left + new Vector2(-scale, 0);
+                distance = box.size.x;
+                break;
+            default:
+                rayDir = Vector3.zero;
+                distance = box.size.x;
+                break;
+        }
+         //Gizmos.DrawRay(transform.position, rayDir * (distance - 0.03f));
          //Draw a cube at the maximum distance
-         Gizmos.DrawWireCube(transform.position + rayDir * (distance - 0.03f), box.size);
-     }*/
+         var size = box.size * transform.localScale.x;
+         Gizmos.DrawWireCube((Vector2)transform.position + rayDir, size);
+     }
 
     public void GetDamage(float value) 
     {
