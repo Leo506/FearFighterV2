@@ -84,13 +84,13 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
         movement = GetComponent<PlayerMovement>();
         box = GetComponent<BoxCollider2D>();
         attack = new AttackComponent(box, transform, attackLayer);
-        FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
-
+        
         if (currentHP == -1) 
         	currentHP = maxHP;
 
         ui.ShowCurrentHp(currentHP);
-        
+        FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
+
     }
 
 
