@@ -143,21 +143,21 @@ public class AIMovementComponent
     }
 
 
-    public Vector3 DetermineView(viewDirection view)
+    public Vector2 DetermineView(viewDirection view)
     {
         switch (view)
         {
             case viewDirection.UP:
-                return Vector3.forward;
+                return Vector2.up;
             case viewDirection.DOWN:
-                return Vector3.back;
+                return Vector2.down;
             case viewDirection.RIGHT:
-                return Vector3.right;
+                return Vector2.right;
             case viewDirection.LEFT:
-                return Vector3.left;
+                return Vector2.left;
             
             default:
-                return Vector3.zero;
+                return Vector2.zero;
         }
     }
 

@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     protected AIMovementComponent movement;
     protected AttackComponent attack;
 
-    protected BoxCollider box;
+    protected BoxCollider2D box;
 
     protected bool canAttack = true;
 
@@ -48,13 +48,10 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
     {
         if (movement != null)
         {
-            movement.Move();
+            //movement.Move();
 
-            if (movement.GetDistanceToTarget() <= attackRadius)
-            {
-                if (canAttack && movement.canMove)
-                    Attack();
-            }
+            if (canAttack)
+                Attack();
         }
     }
 
@@ -63,30 +60,31 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
     protected virtual void Attack()
     {
-        Vector3 rayDir;
+        
+        Vector2 dirToPlayer = (player.transform.position - this.transform.position).normalized;
+        viewDirection dir = movement.DetermineView(dirToPlayer);
+        
+        Vector2 rayDir;
         float distance;
 
-        canAttack = false;
-
-        Vector3 dirToPlayer = (player.transform.position - this.transform.position).normalized;
-        viewDirection dir = movement.DetermineView(dirToPlayer);
+        float scale = box.size.x * (transform.localScale.x / 2);
 
         switch (dir)
         {
             case viewDirection.UP:
-                rayDir = Vector3.forward;
-                distance = box.size.z;
+                rayDir = Vector2.up + new Vector2(0, scale);
+                distance = box.size.y;
                 break;
             case viewDirection.DOWN:
-                rayDir = Vector3.back;
-                distance = box.size.z;
+                rayDir = Vector2.down + new Vector2(0, -scale);
+                distance = box.size.y;
                 break;
             case viewDirection.RIGHT:
-                rayDir = Vector3.right;
+                rayDir = Vector2.right + new Vector2(scale, 0);
                 distance = box.size.x;
                 break;
             case viewDirection.LEFT:
-                rayDir = Vector3.left;
+                rayDir = Vector2.left + new Vector2(-scale, 0);
                 distance = box.size.x;
                 break;
             default:
@@ -121,7 +119,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         }
         movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), targets, player.transform, indicator);
 
-        box = GetComponent<BoxCollider>();
+        box = GetComponent<BoxCollider2D>();
         //attack = new AttackComponent(box, transform, attackLayer);
 
         GameController.Pause += () => movement.canMove = canAttack = false;
@@ -161,7 +159,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
         var boom = Instantiate(getDamageEffect, boomObj.transform);
 
-        movement.PushFromTarget();
+        //movement.PushFromTarget();
 
         if (hp <= 0)
         {
@@ -189,14 +187,43 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawRay(transform.position, transform.forward * box.size.z);
-        //Draw a cube at the maximum distance
-        Vector3 size = new Vector3(
-            box.size.x * transform.localScale.x,
-            box.size.y * transform.localScale.y,
-            box.size.z * transform.localScale.z
-            );
-        Gizmos.DrawWireCube(transform.position + movement.DetermineView(movement.currentView) * box.size.z + new Vector3(0, box.center.y * transform.localScale.y, 0), size);
+        Gizmos.color = Color.red;
+
+        Vector2 rayDir;
+        float distance;
+
+        float scale = box.size.x * (transform.localScale.x / 2);
+
+        Vector2 dirToPlayer = (player.transform.position - this.transform.position).normalized;
+        viewDirection dir = movement.DetermineView(dirToPlayer);
+
+        switch (dir)
+        {
+            case viewDirection.UP:
+                rayDir = Vector2.up + new Vector2(0, scale);
+                distance = box.size.y;
+                break;
+            case viewDirection.DOWN:
+                rayDir = Vector2.down + new Vector2(0, -scale);
+                distance = box.size.y;
+                break;
+            case viewDirection.RIGHT:
+                rayDir = Vector2.right + new Vector2(scale, 0);
+                distance = box.size.x;
+                break;
+            case viewDirection.LEFT:
+                rayDir = Vector2.left + new Vector2(-scale, 0);
+                distance = box.size.x;
+                break;
+            default:
+                rayDir = Vector3.zero;
+                distance = box.size.x;
+                break;
+        }
+         //Gizmos.DrawRay(transform.position, rayDir * (distance - 0.03f));
+         //Draw a cube at the maximum distance
+         var size = box.size * transform.localScale.x;
+         Gizmos.DrawWireCube((Vector2)transform.position + rayDir, size);
     }
 
     protected void Die()
