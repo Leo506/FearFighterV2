@@ -8,11 +8,11 @@ public class LoadingController : MonoBehaviour
 {
     private void Awake()
     {
-        Generator.MapReadyEvent += () => SceneManager.LoadScene("SampleScene");
+        Loading.Generator.MapReadyEvent += () => SceneManager.LoadScene("SampleScene");
     }
 
     private void OnDestroy()
     {
-        Generator.MapReadyEvent -= () => SceneManager.LoadScene("SampleScene");
+        Loading.Generator.MapReadyEvent -= () => SceneManager.LoadScene("SampleScene");
     }
 }

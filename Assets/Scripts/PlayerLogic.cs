@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
 {
     PlayerMovement movement;
-    BoxCollider box;
+    BoxCollider2D box;
     AttackComponent attack;
     IUsingObj currentUsingObj;
     
@@ -82,7 +82,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     public void SetUp()
     {
         movement = GetComponent<PlayerMovement>();
-        box = GetComponent<BoxCollider>();
+        box = GetComponent<BoxCollider2D>();
         attack = new AttackComponent(box, transform, attackLayer);
         FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = this.transform;
 
@@ -100,36 +100,36 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     public void Attack()
     {
 
-        Vector3 rayDir;
-        float distance;
+        // Vector3 rayDir;
+        // float distance;
 
-        switch (movement.currentViewDirection)
-        {
-            case viewDirection.TOWARD:
-                rayDir = Vector3.forward;
-                distance = box.size.z;
-                break;
-            case viewDirection.DOWN:
-                rayDir = Vector3.back;
-                distance = box.size.z;
-                break;
-            case viewDirection.RIGHT:
-                rayDir = Vector3.right;
-                distance = box.size.x;
-                break;
-            case viewDirection.LEFT:
-                rayDir = Vector3.left;
-                distance = box.size.x;
-                break;
-            default:
-                rayDir = Vector3.zero;
-                distance = box.size.x;
-                break;
-        }
+        // switch (movement.currentViewDirection)
+        // {
+        //     case viewDirection.TOWARD:
+        //         rayDir = Vector3.forward;
+        //         distance = box.size.z;
+        //         break;
+        //     case viewDirection.DOWN:
+        //         rayDir = Vector3.back;
+        //         distance = box.size.z;
+        //         break;
+        //     case viewDirection.RIGHT:
+        //         rayDir = Vector3.right;
+        //         distance = box.size.x;
+        //         break;
+        //     case viewDirection.LEFT:
+        //         rayDir = Vector3.left;
+        //         distance = box.size.x;
+        //         break;
+        //     default:
+        //         rayDir = Vector3.zero;
+        //         distance = box.size.x;
+        //         break;
+        // }
 
-        attack.Attack(rayDir, distance, attackValue);
+        // attack.Attack(rayDir, distance, attackValue);
         animator.SetTrigger("Attack");
-        FindObjectOfType<CameraController>().ChangeView();
+        // FindObjectOfType<CameraController>().ChangeView();
     }
 
 
@@ -178,7 +178,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     }
 
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
      {
          Gizmos.color = Color.red;
 
@@ -211,7 +211,7 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
          Gizmos.DrawRay(transform.position, rayDir * (distance - 0.03f));
          //Draw a cube at the maximum distance
          Gizmos.DrawWireCube(transform.position + rayDir * (distance - 0.03f), box.size);
-     }
+     }*/
 
     public void GetDamage(float value) 
     {

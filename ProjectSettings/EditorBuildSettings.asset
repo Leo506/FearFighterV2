@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BossFightPhase2.unity
     guid: cd80d78ef05d1235594d7427627248d6
+  - enabled: 1
+    path: Assets/chunk-map-system-2D/Demo/Chunk.unity
+    guid: a7878d0dcacf3d445a2add9d7d319fb3
+  - enabled: 1
+    path: Assets/chunk-map-system-2D/Demo/Demo.unity
+    guid: 9326f253c7271314288c330f4c365050
   m_configObjects: {}

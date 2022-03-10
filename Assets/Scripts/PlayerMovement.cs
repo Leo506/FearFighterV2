@@ -12,8 +12,8 @@ public enum viewDirection
 }
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody rb;
-    Vector3 direction;                                                 // Направление движения
+    Rigidbody2D rb;
+    Vector2 direction;                                                 // Направление движения
 
     public viewDirection currentViewDirection = viewDirection.RIGHT;   // В какую сторону смотрит игрок
     public float speed = 100;                                          // Скорость движения
@@ -24,25 +24,25 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        int multiplier = (CameraController.instance != null) ? ( (CameraController.instance.isReverse) ? -1 : 1) : 1;  //TODO переписать в удобочитаемом формате
-        direction = new Vector3(joystick.Direction.x, 0, joystick.Direction.y).normalized * multiplier;
+        //int multiplier = (CameraController.instance != null) ? ( (CameraController.instance.isReverse) ? -1 : 1) : 1;  //TODO переписать в удобочитаемом формате
+        direction = joystick.Direction.normalized;
         if (Mathf.Abs(joystick.Vertical) > Mathf.Abs(joystick.Horizontal))
         {
-            if (joystick.Vertical * multiplier > 0)
+            if (joystick.Vertical > 0)
                 currentViewDirection = viewDirection.TOWARD;
-            else if (joystick.Vertical * multiplier < 0)
+            else if (joystick.Vertical < 0)
                 currentViewDirection = viewDirection.DOWN;
         } else
         {
-            if (joystick.Horizontal * multiplier > 0)
+            if (joystick.Horizontal > 0)
                 currentViewDirection = viewDirection.RIGHT;
-            else if (joystick.Horizontal * multiplier < 0)
+            else if (joystick.Horizontal < 0)
                 currentViewDirection = viewDirection.LEFT;
         }
     }

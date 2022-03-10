@@ -122,7 +122,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
         movement = new AIMovementComponent(GetComponent<NavMeshAgent>(), targets, player.transform, indicator);
 
         box = GetComponent<BoxCollider>();
-        attack = new AttackComponent(box, transform, attackLayer);
+        //attack = new AttackComponent(box, transform, attackLayer);
 
         GameController.Pause += () => movement.canMove = canAttack = false;
         GameController.Unpause += () => movement.canMove = canAttack = true;

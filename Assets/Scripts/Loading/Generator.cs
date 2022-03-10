@@ -4,73 +4,77 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.IO;
 
-public enum TypeOfScene 
+namespace Loading
 {
-    BOSS_ARENA,
-    SIMPLE_SCENE
-}
 
-public class Generator : MonoBehaviour
-{
-    [SerializeField] GameObject roomRoot;             // "Корень комнаты"
-
-    [SerializeField] TypeOfScene sceneType;           // Тип генерируемой сцены
-
-    [SerializeField] NavMeshSurface surface;          // Поверхность, которую надо сканить на наличие препятствий, чтобы работал AI врагов
-
-    public static event System.Action MapReadyEvent;  // События готовности карты
-
-
-    private void Start()
+    public enum TypeOfScene 
     {
-        string mapName = "";
-
-        switch (sceneType) 
-        {
-            case TypeOfScene.BOSS_ARENA:
-                mapName = "BA00";
-                break;
-
-            case TypeOfScene.SIMPLE_SCENE:
-                mapName = "Map02";
-                break;
-        }
-
-        StartCoroutine(GenerateRoom(mapName));
-
+        BOSS_ARENA,
+        SIMPLE_SCENE
     }
 
-
-
-
-    /// <summary>
-    /// Создаёт комнату
-    /// </summary>
-    IEnumerator GenerateRoom(string mapName)
+    public class Generator : MonoBehaviour
     {
-        // Загружаем файл bundle
-        AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, "GameMaps/maps"));
-        yield return request;
+        [SerializeField] GameObject roomRoot;             // "Корень комнаты"
 
-        AssetBundle localAssetBundle = request.assetBundle;
+        [SerializeField] TypeOfScene sceneType;           // Тип генерируемой сцены
 
-        if (localAssetBundle == null)
+        [SerializeField] NavMeshSurface surface;          // Поверхность, которую надо сканить на наличие препятствий, чтобы работал AI врагов
+
+        public static event System.Action MapReadyEvent;  // События готовности карты
+
+
+        private void Start()
         {
-            Debug.LogError("Failed to load asset bundles");
-            yield break;
+            string mapName = "";
+
+            switch (sceneType) 
+            {
+                case TypeOfScene.BOSS_ARENA:
+                    mapName = "BA00";
+                    break;
+
+                case TypeOfScene.SIMPLE_SCENE:
+                    mapName = "Map02";
+                    break;
+            }
+
+            StartCoroutine(GenerateRoom(mapName));
+
         }
 
-        // Загружаем ассет
-        AssetBundleRequest bundleRequest = localAssetBundle.LoadAssetAsync<GameObject>(mapName);
-        yield return bundleRequest;
 
-        GameObject map = bundleRequest.asset as GameObject;
-        Instantiate(map, roomRoot.transform);
 
-        localAssetBundle.Unload(false);
 
-        surface.BuildNavMesh();
-        MapReadyEvent?.Invoke();
+        /// <summary>
+        /// Создаёт комнату
+        /// </summary>
+        IEnumerator GenerateRoom(string mapName)
+        {
+            // Загружаем файл bundle
+            AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, "GameMaps/maps"));
+            yield return request;
+
+            AssetBundle localAssetBundle = request.assetBundle;
+
+            if (localAssetBundle == null)
+            {
+                Debug.LogError("Failed to load asset bundles");
+                yield break;
+            }
+
+            // Загружаем ассет
+            AssetBundleRequest bundleRequest = localAssetBundle.LoadAssetAsync<GameObject>(mapName);
+            yield return bundleRequest;
+
+            GameObject map = bundleRequest.asset as GameObject;
+            Instantiate(map, roomRoot.transform);
+
+            localAssetBundle.Unload(false);
+
+            surface.BuildNavMesh();
+            MapReadyEvent?.Invoke();
+        }
+        
     }
-    
 }
