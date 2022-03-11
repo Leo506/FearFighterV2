@@ -131,7 +131,7 @@ public class EnemyController : MonoBehaviour, IGetDamaged, ISetUpObj
             enemyCount--;
             Debug.Log("ENEMY DIED. Enemy on scene: " + enemyCount);
             EnemyDiedEvent?.Invoke();
-            GetComponent<HaveDropComponent>()?.Drop();
+            
             enemiesOnScene.Remove(this);
             Destroy(this.gameObject);
             return;

@@ -84,8 +84,8 @@ public class MenuController : MonoBehaviour, ISetUpObj
 
 	void SetAwardTexts()
 	{
-		moneyTextVictory.text = moneyTextFailed.text = AwardController.GetMoneyAward().ToString();
-		expTextVictory.text = expTextFailed.text = AwardController.GetExpAward().ToString();
+		//moneyTextVictory.text = moneyTextFailed.text = AwardController.GetMoneyAward().ToString();
+		//expTextVictory.text = expTextFailed.text = AwardController.GetExpAward().ToString();
 	}
 
 }

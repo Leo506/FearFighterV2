@@ -3,4 +3,5 @@
   <type>AchievementSave</type>
   <type>ResourcesSave</type>
   <type>StatisticSave</type>
+  <type>ProgressSave</type>
 </SaveObjs>

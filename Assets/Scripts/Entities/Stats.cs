@@ -8,12 +8,12 @@ namespace Core.Entities
     public class Stats
     {
 #if UNITY_EDITOR
-        private const string healthTooltip = "Сила - отвечает за количество здоровья у персонажа";
-        private const string speedTooltip = "Ловкость - отвечает за скорость передвижения персонажа";
-        private const string armorTooltip = "Броня - отвечает за сопротивление урону персонажа ";
-        private const string damageTooltip = "Базовый урон - отвечает за базовый урон персонажа";
-        private const string critChanceTooltip = "Шанс критического урона - определяет базовый шанс критического урона (от 0 до 100)";
-        private const string critDamageTooltip = "Урон критического удара - определяет урон, который наносит крит (после всех модификаторов)";
+        private const string healthTooltip = "пїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+        private const string speedTooltip = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+        private const string armorTooltip = "пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ";
+        private const string damageTooltip = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+        private const string critChanceTooltip = "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅ 0 пїЅпїЅ 100)";
+        private const string critDamageTooltip = "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)";
 #endif
 
         [Header("Stats")]
@@ -123,6 +123,12 @@ namespace Core.Entities
             int critChance = stats1.CritChance - stats2.CritChance;
             int critDamage = stats1.CritDamage - stats2.CritDamage;
             return new Stats(health, speed, armor, damage, critChance, critDamage);
+        }
+
+
+        public override string ToString()
+        {
+            return $"Stats:\nHealth: {_health} Speed: {_speed} Armor: {_armor} Damage: {_damage} Crit Chance: {_critChance} Crit damage: {_critDamage}";
         }
     }
 }

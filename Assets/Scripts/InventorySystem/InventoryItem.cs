@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
+[System.Serializable]
 public class InventoryItem
 {
+    [SerializeField]
     public Sprite sprite { get; private set; }               // Спрайт объект
     public UnityAction usingFunction { get; private set; }   // Функция использования
 

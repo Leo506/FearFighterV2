@@ -67,12 +67,12 @@ public class PlayerLogic : MonoBehaviour, ISetUpObj, IGetDamaged, IResetObj
     private void Update()
     {
         text.text = transform.position.ToString();
-        foreach (var item in Physics.OverlapSphere(this.transform.position, 0.5f))
-        {
-            DroppingObj obj = item.GetComponent<DroppingObj>();
-            if (obj != null)
-                obj.StartMove(this.transform);
-        }
+        // foreach (var item in Physics.OverlapSphere(this.transform.position, 0.5f))
+        // {
+        //     //DroppingObj obj = item.GetComponent<DroppingObj>();
+        //     if (obj != null)
+        //         obj.StartMove(this.transform);
+        // }
     }
 
 

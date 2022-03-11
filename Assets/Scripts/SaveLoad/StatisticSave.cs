@@ -15,9 +15,12 @@ public class StatisticSave : ISaveable
     public void Load()
     {
         PlayerStatistic.Statistics = statistics;
-        foreach (var item in statistics)
+        if (statistics != null)
         {
-            item.Registrate();
+            foreach (var item in statistics)
+            {
+                item.Registrate();
+            }
         }
     }
 }

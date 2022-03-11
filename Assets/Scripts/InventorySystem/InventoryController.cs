@@ -2,30 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour, ISetUpObj, IResetObj
+public class InventoryController
 {
     public static Dictionary<InventoryItem, int> inventory { get; private set; }
-    public static InventoryController instance;
+    private static InventoryController instance;
 
-    private void Awake() 
+    private InventoryController()
     {
-        if (instance != this && instance != null)
-            Destroy(instance.gameObject);
-
-        instance = this;   
+        inventory = new Dictionary<InventoryItem, int>();
     }
 
-    public void SetUp()
+    public static InventoryController GetInstance()
     {
-        if (inventory == null)
-            inventory = new Dictionary<InventoryItem, int>();
+        if (instance == null)
+            instance = new InventoryController();
+
+        return instance;
     }
 
-
-    public void ResetObj() 
-    {
-        inventory.Clear();
-    }
 
 
     /// <summary>
@@ -86,5 +80,19 @@ public class InventoryController : MonoBehaviour, ISetUpObj, IResetObj
         }
 
         return 0;
+    }
+
+
+    /// <summary>
+    /// Возвращает список различных предметов в инвенторе игрока
+    /// </summary>
+    /// <returns></returns>
+    public List<InventoryItem> GetItems()
+    {
+        List<InventoryItem> items = new List<InventoryItem>();
+        foreach (var item in inventory)
+            items.Add(item.Key);
+        
+        return items;
     }
 }
