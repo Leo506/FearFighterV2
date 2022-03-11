@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: New Dungeon Generator
   m_EditorClassIdentifier: 
   _main: {fileID: 11400000, guid: f76cddf8a2b12c948837150eea9e9880, type: 2}
-  _divideIterations: 10
-  _minRoomSize: 3
+  _divideIterations: 20
+  _minRoomSize: 5
+  _chanceWalls: 1
+  _wallsIterations: 1
+  _holeSize: 3
+  _chanceCorners: 0.2

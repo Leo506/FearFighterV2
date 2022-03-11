@@ -54,6 +54,17 @@ namespace Game.WorldGeneration
             return rect;
         }
 
+        public static Vector3Int[] CornersRectangle(Vector2Int min, Vector2Int max)
+        {
+            return new Vector3Int[4]
+            {
+                new Vector3Int(min.x, min.y, 0),
+                new Vector3Int(min.x, max.y, 0),
+                new Vector3Int(max.x, min.y, 0),
+                new Vector3Int(max.x, max.y, 0)
+            };
+        }
+
         public static Vector3Int[] HollowRectangleCentralHoles(Vector2Int min, Vector2Int max, int sizeHoles)
         {
             Vector3Int[] rect = new Vector3Int[sizeHoles * 4];
