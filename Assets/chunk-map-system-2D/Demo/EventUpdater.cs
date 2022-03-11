@@ -7,13 +7,9 @@ namespace Game.Demo
     public class EventUpdater : MonoBehaviour
     {
         [SerializeField] private float _time = 0.5f;
-        private TargetLoader _loader;
+        [SerializeField] private TargetLoader _loader;
         private Coroutine _main;
 
-        private void Awake()
-        {
-            _loader = GetComponent<TargetLoader>();
-        }
         public void Start()
         {
             _main = StartCoroutine(Timer());
